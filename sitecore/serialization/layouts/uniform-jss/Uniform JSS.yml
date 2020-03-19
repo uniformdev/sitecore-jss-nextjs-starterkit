@@ -1,0 +1,19 @@
+﻿---
+ID: "bdaa4402-015a-4f42-bf43-d5e083a02a20"
+Parent: "e9330290-a76c-4c69-bbfc-2245bab3f1f4"
+Template: "35c61e90-47dd-43dd-83a8-d1c4d5119720"
+Path: "/sitecore/layout/Layouts/Project/uniform-jss/Uniform JSS"
+DB: master
+SharedFields:
+- ID: "80334869-86dc-4472-aa89-44cf1b2f6c9b"
+  Hint: Placeholders
+  Type: Treelist
+  Value: "{DEE69BFC-9B92-473B-802A-16DAFF595011}"
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20200302T030433Z

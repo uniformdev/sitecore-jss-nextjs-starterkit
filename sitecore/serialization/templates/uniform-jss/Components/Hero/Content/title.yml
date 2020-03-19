@@ -1,0 +1,21 @@
+﻿---
+ID: "a4e63708-f7f5-4c53-9348-31e8b9a1b1e8"
+Parent: "4fc5ab9d-579c-4564-b1d5-4d115703ca56"
+Template: "455a3e98-a627-4b40-8035-e683a0331ac7"
+Path: "/sitecore/templates/Project/uniform-jss/Components/Hero/Content/title"
+DB: master
+SharedFields:
+- ID: "ab162cc0-dc80-4abf-8871-998ee5d7ba32"
+  Hint: Type
+  Value: "Single-Line Text"
+- ID: "ba3f86a2-4a1c-4d78-b63d-91c2779c1b5e"
+  Hint: __Sortorder
+  Value: 100
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20200228T212354Z

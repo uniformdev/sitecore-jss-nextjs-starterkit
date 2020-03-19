@@ -1,0 +1,31 @@
+diff --git a/node_modules/next-routes/dist/index.js b/node_modules/next-routes/dist/index.js
+index 29ec64a..c2cff19 100644
+--- a/node_modules/next-routes/dist/index.js
++++ b/node_modules/next-routes/dist/index.js
+@@ -86,7 +86,11 @@ function () {
+   }, {
+     key: "match",
+     value: function match(url) {
+-      var parsedUrl = (0, _url.parse)(url, true);
++      var parsedUrl = url;
++      if (typeof url === 'string') {
++        parsedUrl = (0, _url.parse)(url, true);
++      }
++      
+       var pathname = parsedUrl.pathname,
+           query = parsedUrl.query;
+       return this.routes.reduce(function (result, route) {
+@@ -188,12 +192,11 @@ function () {
+       var wrap = function wrap(method) {
+         return function (route, params, options) {
+           var _this3$findAndGetUrls = _this3.findAndGetUrls(route, params),
+-              byName = _this3$findAndGetUrls.byName,
+               _this3$findAndGetUrls2 = _this3$findAndGetUrls.urls,
+               as = _this3$findAndGetUrls2.as,
+               href = _this3$findAndGetUrls2.href;
+ 
+-          return Router[method](href, as, byName ? options : params);
++          return Router[method](href, as, options || params);
+         };
+       };
+ 

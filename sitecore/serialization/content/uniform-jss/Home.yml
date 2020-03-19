@@ -1,0 +1,44 @@
+﻿---
+ID: "5505b7b1-b454-459e-9d36-06a4d89755ad"
+Parent: "b506a73e-c9bb-4c13-8f2c-836b1e9f59dc"
+Template: "bc93942a-b0e5-4bd3-a872-a9b8b5c7d4f9"
+Path: "/sitecore/content/uniform-jss/Home"
+DB: master
+SharedFields:
+- ID: "06d5295c-ed2f-4a54-9bf2-26228d113318"
+  Hint: __Icon
+  Value: Network/16x16/home.png
+- ID: "1172f251-dad4-4efb-a329-0c63500e4f1e"
+  Hint: __Masters
+  Type: TreelistEx
+  Value: "{A65EAFF8-35C8-4929-A4A3-D2543B2867EA}"
+- ID: "a4f985d9-98b3-4b52-aaaf-4344f6e747c6"
+  Hint: __Workflow
+  Value: "{A5BC37E7-ED96-4C1E-8590-A26E64DB55EA}"
+- ID: "f1a1fe9e-a60c-4ddb-a3a0-bb5b29fe732e"
+  Hint: __Renderings
+  Type: layout
+  Value: |
+    <r xmlns:p="p" xmlns:s="s"
+      p:p="1">
+      <d
+        id="{FE5D7FDF-89C0-4D99-9AA3-B5FBD009C9F3}">
+        <r
+          uid="{988D1BBD-CEA2-47A7-B48A-B5E68FEF8347}"
+          s:ds="{BB13D540-3676-4D38-B6CF-7724A17A2F46}"
+          s:id="{FB53DB9E-75B0-4DBD-A14B-3BD053ECEF59}"
+          s:par=""
+          s:ph="uniform-jss-content" />
+      </d>
+    </r>
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20200214T190718Z
+    - ID: "3e431de1-525e-47a3-b6b0-1ccbec3a8c98"
+      Hint: __Workflow state
+      Value: "{190B1C84-F1BE-47ED-AA41-F42193D9C8FC}"

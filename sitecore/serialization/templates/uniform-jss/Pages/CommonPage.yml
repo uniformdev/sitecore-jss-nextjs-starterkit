@@ -1,0 +1,27 @@
+﻿---
+ID: "bc93942a-b0e5-4bd3-a872-a9b8b5c7d4f9"
+Parent: "97bcb300-2ce0-4040-98e4-9f55acd310c1"
+Template: "ab86861a-6030-46c5-b394-e8f99e8b87db"
+Path: "/sitecore/templates/Project/uniform-jss/Pages/CommonPage"
+DB: master
+SharedFields:
+- ID: "06d5295c-ed2f-4a54-9bf2-26228d113318"
+  Hint: __Icon
+  Value: Applications/16x16/document_plain.png
+- ID: "12c33f3f-86c5-43a5-aeb4-5598cec45116"
+  Hint: __Base template
+  Type: tree list
+  Value: |
+    {1930BBEB-7805-471A-A3BE-4858AC7CF696}
+    {B36BA9FD-0DC0-49C8-BEA2-E55D70E6AF28}
+- ID: "f7d48a55-2158-4f02-9356-756654404f73"
+  Hint: __Standard values
+  Value: "{E87F5226-5089-4D69-8B16-ABE69B134125}"
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20200219T020047Z

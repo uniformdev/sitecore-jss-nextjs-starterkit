@@ -1,0 +1,22 @@
+﻿---
+ID: "b506a73e-c9bb-4c13-8f2c-836b1e9f59dc"
+Parent: "0de95ae4-41ab-4d01-9eb0-67441b7c2450"
+Template: "061cba15-5474-4b91-8a06-17903b102b82"
+Path: "/sitecore/content/uniform-jss"
+DB: master
+SharedFields:
+- ID: "06d5295c-ed2f-4a54-9bf2-26228d113318"
+  Hint: __Icon
+  Value: 
+Languages:
+- Language: en
+  Fields:
+  - ID: "b5e02ad9-d56f-4c41-a065-a133db87bdeb"
+    Hint: __Display name
+    Value: Uniform (JSS)
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20200214T190709Z

@@ -1,0 +1,148 @@
+﻿---
+ID: "dee69bfc-9b92-473b-802a-16daff595011"
+Parent: "d098f13c-4629-48bf-8e85-e5812649face"
+Template: "5c547d4e-7111-4995-95b0-6b561751bf2e"
+Path: "/sitecore/layout/Placeholder Settings/Project/uniform-jss/uniform-jss-content"
+DB: master
+SharedFields:
+- ID: "7256bdab-1fd2-49dd-b205-cb4873d2917c"
+  Hint: Placeholder Key
+  Value: "uniform-jss-content"
+- ID: "e391b526-d0c5-439d-803e-17512eae6222"
+  Hint: Allowed Controls
+  Type: TreelistEx
+  Value: |
+    {FB53DB9E-75B0-4DBD-A14B-3BD053ECEF59}
+    {BDAFEC7C-B6C0-4E7F-B5FC-FC18D4F841F7}
+Languages:
+- Language: da
+  Fields:
+  - ID: "87871ff5-1965-46d6-884f-01d6a0b9c4c1"
+    Hint: Description
+    Value: |
+      <div>
+            <b>Indholdsplaceholder</b>
+            <div>
+      
+      <div style="padding:8px 8px 0px 8px;width:200px">
+      <img height="32" width="32" alt="Sample Rendering" style="float:left;margin:0px 8px 0px 0px" src="-/icon/Business/32x32/table_selection_block.png?w=32&amp;h=32&amp;as=1" />
+      <div>Indholdsplaceholderen er den primære placeholder.<div></div></div></div></div>
+      <div></div></div>
+  - ID: "b5e02ad9-d56f-4c41-a065-a133db87bdeb"
+    Hint: __Display name
+    Value: indhold
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20190328T131427Z
+    - ID: "5dd74568-4d4b-44c1-b513-0af5f4cda34f"
+      Hint: __Created by
+      Value: |
+        sitecore\Admin
+- Language: "de-DE"
+  Fields:
+  - ID: "87871ff5-1965-46d6-884f-01d6a0b9c4c1"
+    Hint: Description
+    Value: |
+      <div>
+            <b>Inhaltsplatzhalter</b>
+            <div>
+      
+      <div style="padding:8px 8px 0px 8px;width:200px">
+      <img height="32" width="32" alt="Sample Rendering" style="float:left;margin:0px 8px 0px 0px" src="-/icon/Business/32x32/table_selection_block.png?w=32&amp;h=32&amp;as=1" />
+      <div>Der Inhaltsplatzhalter ist der Hauptplatzhalter.<div></div></div></div></div>
+      <div></div></div>
+  - ID: "b5e02ad9-d56f-4c41-a065-a133db87bdeb"
+    Hint: __Display name
+    Value: Inhalt
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20190328T132519Z
+    - ID: "5dd74568-4d4b-44c1-b513-0af5f4cda34f"
+      Hint: __Created by
+      Value: |
+        sitecore\Admin
+- Language: en
+  Fields:
+  - ID: "87871ff5-1965-46d6-884f-01d6a0b9c4c1"
+    Hint: Description
+    Value: |
+      <div>
+      <strong>Uniform JSS demo Placeholder</strong>
+      <div>
+      <div style="padding:8px 8px 0px 8px;width:200px;">
+      <img height="32" width="32" alt="Sample Rendering" style="float:left;margin:0px 8px 0px 0px;" src="-/icon/Business/32x32/table_selection_block.png?w=32&amp;h=32&amp;as=1" />
+      <div>The content placeholder is the main placeholder.
+      <div>&nbsp;</div>
+      </div>
+      </div>
+      </div>
+      <div>&nbsp;</div>
+      </div>
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20080110T175900Z
+    - ID: "5dd74568-4d4b-44c1-b513-0af5f4cda34f"
+      Hint: __Created by
+      Value: |
+        sitecore\Admin
+- Language: "ja-JP"
+  Fields:
+  - ID: "87871ff5-1965-46d6-884f-01d6a0b9c4c1"
+    Hint: Description
+    Value: |
+      <div>
+            <b>コンテンツ プレースホルダー</b>
+            <div>
+      
+      <div style="padding:8px 8px 0px 8px;width:200px">
+      <img height="32" width="32" alt="Sample Rendering" style="float:left;margin:0px 8px 0px 0px" src="-/icon/Business/32x32/table_selection_block.png?w=32&amp;h=32&amp;as=1" />
+      <div>コンテンツ プレースホルダーはメインのプレースホルダーです。<div></div></div></div></div>
+      <div></div></div>
+  - ID: "b5e02ad9-d56f-4c41-a065-a133db87bdeb"
+    Hint: __Display name
+    Value: コンテンツ (content)
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20190328T133902Z
+    - ID: "5dd74568-4d4b-44c1-b513-0af5f4cda34f"
+      Hint: __Created by
+      Value: |
+        sitecore\Admin
+- Language: "zh-CN"
+  Fields:
+  - ID: "87871ff5-1965-46d6-884f-01d6a0b9c4c1"
+    Hint: Description
+    Value: |
+      <div>
+            <b>内容占位符</b>
+            <div>
+      
+      <div style="padding:8px 8px 0px 8px;width:200px">
+      <img height="32" width="32" alt="Sample Rendering" style="float:left;margin:0px 8px 0px 0px" src="~/icon/Business/32x32/table_selection_block.png?w=32&amp;h=32&amp;as=1" />
+      <div>此内容占位符是主要的占位符。<div></div></div></div></div>
+      <div></div></div>
+  - ID: "b5e02ad9-d56f-4c41-a065-a133db87bdeb"
+    Hint: __Display name
+    Value: 内容
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20190328T134752Z
+    - ID: "5dd74568-4d4b-44c1-b513-0af5f4cda34f"
+      Hint: __Created by
+      Value: |
+        sitecore\Admin
