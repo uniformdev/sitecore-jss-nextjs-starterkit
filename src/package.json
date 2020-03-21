@@ -21,7 +21,7 @@
     "start:watch-components": "node scripts/generate-component-factory.js --watch",
     "bootstrap:connected": "node scripts/bootstrap.js",
     "bootstrap:disconnected": "node scripts/bootstrap.js --disconnected",
-    "export:site": "next export",
+    "export:site": "next export --threads 32",
     "export": "npm-run-all --serial jssconfig bootstrap:connected build-tailwind build export:site",
     "azure": "node ./deploy-azure.js",
     "aws": "node ./deploy-aws.js",
