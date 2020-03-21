@@ -21,15 +21,15 @@
     "start:watch-components": "node scripts/generate-component-factory.js --watch",
     "bootstrap:connected": "node scripts/bootstrap.js",
     "bootstrap:disconnected": "node scripts/bootstrap.js --disconnected",
-    "export:site": "next export --threads 8",
-    "export": "npm-run-all --serial bootstrap:connected build-tailwind build export:site",
+    "export:site": "next export",
+    "export": "npm-run-all --serial jssconfig bootstrap:connected build-tailwind build export:site",
     "azure": "node ./deploy-azure.js",
     "aws": "node ./deploy-aws.js",
     "netlify": "node ./deploy-netlify.js",
     "deploy:azure": "npm-run-all --serial bootstrap:connected build-tailwind build export:site azure",
     "deploy:aws": "npm-run-all --serial bootstrap:connected build-tailwind build export:site aws",
     "deploy:netlify": "npm-run-all --serial bootstrap:connected build-tailwind build export:site netlify",
-    "postinstall": "npm-run-all --serial jssconfig patchpackages",
+    "postinstall": "npm run patchpackages",
     "patchpackages": "patch-package"
   },
   "dependencies": {
