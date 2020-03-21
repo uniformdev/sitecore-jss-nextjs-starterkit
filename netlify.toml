@@ -1,0 +1,4 @@
+[build]
+  base = "src/"
+  publish = "out/"
+  command = "npm run export"
