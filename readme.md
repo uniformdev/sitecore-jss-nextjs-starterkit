@@ -3,6 +3,7 @@
 This repo contains both the starter kit and a sample JSS app with content to go with it, which is optional if you are connecting to an existing JSS app.
 
 ## Value prop
+
 Uniform enables [JAMstack](https://jamstack.wtf/) style architecture for your Sitecore solution allowing to statically generate the whole site at build-time and deploy to your delivery platform of choice (this app is setup with Netlify, Azure and AWS S3 but it can work with virtually any combination of file/blob storage + CDN).
 
 On top of that, Uniform unlocks **origin-less** tracking and personalization where marketing users assign personalization in Sitecore the usual way but **execution** part is deferred to the edge (depending on the CDN of choice) or client-side without paying the cost of going back to the origin content delivery server - unlocking the benefits of performance and scale of Content Delivery Networks with personalized experiences.
@@ -38,28 +39,26 @@ On top of that, Uniform unlocks **origin-less** tracking and personalization whe
      ```
 
      > This value will be used to secure the deployment endpoint during Sitecore publishing and should be changed to a secret value in non-developer environments. The same value should be used when setting the `UNIFORM_API_TOKEN` environment variable (see below).
-   
+
    - `Uniform.LicenseKey` with the value of Uniform license key you've received:
 
      <add name="Uniform.LicenseKey" connectionString="LICENSE-KEY-GOES-HERE" />
 
+> Since these connection strings may not change frequently in development environment, consider adding these connection strings globally to IIS Manager (stored in `C:\Windows\Microsoft.NET\Framework64\v4.0.30319\config\web.config`):
 
-   > Since these connection strings may not change frequently in development environment, consider adding these connection strings globally to IIS Manager (stored in `C:\Windows\Microsoft.NET\Framework64\v4.0.30319\config\web.config`):
+1.  Open IIS Manager
+1.  Select your computer name in the tree on the left
+1.  Select Connection Strings
+1.  Click Add in the right panel
+1.  Fill in the dialog with values from bulleted list above
 
-   1. Open IIS Manager
-   1. Select your computer name in the tree on the left
-   1. Select Connection Strings
-   1. Click Add in the right panel
-   1. Fill in the dialog with values from bulleted list above
-
-   ```
-   Name: connection-string-name
-   ( ) SQL Server
-   (x) Custom
-      .------------------------
-      | connection-string-value
-   ```
-
+```
+Name: connection-string-name
+( ) SQL Server
+(x) Custom
+   .------------------------
+   | connection-string-value
+```
 
 ### Optional - sample JSS app deployment
 
@@ -136,13 +135,13 @@ The following response is expected (will be different if you are using another J
 1. Set the `NPM_TOKEN` environment variable with the value we provided you with.
 
    You can use `$Env:NPM_TOKEN="your-npm-token here"` in PowerShell or `export NPM_TOKEN="your-npm-token here"` in Bash.
-   
-   > This variable is used within the `.npmrc` file located next to `package.json`
-     So alternatively, simply replace `${NPM_TOKEN}` within `.npmrc` file with the value we provided you with.
 
-      ```bash
-      //registry.npmjs.org/:_authToken=npm-token-guid
-      ```
+   > This variable is used within the `.npmrc` file located next to `package.json`
+   > So alternatively, simply replace `${NPM_TOKEN}` within `.npmrc` file with the value we provided you with.
+
+   ```bash
+   //registry.npmjs.org/:_authToken=npm-token-guid
+   ```
 
 1. Install all the dependencies with `npm install`
 
@@ -161,6 +160,18 @@ You can serve the static version with any file server now. To test, run `npx ser
 > "Serve" is a global npm package that will start a simple web server on http://localhost:5000
 
 You are now ready to deploy your JSS app statically to virtually any target.
+
+## Handling media / images
+
+As of now, media/image support is not availble in public version of Uniform ([contact us](mailto:hi@unfrm.io) if you need this capability now).
+
+In meantime, there are multiple alternatives as to how you can configure media handling for your JAMstackified Sitecore site:
+
+1. Have your Sitecore Content Delivery origin handle Media Library requests (this is enabled with `Media.AlwaysIncludeServerUrl=true` setting enabled in `Habitat.UniformSettings.config` config patch included in this repo).
+1. Configure a "pull-based" CDN for Sitecore Media Library - [it is quite straightforward](https://doc.sitecore.com/developers/91/sitecore-experience-manager/en/manually-configure-the-sitecore-media-library-to-use-a-cdn.html). Besides the usual suspects, such as Akamai, Cloudflare and Cloudfront, there is a set of cool smart image CDNs to consider that are very much plug and play:
+   - [CloudImage](https://www.cloudimage.io/)
+   - [Cloudinary](https://cloudinary.com/)
+   - [Piio](http://piio.co/)
 
 ## Deployment
 
@@ -202,15 +213,16 @@ Afterwards, make sure that you add the following Environment variables in the ne
 ![Netlify build-time environment variables](docs/images/netlify-env-vars.png "Netlify build-time environment variables")
 
 The following environment variables are must haves:
-   ```
-   UNIFORM_API_KEY={guid of API key item from the step above}
-   UNIFORM_API_TOKEN=1234
-   UNIFORM_API_URL=http://your-sc-host
-   UNIFORM_DATA_URL=http://your-sc-host
-   UNIFORM_API_SITENAME=uniform-jss
-   UNIFORM_API_DEFAULT_LANGUAGE=en
-   NPM_TOKEN=<the value of the npm token received from us>
-   ```
+
+```
+UNIFORM_API_KEY={guid of API key item from the step above}
+UNIFORM_API_TOKEN=1234
+UNIFORM_API_URL=http://your-sc-host
+UNIFORM_DATA_URL=http://your-sc-host
+UNIFORM_API_SITENAME=uniform-jss
+UNIFORM_API_DEFAULT_LANGUAGE=en
+NPM_TOKEN=<the value of the npm token received from us>
+```
 
 Since Netlify will connect to your Sitecore instance, consider setting up a tunnel to your local Sitecore instance if you don't have it deployed publicly yet with something like ngrok: `ngrok http -host-header="ABCsc.dev.local" ABCsc.dev.local:80`
 
@@ -274,9 +286,9 @@ The static version of the JSS app is now expected to be served from this endpoin
 
 1. Run `npm run deploy:aws`. This will provision the S3 bucket with "Static site hosting" settings and will deploy the contents of the `out` folder to it. At the end of the process, you should see the following in the console and the `aws.config.json` will be created in the project root:
 
-      ```
-      AwsS3PublishProvider deployed site files: out
-      ```
+   ```
+   AwsS3PublishProvider deployed site files: out
+   ```
 
 ### Other deployment targets
 
@@ -311,6 +323,7 @@ You need to setup your JSS app definition config in `uniform-jss.config`. Be sur
 Notice the `serverSideRenderingEngine` attribute is set to `http` and the `serverSideRenderingEngineEndpointUrl` is set to the host your Next+JSS app is running on.
 
 ### Configure deployment on Sitecore publish
+
 WIP
 
 ### Setting up Preview server
