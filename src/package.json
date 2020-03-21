@@ -14,6 +14,7 @@
   "scripts": {
     "start": "cross-env-shell JSS_MODE=connected \"npm-run-all --serial bootstrap:connected --parallel dev start:watch-components\"",
     "dev": "node ./server.js",
+    "jssconfig": "node ./create-scjssconfig.js",
     "build": "next build",
     "build-tailwind": "npx postcss styles/style.css -o public/styles.css",
     "start:ssr": "cross-env-shell NODE_ENV=production node ./server.js",
@@ -28,7 +29,7 @@
     "deploy:azure": "npm-run-all --serial bootstrap:connected build-tailwind build export:site azure",
     "deploy:aws": "npm-run-all --serial bootstrap:connected build-tailwind build export:site aws",
     "deploy:netlify": "npm-run-all --serial bootstrap:connected build-tailwind build export:site netlify",
-    "postinstall": "npm run patchpackages",
+    "postinstall": "npm-run-all --serial jssconfig patchpackages",
     "patchpackages": "patch-package"
   },
   "dependencies": {
