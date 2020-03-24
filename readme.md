@@ -8,6 +8,19 @@ Uniform enables [JAMstack](https://jamstack.wtf/) style architecture for your Si
 
 On top of that, Uniform unlocks **origin-less** tracking and personalization where marketing users assign personalization in Sitecore the usual way but **execution** part is deferred to the edge (depending on the CDN of choice) or client-side without paying the cost of going back to the origin content delivery server - unlocking the benefits of performance and scale of Content Delivery Networks with personalized experiences.
 
+## Sitecore version compatibility
+
+This starter kit is expected to work with any Sitecore 9.x version backend.
+
+## Next.js role
+
+This starter kit is using [Next.js 9.3](https://nextjs.org/), a battleground tested React Framework, which is also capable of doing static site export, essentially acting as a static site generator.
+
+There are multiple reasons why we are using Next.js in this context:
+
+1. Leveraging outstanding server-side rendering option that Next.js provides out of the box. This is critical to retain Sitecore Experience Editor and Preview functionality.
+1. Leveraging utilities such as routing, the plugin system and many other enhancements that improve Developer Experience and help with building fast sites.
+
 ## Repo structure
 
 - `/sitecore` - the required configuration files and content items for the demo site (Unicorn items and the package).
@@ -110,28 +123,36 @@ The following response is expected (will be different if you are using another J
 
 ## Setting up the app
 
-1. Provide environment variables
+1. Provide the Sitecore connection details in environment variables
 
    Create `.env` file with connection details to your Sitecore dev instance.
 
    ```
    UNIFORM_API_KEY={guid of Sitecore JSS app API key item from the step above - same as you use for LayoutService}
-   UNIFORM_API_TOKEN=1234
    UNIFORM_API_URL=http://your-sc-host
    UNIFORM_DATA_URL=http://your-sc-host
-   UNIFORM_API_SITENAME=uniform-jss
-   UNIFORM_API_DEFAULT_LANGUAGE=en
-   NODE_TLS_REJECT_UNAUTHORIZED=0
    ```
 
+   There are more environment variables available to specify - see `_defaultConfig.js` file for all default values. Naturally, these environment variables can be tweaked according to your environment specific by corresponding entries to the `.env` file:
+
+   ```
+   UNIFORM_API_TOKEN=1234
+   UNIFORM_API_SITENAME=uniform-jss
+   UNIFORM_API_DEFAULT_LANGUAGE=en
+   ```
    > The value of `UNIFORM_API_TOKEN` should match what was provided as value for the `uniform.api.token` query string during server-side setup.
-   >
+
    > Note that the value of `UNIFORM_API_SITENAME` variable will depend on whether you are deploying this sample app to your Sitecore instance or you are connecting to your existing JSS app. If the latter, use the name of the site associated with the JSS app you'd like to connect to.
 
    > For multi-lingual solutions, if your are not using the default `en` language for your site's content, you will need to adjust the value of the `UNIFORM_API_DEFAULT_LANGUAGE` to the ISO code of the content language you are using.
 
    > Instead of specifying the `.env` file, you can use system environment variables instead.
 
+1. (Optional) connecting via HTTPS.
+   Add the following parameter if connecting to Sitecore instance over HTTPs, as you may experience connection issue due to the certificates:
+   ```
+    NODE_TLS_REJECT_UNAUTHORIZED=0
+   ```
 1. Set the `NPM_TOKEN` environment variable with the value we provided you with.
 
    You can use `$Env:NPM_TOKEN="your-npm-token here"` in PowerShell or `export NPM_TOKEN="your-npm-token here"` in Bash.

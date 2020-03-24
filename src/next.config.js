@@ -1,3 +1,6 @@
+const _config = require('./_defaultConfig');
+_config();
+
 require('dotenv').config();
 const path = require('path');
 const { consoleLogger } = require('./utils/logging/consoleLogger');
