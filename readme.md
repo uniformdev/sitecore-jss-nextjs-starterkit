@@ -14,7 +14,7 @@ This starter kit is expected to work with any Sitecore 9.x version backend.
 
 ## Next.js role
 
-This starter kit is using [Next.js 9.3](https://nextjs.org/), a battleground tested React Framework, which is also capable of doing static site export, essentially acting as a static site generator.
+This starter kit is using [Next.js](https://nextjs.org/), a battleground tested React Framework, which is also capable of doing static site export, essentially acting as a static site generator.
 
 There are multiple reasons why we are using Next.js in this context:
 
