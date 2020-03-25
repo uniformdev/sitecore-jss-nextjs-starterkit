@@ -58,8 +58,24 @@ export function i18init(language, dictionary) {
     options.initImmediate = false;
   }
 
-  return i18n
-    .use(fetchBackend)
-    .use(initReactI18next)
-    .init(options);
+  // Although the `i18n.init` function returns a promise after init is complete, we're unable to
+  // use `catch` to handle errors that originate in the fetch backend. If the fetch backend throws an
+  // error, the backend only calls the `init` callback with the error, it doesn't attempt to reject
+  // the init promise.
+  // https://github.com/perrin4869/i18next-fetch-backend/blob/397b1c9c0fc87a3b9e7ff80aaf36674b89fd6466/src/index.js#L70
+
+  // So the workaround is treat the `init` call like a traditional async call and
+  // wrap it with our own promise.
+  return new Promise((resolve, reject) => {
+    i18n
+      .use(fetchBackend)
+      .use(initReactI18next)
+      .init(options, (err) => {
+        if (err) {
+          reject(err);
+          return;
+        }
+        resolve();
+      });
+  });
 }
