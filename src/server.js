@@ -5,7 +5,7 @@ const next = require('next');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 
-const routes = require('./lib/routeDefinitions');
+const { matchRoute } = require('./lib/routing/routeMatcher');
 const { getJssRenderingHostMiddleware } = require('./scripts/next-jss-rendering-host-middleware');
 const scJssConfig = require('./scjssconfig.json');
 
@@ -17,10 +17,18 @@ const dev = process.env.NODE_ENV !== 'production';
 
 const app = next({ dev });
 const defaultRequestHandler = app.getRequestHandler();
-const dynamicRouteHandler = routes.getRequestHandler(app);
-const jsonBodyParser = bodyParser.json();
 
 const serverUrl = `${protocol}://${hostname}:${port}`;
+
+// OPTIONAL: by default, Next will invoke the `nextConfig.exportPathMap` function
+// in development mode. When using the Uniform plugin, this will result in a
+// call to the Uniform+Sitecore sitemap endpoint, which _may_ be expensive (for larger sites).
+// This call should only happen when the development server is starting up, so
+// may not have a big impact on development, but could impact dev server startup time.
+// If you want to use the `export` feature in development mode, you can disable the next 3 lines below.
+if (dev) {
+  app.nextConfig.exportPathMap = undefined;
+}
 
 app.prepare().then(() => {
   const server = express();
@@ -28,50 +36,17 @@ app.prepare().then(() => {
   server.use(cors());
   server.use(express.static('static'));
 
-  // Setup the JSS rendering host route.
-  // The URL that is called is configured via JSS app config, e.g. `<app serverSideRenderingEngineEndpointUrl="" />`
-  // TODO: only add this middleware when starting in `rendering host` / integrated mode
-  server.post(
-    '/jss-render',
-    jsonBodyParser,
-    getJssRenderingHostMiddleware(app, scJssConfig, {
-      serverUrl,
-      routeResolver: (routeInfo) => {
-        const { route, query } = routes.match(routeInfo.pathname);
-        if (route) {
-          return {
-            pathname: route.page,
-            params: {
-              ...routeInfo.params,
-              ...query,
-            },
-          };
-        }
-        return routeInfo;
-      },
-    })
-  );
+  attachJssRenderingHostMiddleware(server, jssMode);
 
-  // Setup JSS disconnected mode support.
-  // TODO: only attach this when starting in `disconnected` mode. In any other mode, we don't
-  // need to the disconnected layout service, dictionary service, media service.
   beforeServerStart(server, jssMode).then(() => {
     server.get('*', (req, res) => {
-      const path = decodeURI(req.path) || '/';
-      if (path.startsWith('/_next/')) {
-        return defaultRequestHandler(req, res);
+      if (!req.url.startsWith('/_next/')) {
+        // some basic logging without too much noise
+        console.log('Incoming HTTP ' + req.method + ' ' + req.url);
       }
-
-      if (!/\/$|\.\w+$/g.exec(path)) {
-        // redirect if /foo and not /foo.png
-        res.redirect(req.path + '/', 302);
-        return;
-      }
-
-      console.log('Incoming HTTP ' + req.method + ' ' + path);
 
       try {
-        return dynamicRouteHandler(req, res);
+        return defaultRequestHandler(req, res);
       } catch (ex) {
         console.error('Failed to handle request\n' + JSON.stringify(ex));
         return;
@@ -87,4 +62,32 @@ app.prepare().then(() => {
 
 function beforeServerStart(server, mode) {
   return Promise.resolve();
+}
+
+function attachJssRenderingHostMiddleware(server, jssMode) {
+  const jsonBodyParser = bodyParser.json();
+
+  // Setup the JSS rendering host route.
+  // The URL that is called is configured via JSS app config, e.g. `<app serverSideRenderingEngineEndpointUrl="" />`
+  // TODO: only add this middleware when starting in `rendering host` / integrated mode
+  server.post(
+    '/jss-render',
+    jsonBodyParser,
+    getJssRenderingHostMiddleware(app, scJssConfig, {
+      serverUrl,
+      routeResolver: (routeInfo) => {
+        const { matchedRoute } = matchRoute(routeInfo.pathname);
+        if (matchedRoute) {
+          return {
+            pathname: matchedRoute.path,
+            params: {
+              ...routeInfo.params,
+              ...matchedRoute.params,
+            },
+          };
+        }
+        return routeInfo;
+      },
+    })
+  );
 }

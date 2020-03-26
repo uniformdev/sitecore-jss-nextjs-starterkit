@@ -13,6 +13,8 @@ const withProgressBar = require('next-progressbar');
 const withUniform = require('@uniformdev/next-server').config;
 const withCSS = require('@zeit/next-css');
 
+const { rewrites } = require('./lib/routing/routeMatcher');
+
 const plugins = [
   [withCSS],
   [withUniform, { logger: consoleLogger }],
@@ -36,6 +38,9 @@ const nextConfig = {
     // NOTE: for the `exportContextProviderModulePath` value, be sure you're passing a
     // fully resolved path, relative paths will not work.
     exportContextProviderModulePath: path.resolve('./scripts/next-export-context-provider.js'),
+  },
+  experimental: {
+    rewrites: () => rewrites,
   },
 };
 
