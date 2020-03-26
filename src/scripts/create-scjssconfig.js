@@ -7,10 +7,7 @@ const layoutServiceHost = process.env.UNIFORM_API_URL;
 
 const scjssConfig = {
   sitecore: {
-    instancePath: '',
     apiKey,
-    deploySecret: '',
-    deployUrl: '',
     layoutServiceHost,
   },
 };
