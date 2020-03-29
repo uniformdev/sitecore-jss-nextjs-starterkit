@@ -13,11 +13,11 @@
   },
   "scripts": {
     "start": "cross-env-shell JSS_MODE=connected \"npm-run-all --serial bootstrap:connected --parallel dev start:watch-components\"",
-    "dev": "node ./server.js",
+    "dev": "node ./server/server.js",
     "jssconfig": "node ./scripts/create-scjssconfig.js",
     "build": "next build",
     "build-tailwind": "npx postcss styles/style.css -o public/styles.css",
-    "start:ssr": "cross-env-shell NODE_ENV=production node ./server.js",
+    "start:ssr": "cross-env-shell NODE_ENV=production node ./server/server.js",
     "start:watch-components": "node scripts/generate-component-factory.js --watch",
     "bootstrap:connected": "node scripts/bootstrap.js",
     "bootstrap:disconnected": "node scripts/bootstrap.js --disconnected",

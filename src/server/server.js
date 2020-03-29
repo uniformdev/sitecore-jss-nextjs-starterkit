@@ -5,9 +5,9 @@ const next = require('next');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 
-const { matchRoute } = require('./lib/routing/routeMatcher');
-const { getJssRenderingHostMiddleware } = require('./scripts/next-jss-rendering-host-middleware');
-const scJssConfig = require('./scjssconfig.json');
+const { matchRoute } = require('../lib/routing/routeMatcher');
+const { getJssRenderingHostMiddleware } = require('./next-jss-rendering-host-middleware');
+const scJssConfig = require('../scjssconfig.json');
 
 const jssMode = process.env.JSS_MODE || 'disconnected';
 const port = process.env.PORT || 3000;
@@ -20,13 +20,13 @@ const defaultRequestHandler = app.getRequestHandler();
 
 const serverUrl = `${protocol}://${hostname}:${port}`;
 
-// OPTIONAL: by default, Next will invoke the `nextConfig.exportPathMap` function
-// in development mode. When using the Uniform plugin, this will result in a
-// call to the Uniform+Sitecore sitemap endpoint, which _may_ be expensive (for larger sites).
-// This call should only happen when the development server is starting up, so
-// may not have a big impact on development, but could impact dev server startup time.
-// If you want to use the `export` feature in development mode, you can disable the next 3 lines below.
 if (dev) {
+  // OPTIONAL: by default, Next will invoke the `nextConfig.exportPathMap` function
+  // in development mode. When using the Uniform plugin, this will result in a
+  // call to the Uniform+Sitecore sitemap endpoint, which _may_ be expensive (for larger sites).
+  // This call should only happen when the development server is starting up, so
+  // may not have a big impact on development, but could impact dev server startup time.
+  // If you want to use the `export` feature in development mode, you can remove or comment out the next line.
   app.nextConfig.exportPathMap = undefined;
 }
 
@@ -65,11 +65,11 @@ function beforeServerStart(server, mode) {
 }
 
 function attachJssRenderingHostMiddleware(server, jssMode) {
-  const jsonBodyParser = bodyParser.json();
+  // Setup body parsing middleware for incoming POST requests.
+  const jsonBodyParser = bodyParser.json({ limit: '2mb' });
 
   // Setup the JSS rendering host route.
   // The URL that is called is configured via JSS app config, e.g. `<app serverSideRenderingEngineEndpointUrl="" />`
-  // TODO: only add this middleware when starting in `rendering host` / integrated mode
   server.post(
     '/jss-render',
     jsonBodyParser,
