@@ -31,8 +31,8 @@
     "deploy:netlify": "npm-run-all --serial bootstrap:connected build-tailwind build export:site netlify"
   },
   "dependencies": {
-    "@sitecore-jss/sitecore-jss-react": "~12.0.0",
-    "@sitecore-jss/sitecore-jss-tracking": "~12.0.0",
+    "@sitecore-jss/sitecore-jss-react": "^13.0.0",
+    "@sitecore-jss/sitecore-jss-tracking": "^13.0.0",
     "@uniformdev/next-server": "^2.0.200318-25",
     "@zeit/next-css": "^1.0.1",
     "axios": "~0.19.0",
@@ -40,7 +40,7 @@
     "i18next-fetch-backend": "^2.2.0",
     "isomorphic-unfetch": "^3.0.0",
     "loglevel": "^1.6.6",
-    "next": "9.3.1",
+    "next": "9.3.2",
     "next-compose-plugins": "^2.2.0",
     "next-progressbar": "^1.0.0",
     "path-to-regexp": "^6.1.0",
@@ -51,9 +51,9 @@
   "devDependencies": {
     "@babel/register": "^7.5.5",
     "@fullhuman/postcss-purgecss": "^2.1.0",
-    "@sitecore-jss/sitecore-jss-cli": "^12.0.0",
-    "@sitecore-jss/sitecore-jss-dev-tools": "^12.0.0",
-    "@sitecore-jss/sitecore-jss-manifest": "^12.0.0",
+    "@sitecore-jss/sitecore-jss-cli": "^13.0.0",
+    "@sitecore-jss/sitecore-jss-dev-tools": "^13.0.0",
+    "@sitecore-jss/sitecore-jss-manifest": "^13.0.0",
     "@uniformdev/publishing-awss3": "^2.0.200318-25",
     "@uniformdev/publishing-azureblobstorage": "^2.0.200318-25",
     "@uniformdev/publishing-netlify": "^2.0.200318-25",
