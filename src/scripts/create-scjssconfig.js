@@ -12,6 +12,6 @@ const scjssConfig = {
   },
 };
 
-const writeStream = fs.createWriteStream('scjssconfig.json');
-writeStream.write(JSON.stringify(scjssConfig));
-writeStream.end();
+// File path is relative to the process invocation path, e.g. `process.cwd()`
+// NOTE: this will overwrite any existing `scjssconfig.json` file.
+fs.writeFileSync('scjssconfig.json', JSON.stringify(scjssConfig, null, 2));
