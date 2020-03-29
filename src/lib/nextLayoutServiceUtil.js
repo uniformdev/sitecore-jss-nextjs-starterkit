@@ -1,6 +1,7 @@
 import { dataApi } from '@sitecore-jss/sitecore-jss-react';
 import { dataFetcher } from './dataFetcher';
 import getConfig from '../temp/config';
+import { isExportProcess } from './helpers';
 
 export function getRouteData(route, language) {
   const config = getConfig();
@@ -14,28 +15,24 @@ export function getRouteData(route, language) {
     fetcher: dataFetcher,
   };
 
-  // `global` is typically defined in browsers, so we also need to check for the existence
-  // of the `__NEXT_DATA__` and `__NEXT_EXPORT_CONTEXT__` properties to fully ensure
-  // that the code is currently being executed as part of static export process.
-  if (
-    typeof global !== 'undefined' &&
-    global.__NEXT_DATA__ &&
-    global.__NEXT_DATA__.nextExport &&
-    global.__NEXT_EXPORT_CONTEXT__
-  ) {
+  // Be sure to include `typeof window === 'undefined'` in the following condition so that
+  // NextJs won't include the code in client compilation. Otherwise webpack will choke on the
+  // inline `require` statement when building for the client.
+  if (typeof window === 'undefined' && isExportProcess()) {
     // export mode
     // Fetch layout data from Layout Service, then write the data to disk.
-    const exportDataWriter = global.__NEXT_EXPORT_CONTEXT__.exportDataWriter;
 
+    const { exportContextProvider } = require('./next-export-context-provider');
+    const { exportRouteDataWriter } = exportContextProvider();
     let apiData;
     return fetchFromApi(route, fetchOptions)
       .then((data) => {
         apiData = data;
-        return exportDataWriter(route, language, data);
+        return exportRouteDataWriter(route, language, data);
       })
       .then(() => apiData);
   } else if (process.env.NODE_ENV === 'production') {
-    // production mode
+    // production mode (i.e. the app is "running" somewhere)
     // Attempt to fetch layout data from disk, and fall back to Layout Service if disk fetch returns 404.
     return fetchFromDisk(route, language).catch((err) => {
       if (err.response && err.response.status === 404) {

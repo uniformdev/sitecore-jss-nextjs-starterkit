@@ -11,12 +11,13 @@ const config = require('../package.json').config;
 
 const touchToReloadFilePath = path.resolve(path.join(__dirname, 'src/temp/config.js'));
 
-const proxyOptions = {
+const disconnectedServerOptions = {
   appRoot: path.join(__dirname, '..'),
   appName: config.appName,
-  watchPaths: ['./data'],
+  watchPaths: [path.join(__dirname, '../data')],
   language: config.language,
-  // port: process.env.PROXY_PORT || 3042,
+  routeDataRoot: path.join(__dirname, '../data/routes'),
+  dictionaryDataRoot: path.join(__dirname, '../data/dictionary'),
   onManifestUpdated: (manifest) => {
     // if we can resolve the config file, we can alter it to force reloading the app automatically
     // instead of waiting for a manual reload. We must materially alter the _contents_ of the file to trigger
@@ -36,8 +37,8 @@ const proxyOptions = {
 
 module.exports = {
   attachDisconnectedServices: (server) => {
-    proxyOptions.server = server;
-    return createDefaultDisconnectedServer(proxyOptions);
+    disconnectedServerOptions.server = server;
+    createDefaultDisconnectedServer(disconnectedServerOptions);
   },
 };
 

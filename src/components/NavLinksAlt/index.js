@@ -1,4 +1,4 @@
-import Link from '../../lib/Link';
+import Link from '../../lib/routing/Link';
 
 function NavLinksAlt() {
   return (

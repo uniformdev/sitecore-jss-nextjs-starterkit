@@ -15,8 +15,8 @@ function getJssRenderingHostMiddleware(app, scJssConfig, { serverUrl = '', route
       const parsedUrl = parse(req.url, true);
       const jssData = resolveJssData(req);
 
-      // next.js server rendering functions only work for `GET` requests, but we're handling a `POST` request
-      // I can't believe we can do this... but it works
+      // Server rendering functions expect `GET` requests, but we're handling a `POST` request.
+      // so change the incoming request method.
       req.method = 'GET';
       // next.js renderToHtml reads from the req.url property, so set it accordingly
       req.url = jssData.renderPath;

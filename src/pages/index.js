@@ -33,7 +33,7 @@ const SitecoreRoute = ({ layoutData, statusCode, assetPrefix = '' }) => {
               'Page'}
           </title>
 
-          <link rel="shortcut icon" href="/static/favicon.ico" />
+          <link rel="shortcut icon" href="/favicon.ico" />
         </Head>
         <SitecoreContext componentFactory={componentFactory} layoutData={layoutData}>
           <Layout route={route} />
