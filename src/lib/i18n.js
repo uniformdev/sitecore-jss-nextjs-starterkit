@@ -30,7 +30,7 @@ export function i18init(language, dictionary) {
     },
   };
 
-  const dictionaryServicePath = `${config.sitecoreApiHost}/sitecore/api/jss/dictionary/${config.jssAppName}/{{lng}}?sc_apikey=${config.sitecoreApiKey}`;
+  const dictionaryServicePath = `${config.sitecoreApiHost}/sitecore/api/jss/dictionary/${config.jssAppName}/{{lng}}?sc_apikey=${config.sitecoreApiKey}&sc_site=${config.jssAppName}`;
 
   options.backend = {
     loadPath: dictionaryServicePath,

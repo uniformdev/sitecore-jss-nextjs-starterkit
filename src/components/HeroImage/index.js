@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { Text, Link } from '@sitecore-jss/sitecore-jss-react';
 import Logo from '../Logo';
 import NavLinks from '../NavLinks';
-import NavLinksAlt from '../NavLinksAlt';
 
 const HeroImage = ({ children, fields }) => {
   if (!fields) {
@@ -83,7 +82,7 @@ const HeroImage = ({ children, fields }) => {
             </div>
           </div>
           <div className="px-2 pt-2 pb-3">
-            <NavLinksAlt />
+            <NavLinks />
           </div>
           <div>
             <a

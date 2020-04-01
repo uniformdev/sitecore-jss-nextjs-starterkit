@@ -2,10 +2,6 @@ import React, { useState } from 'react';
 import { Text, Link } from '@sitecore-jss/sitecore-jss-react';
 import Logo from '../Logo';
 import NavLinks from '../NavLinks';
-import NavLinksAlt from '../NavLinksAlt';
-// import NavLinksAlt from '../NavLinksAlt';
-// import { getPropertyByPath } from '../../lib/helpers';
-// import Link from '../../lib/Link';
 
 const Hero = ({ fields }) => {
   if (!fields) {
@@ -95,7 +91,7 @@ const Hero = ({ fields }) => {
             </div>
           </div>
           <div className="px-2 pt-2 pb-3">
-            <NavLinksAlt />
+            <NavLinks />
           </div>
           <div>
             <a
