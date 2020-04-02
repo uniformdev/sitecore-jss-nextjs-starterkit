@@ -2,6 +2,11 @@
 
 This repo contains both the starter kit and a sample JSS app with content to go with it, which is optional if you are connecting to an existing JSS app.
 
+## Demo
+
+This is the latest deployment of this starter, served from Netlify:
+https://uniform-sitecore-jss-nextjs.netlify.com/
+
 ## Value prop
 
 Uniform enables [JAMstack](https://jamstack.wtf/) style architecture for your Sitecore solution allowing to statically generate the whole site at build-time and deploy to your delivery platform of choice (this app is setup with Netlify, Azure and AWS S3 but it can work with virtually any combination of file/blob storage + CDN).
