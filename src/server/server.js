@@ -1,13 +1,20 @@
 // This file doesn't go through babel or webpack transformation.
 // Make sure the syntax and sources this file requires are compatible with the current node version you are running
+require('../_defaultConfig')();
 const express = require('express');
 const next = require('next');
 const bodyParser = require('body-parser');
 const cors = require('cors');
+const {
+  attachUniformServicesToServer,
+  parseUniformServerConfig,
+} = require('@uniformdev/common-server');
+const { NextBuildAndExportEngine } = require('@uniformdev/next-server');
 
 const { matchRoute } = require('../lib/routing/routeMatcher');
 const { getJssRenderingHostMiddleware } = require('./next-jss-rendering-host-middleware');
 const scJssConfig = require('../scjssconfig.json');
+const { consoleLogger } = require('../utils/logging/consoleLogger');
 
 const jssMode = process.env.JSS_MODE || 'disconnected';
 const port = process.env.PORT || 3000;
@@ -40,7 +47,11 @@ app.prepare().then(() => {
 
   beforeServerStart(server, jssMode).then(() => {
     server.get('*', (req, res) => {
-      if (!req.url.startsWith('/_next/')) {
+      if (
+        !req.url.startsWith('/_next/') &&
+        !req.url.startsWith('/sw.js') &&
+        !req.url.startsWith('/favicon.ico')
+      ) {
         // some basic logging without too much noise
         console.log('Incoming HTTP ' + req.method + ' ' + req.url);
       }
@@ -61,7 +72,18 @@ app.prepare().then(() => {
 });
 
 function beforeServerStart(server, mode) {
+  attachUniformServices(server);
   return Promise.resolve();
+}
+
+// Setup Uniform config and attach Uniform-specific middleware to the existing server.
+function attachUniformServices(server) {
+  const uniformServerConfig = parseUniformServerConfig(process.env);
+  const buildAndExportEngine = new NextBuildAndExportEngine(uniformServerConfig);
+
+  attachUniformServicesToServer(server, buildAndExportEngine, consoleLogger, {
+    uniformServerConfig,
+  });
 }
 
 function attachJssRenderingHostMiddleware(server, jssMode) {
