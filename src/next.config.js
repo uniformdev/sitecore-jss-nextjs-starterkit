@@ -1,4 +1,4 @@
-const _config = require('./_defaultConfig');
+const _config = require('./uniform.config');
 _config();
 
 require('dotenv').config();

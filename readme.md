@@ -2,6 +2,11 @@
 
 This repo contains both the starter kit and a sample JSS app with content to go with it, which is optional if you are connecting to an existing JSS app.
 
+## Demo
+
+This is the latest deployment of this starter, served from Netlify:
+https://uniform-sitecore-jss-nextjs.netlify.com/
+
 ## Value prop
 
 Uniform enables [JAMstack](https://jamstack.wtf/) style architecture for your Sitecore solution allowing to statically generate the whole site at build-time and deploy to your delivery platform of choice (this app is setup with Netlify, Azure and AWS S3 but it can work with virtually any combination of file/blob storage + CDN).
@@ -32,8 +37,8 @@ There are multiple reasons why we are using Next.js in this context:
 1. `Uniform.Sitecore.zip` package provided by the folks @ Uniform ([contact us for details](mailto:hi@unfrm.io)).
 1. Uniform license key provided by the folks @ Uniform ([contact us for details](mailto:hi@unfrm.io)).
 1. npm token provided by the folks @ Uniform ([contact us for details](mailto:hi@unfrm.io)).
-1. Sitecore 9.1.1 or 9.2 installed and up and running with Admin credentials.
-1. JSS.Server package installed and configured according to the official documentation.
+1. Sitecore 9.x (9.0 -> 9.3) installed and up and running with Admin credentials.
+1. JSS.Server package (version dependent on your Sitecore version) installed and configured according to the official documentation.
 
 ## Setting up the server-side
 
@@ -54,24 +59,25 @@ There are multiple reasons why we are using Next.js in this context:
      > This value will be used to secure the deployment endpoint during Sitecore publishing and should be changed to a secret value in non-developer environments. The same value should be used when setting the `UNIFORM_API_TOKEN` environment variable (see below).
 
    - `Uniform.LicenseKey` with the value of Uniform license key you've received:
+      ```
+      <add name="Uniform.LicenseKey" connectionString="LICENSE-KEY-GOES-HERE" />
+      ```
+      
+1. `Optional` alternative place for Uniform connection strings. Since these connection strings may not change frequently in development environment, consider adding these connection strings globally to IIS Manager (stored in `C:\Windows\Microsoft.NET\Framework64\v4.0.30319\config\web.config`):
 
-     <add name="Uniform.LicenseKey" connectionString="LICENSE-KEY-GOES-HERE" />
+      1.  Open IIS Manager
+      1.  Select your computer name in the tree on the left
+      1.  Select Connection Strings
+      1.  Click Add in the right panel
+      1.  Fill in the dialog with values from bulleted list above
 
-> Since these connection strings may not change frequently in development environment, consider adding these connection strings globally to IIS Manager (stored in `C:\Windows\Microsoft.NET\Framework64\v4.0.30319\config\web.config`):
-
-1.  Open IIS Manager
-1.  Select your computer name in the tree on the left
-1.  Select Connection Strings
-1.  Click Add in the right panel
-1.  Fill in the dialog with values from bulleted list above
-
-```
-Name: connection-string-name
-( ) SQL Server
-(x) Custom
-   .------------------------
-   | connection-string-value
-```
+      ```
+      Name: connection-string-name
+      ( ) SQL Server
+      (x) Custom
+         .------------------------
+         | connection-string-value
+      ```
 
 ### Optional - sample JSS app deployment
 
@@ -83,7 +89,7 @@ If you don't have a JSS app deployed, but want to experience Uniform, not a prob
 
 1. Deploy content items.
 
-- Option 1 (easiest): install the `Uniform SitecoreJSS Demo-items` package from `sitecore\` folder via Installation Wizard.
+- Option 1 (easiest): install [the `Uniform SitecoreJSS Demo-items` package](/sitecore/Uniform%20SitecoreJSS%20Demo-items.0.0.1.zip) from this repo's `sitecore\` folder using Installation Wizard.
 
 - Option 2: via [Unicorn](https://github.com/SitecoreUnicorn/Unicorn) (first, make sure Unicorn is installed and configured).
   1. copy the contents of the `sitecore\serialization` folder to your Sitecore instance's `App_Data\uniform-jss` folder, so the destination paths look like this:
@@ -93,9 +99,9 @@ If you don't have a JSS app deployed, but want to experience Uniform, not a prob
 
 ### Quick test of the server-side
 
-Verify everything is working by making request to `http://your-sitecore-instance/api/map/uniform-jss`
+Verify everything is working by making request to `http://your-sitecore-instance/api/map/website` (or `http://your-sitecore-instance/api/map/uniform-jss` if you installed the sample site from this repo).
 
-> Please note that the last part of the url above (`uniform-jss`) corresponds to the site name. So if you didn't deploy the sample JSS app from this repo using the steps above, this value will likely be different and will correspond to the site name your JSS app is associated with. If not sure, use `website`.
+The last last part of the url above (`/website` or `/uniform-jss`) corresponds to the site name. So if you didn't deploy the sample JSS app from this repo using the steps above, this value will likely be different and will correspond to the site name your JSS app is associated with. If not sure, use `website`.
 
 The following response is expected (will be different if you are using another JSS app but JSON with the following structure is expected to be returned):
 
@@ -133,7 +139,7 @@ The following response is expected (will be different if you are using another J
    UNIFORM_DATA_URL=http://your-sc-host
    ```
 
-   There are more environment variables available to specify - see `_defaultConfig.js` file for all default values. Naturally, these environment variables can be tweaked according to your environment specific by corresponding entries to the `.env` file:
+   There are more environment variables available to specify - see [`uniform.config.js`](/src/uniform.config.js) file in `/src` folder for all default values. Naturally, these environment variables can be tweaked according to your environment specific by corresponding entries to the `.env` file:
 
    ```
    UNIFORM_API_TOKEN=1234
@@ -188,7 +194,7 @@ As of now, media/image support is not availble in public version of Uniform ([co
 
 In meantime, there are multiple alternatives as to how you can configure media handling for your JAMstackified Sitecore site:
 
-1. Have your Sitecore Content Delivery origin handle Media Library requests (this is enabled with `Media.AlwaysIncludeServerUrl=true` setting enabled in `Habitat.UniformSettings.config` config patch included in this repo).
+1. Have your Sitecore Content Delivery origin handle Media Library requests (this is enabled with `Media.AlwaysIncludeServerUrl=true` setting enabled in `uniform-jss.config` config patch included in this repo).
 1. Configure a "pull-based" CDN for Sitecore Media Library - [it is quite straightforward](https://doc.sitecore.com/developers/91/sitecore-experience-manager/en/manually-configure-the-sitecore-media-library-to-use-a-cdn.html). Besides the usual suspects, such as Akamai, Cloudflare and Cloudfront, there is a set of cool smart image CDNs to consider that are very much plug and play:
    - [CloudImage](https://www.cloudimage.io/)
    - [Cloudinary](https://cloudinary.com/)
