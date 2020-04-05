@@ -31,5 +31,4 @@ azure.config.json
 netlify.config.json
 aws.config.json
 .npmrc
-
-public/styles.css
+.temp
