@@ -282,7 +282,7 @@ Since Netlify will connect to your Sitecore instance, consider setting up a tunn
    AZURE_CONTAINER=$web
 
    # Key 1 / connection string for your blob container:
-   AZURE_STORAGE_CONNECTION_STRING==DefaultEndpointsProtocol=https;AccountName=...
+   AZURE_STORAGE_CONNECTION_STRING=DefaultEndpointsProtocol=https;AccountName=...
 
    ```
 
