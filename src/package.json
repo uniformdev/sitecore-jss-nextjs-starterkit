@@ -32,7 +32,7 @@
   "dependencies": {
     "@sitecore-jss/sitecore-jss-react": "^13.0.0",
     "@sitecore-jss/sitecore-jss-tracking": "^13.0.0",
-    "@uniformdev/next-server": "^2.0.200405-2",
+    "@uniformdev/next-server": "^2.0.200416-1",
     "@zeit/next-css": "^1.0.1",
     "axios": "~0.19.0",
     "i18next": "^19.0.1",
@@ -45,6 +45,7 @@
     "path-to-regexp": "^6.1.0",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
+    "react-html-parser": "^2.0.2",
     "react-i18next": "^10.12.2"
   },
   "devDependencies": {
@@ -53,9 +54,9 @@
     "@sitecore-jss/sitecore-jss-cli": "^13.0.0",
     "@sitecore-jss/sitecore-jss-dev-tools": "^13.0.0",
     "@sitecore-jss/sitecore-jss-manifest": "^13.0.0",
-    "@uniformdev/publishing-awss3": "^2.0.200405-2",
-    "@uniformdev/publishing-azureblobstorage": "^2.0.200405-2",
-    "@uniformdev/publishing-netlify": "^2.0.200405-2",
+    "@uniformdev/publishing-awss3": "^2.0.200416-1",
+    "@uniformdev/publishing-azureblobstorage": "^2.0.200416-1",
+    "@uniformdev/publishing-netlify": "^2.0.200416-1",
     "autoprefixer": "^9.7.4",
     "body-parser": "^1.19.0",
     "chokidar": "^3.0.2",
