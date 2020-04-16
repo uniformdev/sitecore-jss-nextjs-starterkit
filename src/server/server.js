@@ -1,6 +1,6 @@
 // This file doesn't go through babel or webpack transformation.
 // Make sure the syntax and sources this file requires are compatible with the current node version you are running
-require('../_defaultConfig')();
+require('../uniform.config')();
 const express = require('express');
 const next = require('next');
 const bodyParser = require('body-parser');
