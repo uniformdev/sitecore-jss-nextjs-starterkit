@@ -12,11 +12,11 @@
     "language": "en"
   },
   "scripts": {
-    "start": "cross-env-shell NODE_ENV=production JSS_MODE=connected \"npm-run-all --serial bootstrap:connected --parallel dev start:watch-components\"",
-    "dev": "node ./server/server.js",
+    "start": "cross-env-shell JSS_MODE=connected \"npm-run-all --serial bootstrap:connected --parallel start-server start:watch-components\"",
+    "start:production": "cross-env-shell JSS_MODE=connected SITE_RUNTIME_ENV=ssr NODE_ENV=production \"npm-run-all --serial bootstrap:connected build --parallel start-server start:watch-components\"",
+    "start-server": "node ./server/server.js",
     "jssconfig": "node ./scripts/create-scjssconfig.js",
     "build": "next build",
-    "start:ssr": "cross-env-shell NODE_ENV=production node ./server/server.js",
     "start:watch-components": "node scripts/generate-component-factory.js --watch",
     "bootstrap:connected": "node scripts/bootstrap.js",
     "bootstrap:disconnected": "node scripts/bootstrap.js --disconnected",

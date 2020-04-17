@@ -30,6 +30,9 @@ const nextConfig = {
   publicRuntimeConfig: {
     siteName: process.env.UNIFORM_API_SITENAME,
   },
+  env: {
+    SITE_RUNTIME_ENV: process.env.SITE_RUNTIME_ENV || 'static',
+  },
   exportTrailingSlash: true,
   experimental: {
     rewrites: () => rewrites,
