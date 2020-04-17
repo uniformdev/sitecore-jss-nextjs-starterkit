@@ -5,6 +5,7 @@ const express = require('express');
 const next = require('next');
 const bodyParser = require('body-parser');
 const cors = require('cors');
+const nodePath = require('path');
 const {
   attachUniformServicesToServer,
   parseUniformServerConfig,
@@ -46,6 +47,11 @@ app.prepare().then(() => {
   attachJssRenderingHostMiddleware(server, jssMode);
 
   beforeServerStart(server, jssMode).then(() => {
+    // Serve service-worker.js file when requested.
+    server.get('/service-worker.js', (req, res) => {
+      res.sendFile(nodePath.join(__dirname, '../.next', 'service-worker.js'));
+    });
+
     server.get('*', (req, res) => {
       if (
         !req.url.startsWith('/_next/') &&
@@ -98,10 +104,10 @@ function attachJssRenderingHostMiddleware(server, jssMode) {
     getJssRenderingHostMiddleware(app, scJssConfig, {
       serverUrl,
       routeResolver: (routeInfo) => {
-        const { matchedRoute } = matchRoute(routeInfo.pathname);
-        if (matchedRoute) {
+        const { matchedRoute, matchedDefinition } = matchRoute(routeInfo.pathname);
+        if (matchedRoute && matchedDefinition) {
           return {
-            pathname: matchedRoute.path,
+            pathname: matchedDefinition.destination,
             params: {
               ...routeInfo.params,
               ...matchedRoute.params,

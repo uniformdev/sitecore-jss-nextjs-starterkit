@@ -5,15 +5,15 @@ const { match: createMatcher } = require('path-to-regexp');
 // array of objects with _only_ `source` and `destination` properties.
 const rewrites = [
   {
-    source: '/:lang([a-z]{2}-[A-Z]{2})/:sitecoreRoute*',
+    source: '/:lang([a-z]{2}-[A-Z]{2})/:sitecoreRoute(.*)',
     destination: '/index',
   },
   {
-    source: '/:lang([a-z]{2})/:sitecoreRoute*',
+    source: '/:lang([a-z]{2})/:sitecoreRoute(.*)',
     destination: '/index',
   },
   {
-    source: '/:sitecoreRoute*',
+    source: '/:sitecoreRoute(.*)',
     destination: '/index',
   },
 ];

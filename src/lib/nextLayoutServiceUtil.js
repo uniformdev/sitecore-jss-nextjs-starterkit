@@ -32,6 +32,9 @@ export function getRouteData(route, language) {
       })
       .then(() => apiData);
   } else if (process.env.NODE_ENV === 'production') {
+    if (process.env.SITE_RUNTIME_ENV !== 'static') {
+      return fetchFromApi(route, fetchOptions);
+    }
     // production mode (i.e. the app is "running" somewhere)
     // Attempt to fetch layout data from disk, and fall back to Layout Service if disk fetch returns 404.
     return fetchFromDisk(route, language).catch((err) => {

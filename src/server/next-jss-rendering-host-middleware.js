@@ -6,13 +6,11 @@ module.exports = {
 
 function getJssRenderingHostMiddleware(app, scJssConfig, { serverUrl = '', routeResolver }) {
   return async function middleware(req, res) {
-    console.log('rendering host handling request', req.url);
     req.setTimeout(36000, () => {
       console.error('request timed out');
     });
 
     try {
-      const parsedUrl = parse(req.url, true);
       const jssData = resolveJssData(req);
 
       // Server rendering functions expect `GET` requests, but we're handling a `POST` request.
@@ -20,6 +18,9 @@ function getJssRenderingHostMiddleware(app, scJssConfig, { serverUrl = '', route
       req.method = 'GET';
       // next.js renderToHtml reads from the req.url property, so set it accordingly
       req.url = jssData.renderPath;
+
+      console.log('rendering host handling request', req.url);
+
       // Allows the app to easily determine whether or not it is being rendered via JSS rendering host.
       req.isJssRenderingHostRequest = true;
       // Attach the parsed JSS data as an arbitrary property on the `req` object
@@ -57,8 +58,10 @@ function getJssRenderingHostMiddleware(app, scJssConfig, { serverUrl = '', route
         req.assetPrefix = serverUrl;
       }
 
+      // `jssData.renderPath` contains the URL requested via Sitecore
+      const parsedUrl = parse(jssData.renderPath, true);
       let routeInfo = {
-        pathname: jssData.renderPath,
+        pathname: parsedUrl.pathname,
         params: parsedUrl.query,
       };
 
@@ -66,14 +69,14 @@ function getJssRenderingHostMiddleware(app, scJssConfig, { serverUrl = '', route
       // The custom route resolver can then handle mapping route path to actual path.
       // This is mostly useful for "dynamic" routes, where a single page (e.g. pages/index.js) is intended
       // to serve routes that aren't statically known by the app. For instance, Sitecore routes that are dynamic.
+      // NOTE: `routeResolver` will likely change the value of `routeInfo.pathname` and _should_ merge `routeInfo.params`
+      // with any params identified by the route matcher/regex.
       if (routeResolver && typeof routeResolver === 'function') {
         routeInfo = routeResolver(routeInfo);
       }
 
       // render app and return
-      const html = await app.renderToHTML(req, res, routeInfo.pathname, routeInfo.params, {
-        dataOnly: false,
-      });
+      const html = await app.renderToHTML(req, res, routeInfo.pathname, routeInfo.params);
 
       // need to handle 404 and/or redirect
       res.send({
