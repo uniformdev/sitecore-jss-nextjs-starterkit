@@ -49,7 +49,9 @@ export default ({ href, ...otherProps }) => {
 // pages in experience editor. Especially in a multi-site configuration where the hostname of the
 // site being edited may not match the hostname used for logging into the Sitecore CM server.
 function EditingLink(props) {
-  const resolvedHref = `${props.href}?sc_site=${props.sitecoreContext.site.name}`;
+  const resolvedHref = `${props.href}${props.href.indexOf('?') !== -1 ? '&' : '?'}sc_site=${
+    props.sitecoreContext.site.name
+  }`;
   return (
     <React.Fragment>
       {React.Children.map(props.children, (child) => {
