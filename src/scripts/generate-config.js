@@ -82,6 +82,9 @@ function transformPackageConfig() {
 
   return {
     jssAppName: packageConfig.config.appName,
+    // Typically, app name and site name will be the same, but sometimes they're not.
+    // And that causes all sorts of unpleasantness. So we allow for separate config values.
+    sitecoreSiteName: packageConfig.config.sitecoreSiteName || packageConfig.config.appName,
     defaultLanguage: packageConfig.config.language || 'en',
     graphQLEndpointPath: packageConfig.config.graphQLEndpointPath || null,
   };

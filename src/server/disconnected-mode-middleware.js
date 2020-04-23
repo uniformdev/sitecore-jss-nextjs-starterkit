@@ -9,15 +9,13 @@ const {
 
 const config = require('../package.json').config;
 
-const touchToReloadFilePath = path.resolve(path.join(__dirname, 'src/temp/config.js'));
+const touchToReloadFilePath = path.resolve(path.join(__dirname, '../temp/config.js'));
 
 const disconnectedServerOptions = {
   appRoot: path.join(__dirname, '..'),
   appName: config.appName,
   watchPaths: [path.join(__dirname, '../data')],
   language: config.language,
-  routeDataRoot: path.join(__dirname, '../data/routes'),
-  dictionaryDataRoot: path.join(__dirname, '../data/dictionary'),
   onManifestUpdated: (manifest) => {
     // if we can resolve the config file, we can alter it to force reloading the app automatically
     // instead of waiting for a manual reload. We must materially alter the _contents_ of the file to trigger
@@ -38,7 +36,7 @@ const disconnectedServerOptions = {
 module.exports = {
   attachDisconnectedServices: (server) => {
     disconnectedServerOptions.server = server;
-    createDefaultDisconnectedServer(disconnectedServerOptions);
+    return createDefaultDisconnectedServer(disconnectedServerOptions);
   },
 };
 

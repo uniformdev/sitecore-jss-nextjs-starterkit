@@ -5,7 +5,7 @@
   "config": {
     "appName": "uniform-jss",
     "rootPlaceholders": [
-      "jss-main"
+      "uniform-jss-content"
     ],
     "sitecoreConfigPath": "/App_Config/Include/zzz",
     "graphQLEndpointPath": "/api/uniform-jss",
@@ -13,6 +13,7 @@
   },
   "scripts": {
     "start": "cross-env-shell JSS_MODE=connected \"npm-run-all --serial bootstrap:connected --parallel start-server start:watch-components\"",
+    "start:disconnected": "cross-env-shell JSS_MODE=disconnected \"npm-run-all --serial bootstrap:disconnected --parallel start-server start:watch-components\"",
     "start:production": "cross-env-shell JSS_MODE=connected SITE_RUNTIME_ENV=ssr NODE_ENV=production \"npm-run-all --serial bootstrap:connected build --parallel start-server start:watch-components\"",
     "start-server": "node ./server/server.js",
     "jssconfig": "node ./scripts/create-scjssconfig.js",
@@ -22,6 +23,7 @@
     "bootstrap:disconnected": "node scripts/bootstrap.js --disconnected",
     "export:site": "next export",
     "export": "cross-env-shell NODE_ENV=production npm-run-all --serial jssconfig bootstrap:connected build export:site",
+    "export:development": "cross-env EXPORT_ENV=development npm run export",
     "azure": "node ./deploy-azure.js",
     "aws": "node ./deploy-aws.js",
     "netlify": "node ./deploy-netlify.js",
