@@ -1,8 +1,8 @@
-import Link from '../../lib/routing/Link';
+import Link from '../SitecoreNavLink/SitecoreNavLink';
 
 function Logo() {
   return (
-    <Link href="/">
+    <Link href="/en">
       <a>
         <svg width="50px" height="57px" viewBox="0 0 100 100">
           <g id="Update" stroke="none" strokeWidth="1" fill="none" fillRule="evenodd">

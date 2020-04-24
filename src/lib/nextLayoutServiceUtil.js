@@ -3,7 +3,7 @@ import { dataFetcher } from './dataFetcher';
 import getConfig from '../temp/config';
 import { isExportProcess } from './helpers';
 
-export function getRouteData(route, language) {
+export function getRouteData(route, language, querystringParams) {
   const config = getConfig();
   const fetchOptions = {
     layoutServiceConfig: { host: config.sitecoreApiHost },
@@ -11,6 +11,7 @@ export function getRouteData(route, language) {
       sc_lang: language,
       sc_apikey: config.sitecoreApiKey,
       sc_site: config.sitecoreSiteName,
+      ...querystringParams,
     },
     fetcher: dataFetcher,
   };
@@ -50,13 +51,8 @@ export function getRouteData(route, language) {
   }
 }
 
-function ensureLeadingSlash(route) {
-  const formattedRoute = !route.startsWith('/') ? `/${route}` : route;
-  return formattedRoute;
-}
-
 function fetchFromDisk(route, language) {
-  let formattedRoute = ensureLeadingSlash(route);
+  let formattedRoute = formatRoute(route);
   if (formattedRoute === '/') {
     formattedRoute = '/home';
   }
@@ -70,7 +66,7 @@ function fetchFromDisk(route, language) {
 }
 
 function fetchFromApi(route, fetchOptions) {
-  const formattedRoute = ensureLeadingSlash(route);
+  const formattedRoute = formatRoute(route);
 
   return dataApi.fetchRouteData(formattedRoute, fetchOptions).catch((error) => {
     if (error.response && error.response.status === 404 && error.response.data) {
@@ -81,4 +77,27 @@ function fetchFromApi(route, fetchOptions) {
 
     return null;
   });
+}
+
+function formatRoute(route) {
+  if (!route) {
+    return route;
+  }
+
+  // `removeQueryStringFromRoute` shouldn't be necessary, but we have it as a "safety" measure.
+  return removeQueryStringFromRoute(ensureLeadingSlash(route));
+}
+
+function ensureLeadingSlash(route) {
+  const formattedRoute = !route.startsWith('/') ? `/${route}` : route;
+  return formattedRoute;
+}
+
+function removeQueryStringFromRoute(route) {
+  const queryIndex = route.indexOf('?');
+  if (queryIndex !== -1) {
+    const formattedRoute = route.substring(0, queryIndex);
+    return formattedRoute;
+  }
+  return route;
 }

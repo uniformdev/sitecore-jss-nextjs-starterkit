@@ -12,7 +12,6 @@ const withProgressBar = require('next-progressbar');
 const withUniform = require('@uniformdev/next-server').config;
 const withCSS = require('@zeit/next-css');
 
-const { rewrites } = require('./lib/routing/routeMatcher');
 const plugins = [
   [withCSS],
   [withUniform, { logger: serverLogger }],
@@ -33,9 +32,6 @@ const nextConfig = {
     SITE_RUNTIME_ENV: process.env.SITE_RUNTIME_ENV || 'static',
   },
   exportTrailingSlash: true,
-  experimental: {
-    rewrites: () => rewrites,
-  },
 };
 
 module.exports = withPlugins(plugins, nextConfig);
