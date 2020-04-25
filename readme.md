@@ -35,7 +35,7 @@ There are multiple reasons why we are using Next.js in this context:
 - `/docs` - documentation
 
 ## Pre-requisites
-
+1. Node.js v10 or greater (check with `node -v`).
 1. `Uniform.Sitecore.zip` package provided by the folks @ Uniform ([contact us for details](mailto:hi@unfrm.io)).
 1. Uniform license key provided by the folks @ Uniform ([contact us for details](mailto:hi@unfrm.io)).
 1. npm token provided by the folks @ Uniform ([contact us for details](mailto:hi@unfrm.io)).
