@@ -39,6 +39,7 @@ There are multiple reasons why we are using Next.js in this context:
 1. npm token provided by the folks @ Uniform ([contact us for details](mailto:hi@unfrm.io)).
 1. Sitecore 9.x (9.0 -> 9.3) installed and up and running with Admin credentials.
 1. JSS.Server package (version dependent on your Sitecore version) installed and configured according to the official documentation.
+1. Next.js requires Node.js v10 or greater (check with `node -v`).
 
 ## Setting up the server-side
 
