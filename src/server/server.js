@@ -16,7 +16,7 @@ const {
   attachJssRenderingHostMiddleware,
 } = require('../server/rendering-host/attach-rendering-host-middleware');
 const { attachDisconnectedServices } = require('../server/disconnected-mode-middleware');
-const { consoleLogger } = require('../utils/logging/consoleLogger');
+const { serverLogger } = require('../utils/logging/serverLogger');
 
 const jssMode = process.env.JSS_MODE || 'disconnected';
 const port = process.env.PORT || 3000;
@@ -88,10 +88,10 @@ async function beforeServerStart(server, mode) {
 
 // Setup Uniform config and attach Uniform-specific middleware to the existing server.
 function attachUniformServices(server) {
-  const uniformServerConfig = parseUniformServerConfig(process.env);
+  const uniformServerConfig = parseUniformServerConfig(process.env, serverLogger);
   const buildAndExportEngine = new NextBuildAndExportEngine(uniformServerConfig);
 
-  attachUniformServicesToServer(server, buildAndExportEngine, consoleLogger, {
+  attachUniformServicesToServer(server, buildAndExportEngine, null, serverLogger, {
     uniformServerConfig,
   });
 }
