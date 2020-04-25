@@ -15,7 +15,9 @@ On top of that, Uniform unlocks **origin-less** tracking and personalization whe
 
 ## Sitecore version compatibility
 
-This starter kit is expected to work with any Sitecore 9.x version backend.
+This starter kit is expected to work with any Sitecore 9.x version backend. This particular starter kit requires Sitecore JSS.
+
+> If you are not planning on using Sitecore JSS, there are [other starter kits available](https://github.com/uniformdev).
 
 ## Next.js role
 
@@ -24,7 +26,7 @@ This starter kit is using [Next.js](https://nextjs.org/), a battleground tested 
 There are multiple reasons why we are using Next.js in this context:
 
 1. Leveraging outstanding server-side rendering option that Next.js provides out of the box. This is critical to retain Sitecore Experience Editor and Preview functionality.
-1. Leveraging utilities such as routing, the plugin system and many other enhancements that improve Developer Experience and help with building fast sites.
+1. Next.js comes with "batteries included". You have  routing, styling built-in as well as the plugin system and many other enhancements that improve Developer Experience and help with building fast sites.
 
 ## Repo structure
 
@@ -37,16 +39,41 @@ There are multiple reasons why we are using Next.js in this context:
 1. `Uniform.Sitecore.zip` package provided by the folks @ Uniform ([contact us for details](mailto:hi@unfrm.io)).
 1. Uniform license key provided by the folks @ Uniform ([contact us for details](mailto:hi@unfrm.io)).
 1. npm token provided by the folks @ Uniform ([contact us for details](mailto:hi@unfrm.io)).
-1. Sitecore 9.x (9.0 -> 9.3) installed and up and running with Admin credentials.
+1. Sitecore 9.x (9.0 -> 9.3) installed and up and running with Admin credentials available.
 1. JSS.Server package (version dependent on your Sitecore version) installed and configured according to the official documentation.
+1. Recommended to install Sitecore JSS CLI:
+   
+   `npm i @sitecore-jss/sitecore-jss-cli -g`
 
-## Setting up the server-side
+## Getting started disconnected
 
-1. Install the provided `Uniform.Sitecore.zip` package via Sitecore Desktop => Installation Wizard.
+In this mode, you can do front-end development without the Sitecore back-end using Sitecore JSS Code-first workflow, learn more about this mode [here](https://jss.sitecore.com/docs/fundamentals/dev-workflows/code-first#code-first-workflow).
 
-1. If you don't have a Sitecore API key created for your JSS app yet, create and configure it according to the official docs [here](https://jss.sitecore.com/docs/getting-started/app-deployment).
+1. Set the `NPM_TOKEN` environment variable with the value we provided you with.
 
-   > This API key will be used for the `UNIFORM_API_KEY` environment variable value below.
+   You can use `$Env:NPM_TOKEN="your-npm-token here"` in PowerShell or `export NPM_TOKEN="your-npm-token here"` in Bash.
+
+   > This variable is used within the `.npmrc` file located next to `package.json`
+   > So alternatively, simply replace `${NPM_TOKEN}` within `.npmrc` file with the value we provided you with.
+
+   ```bash
+   //registry.npmjs.org/:_authToken=npm-token-guid
+   ```
+
+1. `npm install` from `/src` folder.
+
+1. To run the app, use `npm run dev`.
+
+1. To run static export of your app in disconnected mode, use `npm run export:dev`.
+
+## Integrating with the server-side
+
+Once the Sitecore back-end is ready and available, you would need to configure Uniform and then you will be able to switch to being connected to the server-side.
+
+### Step 1: server package installation and configuration
+
+1. Deploy config files for this sample JSS app by copying the files from this repo's `/sitecore/config` folder to your Sitecore installation's `App_Config\Include\zzz` folder.
+   > If you are not planning on using Unicorn for content item push to Sitecore, you would only need to deploy the "uniform-jss.config" file.
 
 1. Update your Sitecore instance's `App_Config\ConnectionStrings.config` file by adding the following two connection strings:
 
@@ -63,7 +90,7 @@ There are multiple reasons why we are using Next.js in this context:
       <add name="Uniform.LicenseKey" connectionString="LICENSE-KEY-GOES-HERE" />
       ```
       
-1. `Optional` alternative place for Uniform connection strings. Since these connection strings may not change frequently in development environment, consider adding these connection strings globally to IIS Manager (stored in `C:\Windows\Microsoft.NET\Framework64\v4.0.30319\config\web.config`):
+      Optionally, consider an alternative place for Uniform connection strings. Since these connection strings may not change frequently in development environment, consider adding these connection strings globally to IIS Manager (stored in `C:\Windows\Microsoft.NET\Framework64\v4.0.30319\config\web.config`):
 
       1.  Open IIS Manager
       1.  Select your computer name in the tree on the left
@@ -79,55 +106,51 @@ There are multiple reasons why we are using Next.js in this context:
          | connection-string-value
       ```
 
-### Optional - sample JSS app deployment
+1. Install the Uniform for Sitecore connector provided to you by Uniform team (`Uniform.Sitecore.zip` file) as a package via Sitecore Desktop => Installation Wizard.
 
-If you don't have a JSS app deployed, but want to experience Uniform, not a problem! Follow the steps below to deploy required configs and content items for this sample app.
+   #### Validate the the server-side setup
 
-1. Deploy configs.
+   Verify everything is working by making request to `http://your-sitecore-instance/uniform/api/content/website/map`
 
-   Copy the configs from `sitecore\config` to your Sitecore instances' `App_Config\Include\zzz` folder.
+   The last last part of the url above (`/website`) corresponds to the site name. So if you didn't deploy the sample JSS app from this repo using the steps above, this value will likely be different and will correspond to the site name your JSS app is associated with. If not sure, use `website`.
 
-1. Deploy content items.
+   The following response is expected (will be different if you are using another JSS app but JSON with the following structure is expected to be returned):
 
-- Option 1 (easiest): install [the `Uniform SitecoreJSS Demo-items` package](/sitecore/Uniform%20SitecoreJSS%20Demo-items.0.0.1.zip) from this repo's `sitecore\` folder using Installation Wizard.
+   ```json
+   {
+   "isPage": true,
+   "lastModified": "2020-03-16T17:34:16",
+   "revision": "5e40c005-c01e-4164-a555-59eb5a09d8eb",
+   "children": {
+      "about": {
+         "isPage": true,
+         "lastModified": "2020-03-16T17:34:16",
+         "revision": "748dc8f3-a897-4681-bd7d-54b2495190ba",
+         "children": {},
+         "name": "About",
+         "id": "0faa6199-bb54-455b-bacc-3b018c3fac1e",
+         "template": "CommonPage"
+      }
+   },
+   "name": "Home",
+   "id": "5505b7b1-b454-459e-9d36-06a4d89755ad",
+   "template": "CommonPage"
+   }
+   ```
 
-- Option 2: via [Unicorn](https://github.com/SitecoreUnicorn/Unicorn) (first, make sure Unicorn is installed and configured).
-  1. copy the contents of the `sitecore\serialization` folder to your Sitecore instance's `App_Data\uniform-jss` folder, so the destination paths look like this:
-     `\App_Data\uniform-jss\content` - `\App_Data\uniform-jss\layouts` - `\App_Data\uniform-jss\placeholders` - `\App_Data\uniform-jss\renderings` - `\App_Data\uniform-jss\templates`
-  1. Open `https://your-sitecore-host/unicorn.aspx` while being logged into Sitecore.
-  1. Click "Sync" the `Uniform.SitecoreJSS.Demo` configuration.
+### Step 2: Updating the next.js app
 
-### Quick test of the server-side
+After the server-side is installed and configured, you will need to update your application to connect to the server-side.
 
-Verify everything is working by making request to `http://your-sitecore-instance/api/map/website` (or `http://your-sitecore-instance/api/map/uniform-jss` if you installed the sample site from this repo).
+1. Make sure you have `jss` CLI installed by running `jss --version` to check.
 
-The last last part of the url above (`/website` or `/uniform-jss`) corresponds to the site name. So if you didn't deploy the sample JSS app from this repo using the steps above, this value will likely be different and will correspond to the site name your JSS app is associated with. If not sure, use `website`.
+      If not, run `npm i @sitecore-jss/sitecore-jss-cli -g`.
 
-The following response is expected (will be different if you are using another JSS app but JSON with the following structure is expected to be returned):
+1. Run `jss setup` and follow the directions in CLI.
 
-```json
-{
-  "isPage": true,
-  "lastModified": "2020-03-16T17:34:16",
-  "revision": "5e40c005-c01e-4164-a555-59eb5a09d8eb",
-  "children": {
-    "about": {
-      "isPage": true,
-      "lastModified": "2020-03-16T17:34:16",
-      "revision": "748dc8f3-a897-4681-bd7d-54b2495190ba",
-      "children": {},
-      "name": "About",
-      "id": "0faa6199-bb54-455b-bacc-3b018c3fac1e",
-      "template": "CommonPage"
-    }
-  },
-  "name": "Home",
-  "id": "5505b7b1-b454-459e-9d36-06a4d89755ad",
-  "template": "CommonPage"
-}
-```
+   If you don't have a Sitecore API key created for your JSS app yet, create and configure it according to the official docs [here](https://jss.sitecore.com/docs/getting-started/app-deployment).
 
-## Setting up the app
+   > This API key will be used for the `UNIFORM_API_KEY` environment variable value below.
 
 1. Provide the Sitecore connection details in environment variables
 
@@ -159,26 +182,38 @@ The following response is expected (will be different if you are using another J
    ```
     NODE_TLS_REJECT_UNAUTHORIZED=0
    ```
-1. Set the `NPM_TOKEN` environment variable with the value we provided you with.
 
-   You can use `$Env:NPM_TOKEN="your-npm-token here"` in PowerShell or `export NPM_TOKEN="your-npm-token here"` in Bash.
+Now you are ready to develop connected to Sitecore back-end.
+Start development server with `npm start` and open `http://localhost:3000/` to access the app.
 
-   > This variable is used within the `.npmrc` file located next to `package.json`
-   > So alternatively, simply replace `${NPM_TOKEN}` within `.npmrc` file with the value we provided you with.
+### Step 3 - sample content deployment
 
-   ```bash
-   //registry.npmjs.org/:_authToken=npm-token-guid
-   ```
+**This step is optional**. If you don't have a JSS app deployed, but want to experience Uniform, not a problem! Follow the steps below to deploy required configs and content items for this sample app.
 
-1. Install all the dependencies with `npm install`
+1. Deploy configs.
 
-1. Configure JSS config with `jss setup` (skip the deployment secret as it won't be used).
+   Copy the configs from `sitecore\config` to your Sitecore instances' `App_Config\Include\zzz` folder.
 
-1. Start development server with `npm start` and open `http://localhost:3000/` to access the app.
+1. Deploy content items.
 
-## Static export
+- Option 1: install [the `Uniform SitecoreJSS Demo-items` package](/sitecore/Uniform%20SitecoreJSS%20Demo-items.0.0.1.zip) from this repo's `sitecore\` folder using Installation Wizard.
 
-Run `npm run export` to perform build and export of your JSS app into the `/out` folder.
+- Option 2: if you intend on using the JSS Code-first workflow:
+   - `jss setup`
+   - `jss deploy config`
+   - `jss deploy items -c`
+
+   This will perform JSS Code-first import of all developer artifacts as items as well as two content pages. Learn more about the Code-first workflow in the official Sitecore JSS docs [here](https://jss.sitecore.com/docs/fundamentals/dev-workflows/code-first#code-first-workflow). 
+
+- Option 3: via [Unicorn](https://github.com/SitecoreUnicorn/Unicorn) (first, make sure Unicorn is installed and configured).
+  1. copy the contents of the `sitecore\serialization` folder to your Sitecore instance's `App_Data\uniform-jss` folder, so the destination paths look like this:
+     `\App_Data\uniform-jss\content` - `\App_Data\uniform-jss\layouts` - `\App_Data\uniform-jss\placeholders` - `\App_Data\uniform-jss\renderings` - `\App_Data\uniform-jss\templates`
+  1. Open `https://your-sitecore-host/unicorn.aspx` while being logged into Sitecore.
+  1. Click "Sync" the `Uniform.SitecoreJSS.Demo` configuration.
+
+### Step 4: test static site export
+
+Once the content for your app is available in your Sitecore instance, you can run `npm run export` to perform build and export of your JSS app into the `/out` folder.
 
 The process should complete with `"Export successful"`.
 
