@@ -10,7 +10,7 @@ export function getRouteData(route, language) {
     querystringParams: {
       sc_lang: language,
       sc_apikey: config.sitecoreApiKey,
-      sc_site: config.jssAppName,
+      sc_site: config.sitecoreSiteName,
     },
     fetcher: dataFetcher,
   };

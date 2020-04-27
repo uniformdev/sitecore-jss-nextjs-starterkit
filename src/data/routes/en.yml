@@ -1,0 +1,22 @@
+# This is a route layout definition.
+# The route definition defines which Sitecore components are present on a route,
+# what their content data is, and which _placeholder_ they are placed in.
+
+# This particular route definition is for the home route - '/', so it defines the
+# components shown on the initial page of the app.
+
+# You may use equivalent JSON files instead of YAML if you prefer;
+# however YAML is simpler to read and allows comments like this one :)
+
+# Setting an ID is optional, but it will allow referring to this item in internal links
+# the ID can be a app-wide-unique string, or a GUID value.
+id: home-page
+name: Home
+template: CommonPage
+icon: Network/16x16/home.png
+
+# Define the page layout starting at the root placeholder - in this case, 'uniform-jss-content'
+# root placeholder names are defined in the package.json config section (required for Sitecore deployment)
+placeholders:
+  uniform-jss-content:
+    - id: global-default-hero

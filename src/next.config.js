@@ -3,8 +3,7 @@ _config();
 
 require('dotenv').config();
 
-const { consoleLogger } = require('./utils/logging/consoleLogger');
-consoleLogger.info('Loading next.config.js...');
+const { serverLogger } = require('./utils/logging/serverLogger');
 
 const withOffline = require('next-offline');
 const withGraphQL = require('next-plugin-graphql');
@@ -16,7 +15,7 @@ const withCSS = require('@zeit/next-css');
 const { rewrites } = require('./lib/routing/routeMatcher');
 const plugins = [
   [withCSS],
-  [withUniform, { logger: consoleLogger }],
+  [withUniform, { logger: serverLogger }],
   [withProgressBar],
   [withOffline],
   [withGraphQL],

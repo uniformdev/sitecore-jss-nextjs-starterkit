@@ -1,0 +1,14 @@
+id: global-default-hero
+name: Default Hero
+template: Hero
+fields:
+  title: Welcome
+  subtitle: to Uniform
+  text: Uniform helps connect your existing digital marketing stack and JAMstackify it.
+  image:
+  primaryCTALink:
+    href: http://uniform.dev
+  primaryCTATitle: Learn more
+  secondaryCTALink:
+    href: https://calendly.com/uniformdemo/intro
+  secondaryCTATitle: Schedule live demo

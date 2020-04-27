@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Text, Link } from '@sitecore-jss/sitecore-jss-react';
+import { Text, RichText, Link } from '@sitecore-jss/sitecore-jss-react';
 import Logo from '../Logo';
 import NavLinks from '../NavLinks';
 
@@ -107,10 +107,10 @@ const HeroImage = ({ children, fields }) => {
               <h2 className="text-4xl tracking-tight leading-10 font-extrabold text-gray-900 sm:text-5xl sm:leading-none md:text-6xl">
                 <Text field={title} />
                 <br className="xl:hidden" />{' '}
-                <Text field={subtitle} tag="span" className="text-red-500" />
+                <RichText field={subtitle} tag="span" className="text-red-500" />
               </h2>
               <p className="mt-3 text-base text-gray-500 sm:mt-5 sm:text-lg sm:max-w-xl sm:mx-auto md:mt-5 md:text-xl lg:mx-0">
-                <Text field={text} />
+                <RichText field={text} />
               </p>
               <div className="mt-5 sm:mt-8 sm:flex sm:justify-center lg:justify-start">
                 {children}

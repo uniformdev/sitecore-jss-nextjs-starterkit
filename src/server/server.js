@@ -3,7 +3,7 @@
 require('../uniform.config')();
 const express = require('express');
 const next = require('next');
-const bodyParser = require('body-parser');
+
 const cors = require('cors');
 const nodePath = require('path');
 const {
@@ -12,10 +12,11 @@ const {
 } = require('@uniformdev/common-server');
 const { NextBuildAndExportEngine } = require('@uniformdev/next-server');
 
-const { matchRoute } = require('../lib/routing/routeMatcher');
-const { getJssRenderingHostMiddleware } = require('./next-jss-rendering-host-middleware');
-const scJssConfig = require('../scjssconfig.json');
-const { consoleLogger } = require('../utils/logging/consoleLogger');
+const {
+  attachJssRenderingHostMiddleware,
+} = require('../server/rendering-host/attach-rendering-host-middleware');
+const { attachDisconnectedServices } = require('../server/disconnected-mode-middleware');
+const { serverLogger } = require('../utils/logging/serverLogger');
 
 const jssMode = process.env.JSS_MODE || 'disconnected';
 const port = process.env.PORT || 3000;
@@ -44,7 +45,7 @@ app.prepare().then(() => {
   server.use(cors());
   server.use(express.static('static'));
 
-  attachJssRenderingHostMiddleware(server, jssMode);
+  attachJssRenderingHostMiddleware(server, serverUrl, app, jssMode);
 
   beforeServerStart(server, jssMode).then(() => {
     // Serve service-worker.js file when requested.
@@ -77,45 +78,20 @@ app.prepare().then(() => {
   });
 });
 
-function beforeServerStart(server, mode) {
+async function beforeServerStart(server, mode) {
+  if (mode === 'disconnected') {
+    await attachDisconnectedServices(server);
+  }
   attachUniformServices(server);
   return Promise.resolve();
 }
 
 // Setup Uniform config and attach Uniform-specific middleware to the existing server.
 function attachUniformServices(server) {
-  const uniformServerConfig = parseUniformServerConfig(process.env);
+  const uniformServerConfig = parseUniformServerConfig(process.env, serverLogger);
   const buildAndExportEngine = new NextBuildAndExportEngine(uniformServerConfig);
 
-  attachUniformServicesToServer(server, buildAndExportEngine, consoleLogger, {
+  attachUniformServicesToServer(server, buildAndExportEngine, null, serverLogger, {
     uniformServerConfig,
   });
-}
-
-function attachJssRenderingHostMiddleware(server, jssMode) {
-  // Setup body parsing middleware for incoming POST requests.
-  const jsonBodyParser = bodyParser.json({ limit: '2mb' });
-
-  // Setup the JSS rendering host route.
-  // The URL that is called is configured via JSS app config, e.g. `<app serverSideRenderingEngineEndpointUrl="" />`
-  server.post(
-    '/jss-render',
-    jsonBodyParser,
-    getJssRenderingHostMiddleware(app, scJssConfig, {
-      serverUrl,
-      routeResolver: (routeInfo) => {
-        const { matchedRoute, matchedDefinition } = matchRoute(routeInfo.pathname);
-        if (matchedRoute && matchedDefinition) {
-          return {
-            pathname: matchedDefinition.destination,
-            params: {
-              ...routeInfo.params,
-              ...matchedRoute.params,
-            },
-          };
-        }
-        return routeInfo;
-      },
-    })
-  );
 }

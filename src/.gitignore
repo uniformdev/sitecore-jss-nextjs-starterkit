@@ -32,3 +32,4 @@ netlify.config.json
 aws.config.json
 .npmrc
 .temp
+.debug.log
