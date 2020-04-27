@@ -30,7 +30,7 @@ There are multiple reasons why we are using Next.js in this context:
 
 ## Repo structure
 
-- `/sitecore` - the required configuration files and content items for the demo site (Unicorn items and the package).
+- `/content` - sample app content items (Unicorn items and the package).
 - `/src` - the sources of the React/Next.js app wired up with Uniform plugin.
 - `/docs` - documentation
 
@@ -64,7 +64,7 @@ In this mode, you can do front-end development without the Sitecore back-end usi
 
 1. To run the app, use `npm run dev`.
 
-1. To run static export of your app in disconnected mode, use `npm run export:dev`.
+> As of now, static export in disconnected mode is not supported.
 
 ## Integrating with the server-side
 
@@ -72,7 +72,7 @@ Once the Sitecore back-end is ready and available, you would need to configure U
 
 ### Step 1: server package installation and configuration
 
-1. Deploy config files for this sample JSS app by copying the files from this repo's `/sitecore/config` folder to your Sitecore installation's `App_Config\Include\zzz` folder.
+1. Deploy config files for this sample JSS app by copying the files from this repo's `/src/sitecore/config` folder to your Sitecore installation's `App_Config\Include\zzz` folder.
    > If you are not planning on using Unicorn for content item push to Sitecore, you would only need to deploy the "uniform-jss.config" file.
 
 1. Update your Sitecore instance's `App_Config\ConnectionStrings.config` file by adding the following two connection strings:
