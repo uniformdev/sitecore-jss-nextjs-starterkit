@@ -1,7 +1,4 @@
-const _config = require('./uniform.config');
-_config();
-
-require('dotenv').config();
+require('./uniform.config')();
 
 const { serverLogger } = require('./utils/logging/serverLogger');
 
@@ -12,12 +9,17 @@ const withProgressBar = require('next-progressbar');
 const withUniform = require('@uniformdev/next-server').config;
 const withCSS = require('@zeit/next-css');
 
+const withDynamicRoutes = require('./lib/routing/dynamicRoutesPlugin');
+const { routeDefinitions } = require('./lib/routing/routeDefinitions');
+
 const plugins = [
   [withCSS],
   [withUniform, { logger: serverLogger }],
   [withProgressBar],
   [withOffline],
   [withGraphQL],
+  // order is important, dynamic routes plugin should occur _after_ any plugin that modifies `exportPathMap`.
+  [withDynamicRoutes, { routeDefinitions }],
 ];
 
 const nextConfig = {
