@@ -12,11 +12,8 @@ const {
 } = require('@uniformdev/common-server');
 const { NextBuildAndExportEngine } = require('@uniformdev/next-server');
 
-
-const { routeMatcher } = require('../lib/routing/routeMatcher');
 const { getDynamicRequestHandler } = require('../lib/routing/dynamicRequestHandler');
 const { routeDefinitions } = require('../lib/routing/routeDefinitions');
-const scJssConfig = require('../scjssconfig.json');
 
 const {
   attachJssRenderingHostMiddleware,

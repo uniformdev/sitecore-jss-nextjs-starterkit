@@ -19,7 +19,7 @@ function getJssRenderingHostMiddleware(app, scJssConfig, { serverUrl = '', route
       // next.js renderToHtml reads from the req.url property, so set it accordingly
       req.url = jssData.renderPath;
 
-      console.log('rendering host handling request', req.url);
+      console.log('Rendering host handling request', req.url);
 
       // Allows the app to easily determine whether or not it is being rendered via JSS rendering host.
       req.isJssRenderingHostRequest = true;
