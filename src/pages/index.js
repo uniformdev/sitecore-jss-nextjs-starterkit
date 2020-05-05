@@ -105,7 +105,7 @@ SitecoreRoute.getInitialProps = ({ pathname, query, asPath, req, res, err }) => 
       })
     );
   }
-  // This condition should be true for client-side route change.
+  // This condition should be true for client-side language change.
   else if (!req && query.lang && i18n.isInitialized && i18n.language !== query.lang) {
     promises.push(
       i18n.changeLanguage(query.lang).then(() => {
@@ -116,12 +116,18 @@ SitecoreRoute.getInitialProps = ({ pathname, query, asPath, req, res, err }) => 
 
   // If we don't have `jssData`, then attempt to fetch it from layout service.
   // This is desired for both node SSR and CSR.
+  const { sitecoreRoute, lang, ...queryStringParams } = query;
+
+  // `sitecoreRoute` param may be undefined when the current URL is `/` or
+  // when the current URL is just a language parameter, e.g. `/en`, `nl-NL`
+  // In those scenarios, we default to `/` for the route.
+  const resolvedRoute = sitecoreRoute || '/';
+  // determine language by route first, then by "state" (i18n.language), else fallback to config
+  const resolvedLang =
+    query.lang || (i18n.isInitialized && i18n.language) || config.defaultLanguage;
+
   promises.push(
-    getRouteData(
-      query.sitecoreRoute || asPath,
-      // determine language by route first, then by "state" (i18n.language), else fallback to config
-      query.lang || (i18n.isInitialized && i18n.language) || config.defaultLanguage
-    ).then((result) => {
+    getRouteData(resolvedRoute, resolvedLang, queryStringParams).then((result) => {
       if (result && result.sitecore && result.sitecore.route) {
         props.layoutData = result;
       } else {

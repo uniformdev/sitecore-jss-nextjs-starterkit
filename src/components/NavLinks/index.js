@@ -1,4 +1,4 @@
-import Link from '../../lib/routing/Link';
+import Link from '../SitecoreNavLink/SitecoreNavLink';
 
 function NavLinks() {
   return (

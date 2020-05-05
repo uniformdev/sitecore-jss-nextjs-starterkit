@@ -2,7 +2,8 @@ const bodyParser = require('body-parser');
 const fs = require('fs');
 const nodePath = require('path');
 const { getJssRenderingHostMiddleware } = require('./next-jss-rendering-host-middleware');
-const { matchRoute } = require('../../lib/routing/routeMatcher');
+const { routeMatcher } = require('../../lib/routing/routeMatcher');
+const { routeDefinitions } = require('../../lib/routing/routeDefinitions');
 
 module.exports = {
   attachJssRenderingHostMiddleware,
@@ -35,13 +36,13 @@ function attachJssRenderingHostMiddleware(server, serverUrl, nextApp, jssMode) {
     getJssRenderingHostMiddleware(nextApp, scJssConfig, {
       serverUrl,
       routeResolver: (routeInfo) => {
-        const { matchedRoute, matchedDefinition } = matchRoute(routeInfo.pathname);
-        if (matchedRoute && matchedDefinition) {
+        const { route, params } = routeMatcher(routeInfo.pathname, routeDefinitions);
+        if (route) {
           return {
-            pathname: matchedDefinition.destination,
+            pathname: route.page,
             params: {
               ...routeInfo.params,
-              ...matchedRoute.params,
+              ...params,
             },
           };
         }

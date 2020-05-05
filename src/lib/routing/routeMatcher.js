@@ -1,53 +1,42 @@
-// This file uses CommonJS because it is used by both server and client.
-const { match: createMatcher } = require('path-to-regexp');
+// NOTE: `next` aliases Node `url` with a package named `native-url`, which provides
+// the same interface as Node URL but is capable of running in browsers.
+// So if you're wondering why we can import a server library in code that will run
+// on both client+server, that is why :)
+const { parse } = require('url');
 
-// `rewrites` are using by `next.config.experimental.rewrites` property and must be an
-// array of objects with _only_ `source` and `destination` properties.
-const rewrites = [
-  {
-    source: '/:lang([a-z]{2}-[A-Z]{2})/:sitecoreRoute(.*)',
-    destination: '/index',
-  },
-  {
-    source: '/:lang([a-z]{2})/:sitecoreRoute(.*)',
-    destination: '/index',
-  },
-  {
-    source: '/:sitecoreRoute(.*)',
-    destination: '/index',
-  },
-];
+module.exports = {
+  routeMatcher,
+};
 
-// We create a new set of definitions mapped from `rewrites` and attach
-// a `matcher` property that we can use for easier match evaluation in
-// consuming code.
-const routeMatcherDefinitions = rewrites.map((rewrite) => {
-  return { ...rewrite, matcher: createMatcher(rewrite.source) };
-});
+function routeMatcher(url, routeDefinitions) {
+  if (!routeDefinitions) {
+    throw new Error('no route definitions provided for matching');
+  }
 
-// matchRoute iterates `routeMatcherDefinitions` and attempts to match
-// and parse the given `path`.
-function matchRoute(path) {
-  let matchedRoute = null;
-  let matchedDefinition = null;
+  // `url` can be a string or a Node URL object.
+  const parsedUrl = typeof url === 'string' ? parse(url, true) : url;
+  const { pathname, query } = parsedUrl;
 
-  // Using a `for` loop allows us to break on the first match.
-  // Why not `for ... of`? because for...of loops get transpiled to something big and clunky.
-  // Why not Array.forEach or Array.reduce? because we can't break early.
-  for (let i = 0; i < routeMatcherDefinitions.length; i++) {
-    const routeDefinition = routeMatcherDefinitions[i];
-    // matcher returns false if no match made
-    matchedRoute = routeDefinition.matcher(path);
+  // default result is the parsedUrl and querystring params
+  // todo: should the default result be null/undefined instead?
+  const result = {
+    params: query,
+    parsedUrl,
+    route: null,
+  };
+
+  for (let i = 0; i < routeDefinitions.length; i++) {
+    const routeDefinition = routeDefinitions[i];
+
+    const matchedRoute = routeDefinition.match(pathname);
     if (matchedRoute) {
-      matchedDefinition = routeDefinition;
+      // The default result.params contains parsed querystring params. We merge any
+      // matched route params with the existing params.
+      Object.assign(result.params, matchedRoute.params);
+      result.route = routeDefinition;
       break;
     }
   }
-  return { matchedRoute, matchedDefinition };
-}
 
-module.exports = {
-  matchRoute,
-  rewrites,
-  routeMatcherDefinitions,
-};
+  return result;
+}

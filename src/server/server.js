@@ -12,6 +12,9 @@ const {
 } = require('@uniformdev/common-server');
 const { NextBuildAndExportEngine } = require('@uniformdev/next-server');
 
+const { getDynamicRequestHandler } = require('../lib/routing/dynamicRequestHandler');
+const { routeDefinitions } = require('../lib/routing/routeDefinitions');
+
 const {
   attachJssRenderingHostMiddleware,
 } = require('../server/rendering-host/attach-rendering-host-middleware');
@@ -26,6 +29,7 @@ const dev = process.env.NODE_ENV !== 'production';
 
 const app = next({ dev });
 const defaultRequestHandler = app.getRequestHandler();
+const dynamicRequestHandler = getDynamicRequestHandler(app, routeDefinitions);
 
 const serverUrl = `${protocol}://${hostname}:${port}`;
 
@@ -43,7 +47,7 @@ app.prepare().then(() => {
   const server = express();
 
   server.use(cors());
-  server.use(express.static('static'));
+  server.use(express.static('public'));
 
   attachJssRenderingHostMiddleware(server, serverUrl, app, jssMode);
 
@@ -55,18 +59,20 @@ app.prepare().then(() => {
 
     server.get('*', (req, res) => {
       if (
-        !req.url.startsWith('/_next/') &&
-        !req.url.startsWith('/sw.js') &&
-        !req.url.startsWith('/favicon.ico')
+        req.url.startsWith('/_next/') ||
+        req.url.startsWith('/sw.js') ||
+        req.url.startsWith('/favicon.ico')
       ) {
-        // some basic logging without too much noise
-        console.log('Incoming HTTP ' + req.method + ' ' + req.url);
+        return defaultRequestHandler(req, res);
       }
 
+      // some basic logging without too much noise
+      console.log('Incoming HTTP ' + req.method + ' ' + req.url);
+
       try {
-        return defaultRequestHandler(req, res);
+        return dynamicRequestHandler(req, res);
       } catch (ex) {
-        console.error('Failed to handle request\n' + JSON.stringify(ex));
+        console.error('Failed to handle request\n' + ex);
         return;
       }
     });
