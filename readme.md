@@ -425,10 +425,6 @@ You need to setup your JSS app definition config in `uniform-jss.config`. Be sur
 
 Notice the `serverSideRenderingEngine` attribute is set to `http` and the `serverSideRenderingEngineEndpointUrl` is set to the host your Next+JSS app is running on.
 
-### Configure deployment on Sitecore publish
-
-WIP
-
 ### Setting up Preview server
 
 WIP
