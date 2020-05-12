@@ -22,6 +22,7 @@
     "bootstrap:connected": "node scripts/bootstrap.js",
     "bootstrap:disconnected": "node scripts/bootstrap.js --disconnected",
     "export:site": "next export",
+    "deploy": "node deploy.js",
     "export": "cross-env-shell NODE_ENV=production npm-run-all --serial jssconfig bootstrap:connected build export:site"
   },
   "dependencies": {

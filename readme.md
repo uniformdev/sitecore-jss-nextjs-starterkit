@@ -235,9 +235,22 @@ In meantime, there are multiple alternatives as to how you can configure media h
    - [Cloudinary](https://cloudinary.com/)
    - [Piio](http://piio.co/)
 
-## Deployment
+## Site deployment
 
-### Netlify
+Site deployment consists of two phases:
+1. Site export (also known as static site generation)
+1. Copy of the statically exported artifacts to the target delivery environment.
+
+This process can be initiated by:
+1. A Sitecore publish command (useful in UAT, production environments where content authoring takes place).
+
+1. Running export command in command line (useful in development and in CI)
+
+Below are the steps to configure site deployment depending on your target environment of choice.
+
+## Site deployment via command line
+
+#### Option 1: Netlify
 
 Netlify is known as a great platform for the JAMstack sites and it is not only the new origin for your built site, it is also the build environment.
 
@@ -252,7 +265,7 @@ Netlify is known as a great platform for the JAMstack sites and it is not only t
 
    > For convenience of your development environment, you may want to consider saving these as system environment variables instead (check [this guide](https://helpdeskgeek.com/how-to/create-custom-environment-variables-in-windows/) if unfamiliar with env variables).
 
-4. Run `npm run deploy:netlify` to perform build, export and deployment to Netlify ADN.
+4. Run `npm run deploy` to perform build, export and deployment to Netlify ADN.
 
    At the end of the process, the following message will be shown in console indicating success:
 
@@ -288,8 +301,12 @@ NPM_TOKEN=<the value of the npm token received from us>
 
 Since Netlify will connect to your Sitecore instance, consider setting up a tunnel to your local Sitecore instance if you don't have it deployed publicly yet with something like ngrok: `ngrok http -host-header="ABCsc.dev.local" ABCsc.dev.local:80`
 
-### Azure Blob Storage
+#### Option 2: Azure Blob Storage
 
+**Pre-requisites**:
+- Download [AzCopy](https://docs.microsoft.com/en-us/azure/storage/common/storage-use-azcopy-v10) tool and make it available on the same server that runs this next app (for simplicity, copy it into the root of this application).
+
+**Configuration steps**:
 1. Provision a Blob Storage account in Azure in the desired region.
 
 1. Create a container called `$web`.
@@ -307,6 +324,8 @@ Since Netlify will connect to your Sitecore instance, consider setting up a tunn
 1. Add the following additional environment variables to the `.env` file located next to your `package.json` file.
 
    ```
+   # This is a path to azcopy, could be ./tools/azcopy.exe if you bring azcopy into the app root or any other path
+   AZCOPY_PATH=./azcopy.exe
 
    UNIFORM_PUBLISH_TARGET=azureblob
 
@@ -323,11 +342,12 @@ Since Netlify will connect to your Sitecore instance, consider setting up a tunn
 
    > The value for `AZURE_STORAGE_CONNECTION_STRING` can be retrieved from the "Access keys" page of your Azure Blob Storage account, under "Key 1 / Connection string".
 
-1. `npm run deploy:azure` to perform the app export and deployment of static application artifacts to your Azure Blob storage container.
+
+To trigger deployment, run `npm run deploy`. This will perform the static app export and deployment of the exported static application artifacts to your Azure Blob storage container.
 
 The static version of the JSS app is now expected to be served from this endpoint.
 
-### AWS S3
+#### Option 3: AWS S3
 
 1. Make sure you have the AWS credentials for a user with `AmazonS3FullAccess` policy. Specifically, the `Access key Id` and a `Secret access key`.
 
@@ -346,15 +366,36 @@ The static version of the JSS app is now expected to be served from this endpoin
 
    > For convenience of your development environment, you may want to consider saving these as system environment variables instead (check [this guide](https://helpdeskgeek.com/how-to/create-custom-environment-variables-in-windows/) if unfamiliar with env variables).
 
-1. Run `npm run deploy:aws`. This will provision the S3 bucket with "Static site hosting" settings and will deploy the contents of the `out` folder to it. At the end of the process, you should see the following in the console and the `aws.config.json` will be created in the project root:
+1. Run `npm run deploy`. This will provision the S3 bucket with "Static site hosting" settings and will deploy the contents of the `out` folder to it. At the end of the process, you should see the following in the console and the `aws.config.json` will be created in the project root:
 
    ```
    AwsS3PublishProvider deployed site files: out
    ```
 
-### Other deployment targets
+#### Other deployment targets
 
 Please [contact us](mailto:hi@unfrm.io) if your deployment to your CDN / hosting environment is not documented, it should be possible :)
+
+### Site deployment via Sitecore publish
+
+1. Ensure your site configuration corresponding to your JSS app has the `publishEndpoint` attribute with value pointing to your running Next server with Uniform plugin:  
+
+   ```xml
+         <site name="uniform-jss"
+               ...
+               publishEndpoint="http://localhost:3000" />
+   ```
+
+1. Ensure `UNIFORM_MODE` environment variable is set to `mixed`.
+   ```
+   UNIFORM_MODE=mixed
+   ```
+
+1. Start this app with `npm start`.
+   
+   Now that Next app is running, it is ready to accept deployment requests from your Sitecore Authoring server. 
+
+1. Run site publishing.
 
 ## Other things you can do
 
