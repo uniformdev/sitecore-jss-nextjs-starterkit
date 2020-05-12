@@ -11,6 +11,7 @@ const {
   parseUniformServerConfig,
 } = require('@uniformdev/common-server');
 const { NextBuildAndExportEngine } = require('@uniformdev/next-server');
+const { createPublishProvider } = require('@uniformdev/publishing-all');
 
 const { getDynamicRequestHandler } = require('../lib/routing/dynamicRequestHandler');
 const { routeDefinitions } = require('../lib/routing/routeDefinitions');
@@ -97,7 +98,10 @@ function attachUniformServices(server) {
   const uniformServerConfig = parseUniformServerConfig(process.env, serverLogger);
   const buildAndExportEngine = new NextBuildAndExportEngine(uniformServerConfig);
 
-  attachUniformServicesToServer(server, buildAndExportEngine, null, serverLogger, {
+  const options = {
     uniformServerConfig,
-  });
+    publishProvider: createPublishProvider(),
+  };
+
+  attachUniformServicesToServer(server, buildAndExportEngine, serverLogger, options);
 }
