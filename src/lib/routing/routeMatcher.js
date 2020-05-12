@@ -9,6 +9,10 @@ module.exports = {
 };
 
 function routeMatcher(url, routeDefinitions) {
+  // we technically allow empty string values for `url`, so need to explicitly check for undefined or null
+  if (typeof url === 'undefined' || url === null) {
+    throw new Error('no url provided for route matcher');
+  }
   if (!routeDefinitions) {
     throw new Error('no route definitions provided for matching');
   }
@@ -32,7 +36,7 @@ function routeMatcher(url, routeDefinitions) {
     if (matchedRoute) {
       // The default result.params contains parsed querystring params. We merge any
       // matched route params with the existing params.
-      Object.assign(result.params, matchedRoute.params);
+      result.params = result.params ? Object.assign({}, result.params, matchedRoute.params) : matchedRoute.params;
       result.route = routeDefinition;
       break;
     }
