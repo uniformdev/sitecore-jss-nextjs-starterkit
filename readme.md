@@ -62,7 +62,7 @@ In this mode, you can do front-end development without the Sitecore back-end usi
 
 1. `npm install` from `/src` folder.
 
-1. To run the app, use `npm run dev`.
+1. To run the app, use `npm run start:disconnected`.
 
 > As of now, static export in disconnected mode is not supported.
 

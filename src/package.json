@@ -12,18 +12,18 @@
     "language": "en"
   },
   "scripts": {
-    "start": "cross-env-shell JSS_MODE=connected \"npm-run-all --serial bootstrap:connected --parallel start-server start:watch-components\"",
-    "dev": "cross-env-shell JSS_MODE=disconnected \"npm-run-all --serial bootstrap:disconnected --parallel start-server start:watch-components\"",
-    "start:production": "cross-env-shell JSS_MODE=connected SITE_RUNTIME_ENV=ssr NODE_ENV=production \"npm-run-all --serial bootstrap:connected build --parallel start-server start:watch-components\"",
-    "start-server": "node ./server/server.js",
-    "jssconfig": "node ./scripts/create-scjssconfig.js",
-    "build": "next build",
-    "start:watch-components": "node scripts/generate-component-factory.js --watch",
     "bootstrap:connected": "node scripts/bootstrap.js",
     "bootstrap:disconnected": "node scripts/bootstrap.js --disconnected",
-    "export:site": "next export",
+    "build": "next build",
     "deploy": "node deploy.js",
-    "export": "cross-env-shell NODE_ENV=production npm-run-all --serial jssconfig bootstrap:connected build export:site"
+    "export": "cross-env-shell NODE_ENV=production npm-run-all --serial jssconfig bootstrap:connected build export:site",
+    "export:site": "next export",
+    "jssconfig": "node ./scripts/create-scjssconfig.js",
+    "start": "cross-env-shell JSS_MODE=connected \"npm-run-all --serial bootstrap:connected --parallel start-server start:watch-components\"",    
+    "start:disconnected": "cross-env-shell JSS_MODE=disconnected \"npm-run-all --serial bootstrap:disconnected --parallel start-server start:watch-components\"",
+    "start:production": "cross-env-shell JSS_MODE=connected SITE_RUNTIME_ENV=ssr NODE_ENV=production \"npm-run-all --serial bootstrap:connected build --parallel start-server start:watch-components\"",
+    "start:watch-components": "node scripts/generate-component-factory.js --watch",
+    "start-server": "node ./server/server.js"
   },
   "dependencies": {
     "@sitecore-jss/sitecore-jss-react": "^13.0.0",
