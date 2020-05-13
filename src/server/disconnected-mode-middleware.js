@@ -6,15 +6,17 @@ const {
   ManifestManager,
   createDisconnectedLayoutService,
 } = require('@sitecore-jss/sitecore-jss-dev-tools');
+const jsYaml = require('js-yaml');
 
 const config = require('../package.json').config;
 
 const touchToReloadFilePath = path.resolve(path.join(__dirname, '../temp/config.js'));
+const dataPath = path.join(__dirname, '../data');
 
 const disconnectedServerOptions = {
   appRoot: path.join(__dirname, '..'),
   appName: config.appName,
-  watchPaths: [path.join(__dirname, '../data')],
+  watchPaths: [dataPath],
   language: config.language,
   onManifestUpdated: (manifest) => {
     // if we can resolve the config file, we can alter it to force reloading the app automatically
@@ -31,6 +33,8 @@ const disconnectedServerOptions = {
       console.log('Manifest data updated. Refresh the browser to see latest content!');
     }
   },
+  customizeContext,
+  customizeRendering,
 };
 
 module.exports = {
@@ -104,7 +108,7 @@ function createDefaultDisconnectedServer(options) {
       server.use('/sitecore/api/jss/dictionary/:appName/:language', dictionaryService.middleware);
 
       if (options.afterMiddlewareRegistered) {
-        options.afterMiddlewareRegistered(app);
+        options.afterMiddlewareRegistered(server);
       }
     })
     .catch((error) => {
@@ -115,4 +119,57 @@ function createDefaultDisconnectedServer(options) {
         process.exit(1);
       }
     });
+}
+
+function customizeContext(context, routeData, currentManifest, request, response) {
+  const routePath = request.query.item;
+  const language = request.query.sc_lang;
+  const filenames = [`${language}.json`, `${language}.yml`];
+  const filepaths = filenames.map((filename) =>
+    path.join(dataPath, 'context', routePath, filename)
+  );
+
+  // Attempt to find a matching `{language}.json` or `{language}.yml` file in `/data/context/{routePath}`
+  // If no file is found, return default context;
+  const contextFilePath = filepaths.find((filepath) => fs.existsSync(filepath));
+  if (!contextFilePath) {
+    return context;
+  }
+
+  const contextFileContents = fs.readFileSync(contextFilePath);
+  const parsedFileContents = tryParseJsonOrYaml(contextFileContents);
+  // If we can't parse the file contents, bail.
+  if (!parsedFileContents) {
+    return context;
+  }
+
+  // Merge custom context data with default context data.
+  return {
+    ...context,
+    ...parsedFileContents,
+  };
+}
+
+function customizeRendering(transformedRendering, rendering, currentManifest, request, response) {
+  // If a rendering has a `dataSource` value (which should be a guid), then use that value for the
+  // transformed rendering `dataSource` value instead of the default `available-in-connected-mode` value.
+  // This is primarily to accommodate personalization testing in disconnected mode with _actual_
+  // Layout Service data that was captured from Sitecore but is being used in disconnected mode.
+  if (rendering.dataSource.dataSource) {
+    transformedRendering.dataSource = rendering.dataSource.dataSource;
+  }
+  return transformedRendering;
+}
+
+function tryParseJsonOrYaml(jsonString) {
+  try {
+    var json = jsYaml.safeLoad(jsonString);
+    // handle non-exception-throwing cases
+    if (json && typeof json === 'object' && json !== null) {
+      return json;
+    }
+  } catch (e) {
+    console.error(e);
+  }
+  return false;
 }
