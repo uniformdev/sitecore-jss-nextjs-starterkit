@@ -1,4 +1,6 @@
 module.exports = {
+  root: true,
+  parser: 'babel-eslint',
   parserOptions: {
     ecmaVersion: 2018,
     sourceType: 'module',
@@ -8,9 +10,15 @@ module.exports = {
     browser: true,
     node: true,
     es6: true,
+    commonjs: true,
+  },
+  settings: {
+    react: {
+      version: 'detect',
+    },
   },
   extends: ['prettier', 'prettier/react', 'plugin:import/warnings'],
-  plugins: ['prettier', 'import'],
+  plugins: ['prettier', 'import', 'react', 'react-hooks'],
   globals: {
     document: true,
     window: true,
@@ -29,5 +37,56 @@ module.exports = {
     'import/no-extraneous-dependencies': 0,
     'prettier/prettier': 'error',
     'react/destructuring-assignment': 0,
+    'react/jsx-uses-react': 'warn',
+    // extra
+    'no-undef': 'error',
+    'no-unreachable': 'warn',
+    'no-unused-expressions': [
+      'error',
+      {
+        allowShortCircuit: true,
+        allowTernary: true,
+        allowTaggedTemplates: true,
+      },
+    ],
+    'no-unused-labels': 'warn',
+    'no-unused-vars': [
+      'warn',
+      {
+        args: 'none',
+        ignoreRestSiblings: true,
+      },
+    ],
+    'no-use-before-define': [
+      'warn',
+      {
+        functions: false,
+        classes: false,
+        variables: false,
+      },
+    ],
+    'no-useless-computed-key': 'warn',
+    'no-useless-concat': 'warn',
+    'no-useless-constructor': 'warn',
+    'no-useless-escape': 'warn',
+    'no-useless-rename': [
+      'warn',
+      {
+        ignoreDestructuring: false,
+        ignoreImport: false,
+        ignoreExport: false,
+      },
+    ],
+    'no-with': 'warn',
+    'no-whitespace-before-property': 'warn',
+    'require-yield': 'warn',
+    'rest-spread-spacing': ['warn', 'never'],
+    strict: ['warn', 'never'],
+    'unicode-bom': ['warn', 'never'],
+    'use-isnan': 'warn',
+    'valid-typeof': 'warn',
+    'getter-return': 'warn',
+    'react-hooks/rules-of-hooks': 'error',
+    'react-hooks/exhaustive-deps': 'warn',
   },
 };
