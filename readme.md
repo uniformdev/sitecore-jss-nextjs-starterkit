@@ -211,6 +211,8 @@ Start development server with `npm start` and open `http://localhost:3000/` to a
   1. Open `https://your-sitecore-host/unicorn.aspx` while being logged into Sitecore.
   1. Click "Sync" the `Uniform.SitecoreJSS.Demo` configuration.
 
+ > While this sample app is configured to serve content from master database (aka "Live mode"), when using "web" database for content, you may need to push some of these content items via workflow using Workbox to ensure those items are published to the "web" database.
+
 ### Step 4: test static site export
 
 Once the content for your app is available in your Sitecore instance, you can run `npm run export` to perform build and export of your JSS app into the `/out` folder.
