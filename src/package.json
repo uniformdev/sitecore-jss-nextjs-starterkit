@@ -17,13 +17,16 @@
     "build": "next build",
     "deploy": "node deploy.js",
     "export": "cross-env-shell NODE_ENV=production npm-run-all --serial jssconfig bootstrap:connected build export:site",
+    "export:disconnected": "cross-env-shell JSS_MODE=disconnected NODE_ENV=production npm-run-all --serial bootstrap:disconnected build --parallel start-server export:site:disconnected",
     "export:site": "next export",
+    "export:site:disconnected": "npm run wait-for-server && npm run export:site",
     "jssconfig": "node ./scripts/create-scjssconfig.js",
-    "start": "cross-env-shell JSS_MODE=connected \"npm-run-all --serial bootstrap:connected --parallel start-server start:watch-components\"",    
+    "start": "cross-env-shell JSS_MODE=connected \"npm-run-all --serial bootstrap:connected --parallel start-server start:watch-components\"",
     "start:disconnected": "cross-env-shell JSS_MODE=disconnected \"npm-run-all --serial bootstrap:disconnected --parallel start-server start:watch-components\"",
     "start:production": "cross-env-shell JSS_MODE=connected SITE_RUNTIME_ENV=ssr NODE_ENV=production \"npm-run-all --serial bootstrap:connected build --parallel start-server start:watch-components\"",
     "start:watch-components": "node scripts/generate-component-factory.js --watch",
-    "start-server": "node ./server/server.js"
+    "start-server": "node ./server/server.js",
+    "wait-for-server": "wait-on -i 1000 -s 1 http://localhost:3000"
   },
   "dependencies": {
     "@sitecore-jss/sitecore-jss-react": "^13.0.0",
@@ -76,6 +79,7 @@
     "postcss-import": "^12.0.1",
     "postcss-preset-env": "^6.7.0",
     "prettier": "^1.18.2",
-    "tailwindcss": "^1.2.0"
+    "tailwindcss": "^1.2.0",
+    "wait-on": "^5.0.0"
   }
 }

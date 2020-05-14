@@ -11,10 +11,12 @@ const withCSS = require('@zeit/next-css');
 
 const withDynamicRoutes = require('./lib/routing/dynamicRoutesPlugin');
 const { routeDefinitions } = require('./lib/routing/routeDefinitions');
+const withDisconnectedPathMap = require('./lib/next-plugin-jss-disconnected-path-map');
 
 const plugins = [
   [withCSS],
   [withUniform, { logger: serverLogger }],
+  [withDisconnectedPathMap, { jssMode: process.env.JSS_MODE }],
   [withProgressBar],
   [withOffline],
   [withGraphQL],
