@@ -37,7 +37,19 @@ module.exports = {
     'import/no-extraneous-dependencies': 0,
     'prettier/prettier': 'error',
     'react/destructuring-assignment': 0,
+    'react/jsx-no-comment-textnodes': 'warn',
+    'react/jsx-no-duplicate-props': 'warn',
+    'react/jsx-no-target-blank': 'warn',
+    'react/jsx-no-undef': 'error',
+    'react/jsx-pascal-case': [
+      'warn',
+      {
+        allowAllCaps: true,
+        ignore: [],
+      },
+    ],
     'react/jsx-uses-react': 'warn',
+    'react/jsx-uses-vars': 'warn',
     // extra
     'no-undef': 'error',
     'no-unreachable': 'warn',
