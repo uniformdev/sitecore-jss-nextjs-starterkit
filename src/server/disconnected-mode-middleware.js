@@ -109,6 +109,9 @@ function createDefaultDisconnectedServer(options) {
       server.use('/disconnected-path-map', (req, res) => {
         disconnectedPathMapMiddleware(req, res, manifestManager);
       });
+      server.use('/disconnected-server-ping', (req, res) => {
+        res.send('42');
+      });
 
       if (options.afterMiddlewareRegistered) {
         options.afterMiddlewareRegistered(server);
