@@ -1,4 +1,8 @@
+require('../uniform.config')();
+const { parseUniformServerConfig } = require('@uniformdev/common-server');
+
 const configGenerator = require('./generate-config');
+const uniformServerConfig = parseUniformServerConfig(process.env, console);
 
 /*
   BOOTSTRAPPING
@@ -14,8 +18,12 @@ const disconnected = process.argv.some((arg) => arg === '--disconnected');
   Generates the /src/temp/config.js file which contains runtime configuration
   that the app can import and use.
 */
-const port = process.env.PORT || 3000;
-const configOverride = disconnected ? { sitecoreApiHost: `http://localhost:${port}` } : null;
+const port = uniformServerConfig.PORT || 3000;
+const siteName = uniformServerConfig.UNIFORM_API_SITENAME;
+
+let configOverride = disconnected ? { sitecoreApiHost: `http://localhost:${port}` } : {};
+configOverride.sitecoreSiteName = siteName;
+
 configGenerator(configOverride);
 
 /*
