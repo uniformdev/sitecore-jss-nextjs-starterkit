@@ -5,12 +5,18 @@ import { isExportProcess } from './helpers';
 
 export function getRouteData(route, language, querystringParams) {
   const config = getConfig();
+
+  let siteName = process.env.UNIFORM_API_SITENAME;
+  if (!siteName) {
+    siteName = config.sitecoreSiteName;
+  }
+
   const fetchOptions = {
     layoutServiceConfig: { host: config.sitecoreApiHost },
     querystringParams: {
       sc_lang: language,
       sc_apikey: config.sitecoreApiKey,
-      sc_site: config.sitecoreSiteName,
+      sc_site: siteName,
       ...querystringParams,
     },
     fetcher: dataFetcher,
