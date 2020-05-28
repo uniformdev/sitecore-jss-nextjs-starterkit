@@ -74,6 +74,7 @@ function transformScJssConfig() {
   return {
     sitecoreApiKey: config.sitecore.apiKey,
     sitecoreApiHost: config.sitecore.layoutServiceHost,
+    sitecoreSiteName: config.sitecore.sitecoreSiteName,
   };
 }
 
