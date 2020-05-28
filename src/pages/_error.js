@@ -1,21 +1,24 @@
 import React from 'react';
 
-// Renders a route-not-found message when no route is available from Sitecore
-// The JSS equivalent of a 404 Not Found page.
+// Renders a basic error page.
 
-// The NotFound component receives the Layout Service Context data, but no route data.
-// This can be used to power parts of your site, such as navigation, from LS context additions
-// without losing the ability to render them on your 404 pages :)
+// By default, if `statusCode` is 404 then the `context` prop _should_ have
+// Layout Service Context data, but no route data.
+// If the `statusCode` is some other value, then `context` prop will likely be undefined/null.
 
-const NotFound = (props) => {
-  const { context } = props;
+const ErrorPage = (props) => {
+  const { context, statusCode, error } = props;
   const siteName = context && context.site && context.site.name ? context.site.name : '';
   const languageName = context && context.site && context.language ? context.language : '';
 
+  if (statusCode === 500 && error) {
+    console.error(error);
+  }
+
   return (
     <React.Fragment>
-      <h1>Page not found</h1>
-      <p>This page does not exist.</p>
+      <h1>An error occurred.</h1>
+      <p>Status code: {statusCode}.</p>
       <p>
         Site: {siteName}
         <br />
@@ -25,4 +28,4 @@ const NotFound = (props) => {
   );
 };
 
-export default NotFound;
+export default ErrorPage;

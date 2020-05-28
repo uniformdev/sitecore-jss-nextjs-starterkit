@@ -1,7 +1,6 @@
 import React from 'react';
 import NextApp from 'next/app';
-import i18n from 'i18next';
-import { i18init } from '../lib/i18n';
+import { i18init, isInitialized as isi18nInitialized } from '../lib/i18n/i18n-manager';
 import RouterContextProvider from '../lib/routing/RouterContextProvider';
 import { routeDefinitions } from '../lib/routing/routeDefinitions';
 import '../styles/style.css';
@@ -9,12 +8,12 @@ import '../styles/style.css';
 export default class App extends NextApp {
   render() {
     const { Component, pageProps } = this.props;
-    // If `pageProps.dictionary` is defined and `i18n` isn't initialized, we assume
-    // the app is being hydrated with SSR data and initialize `i18n` accordingly.
-    if (pageProps.dictionary && !i18n.isInitialized) {
-      // when passing in a dictionary that is defined, our i18init function
-      // will set an option to immediately initialize the i18n instance instead
-      // of initializing i18n asynchronously.
+    // If i18n is not initialized, then do so.
+    if (!isi18nInitialized()) {
+      // `pageProps.dictionary` _should_ already be defined at this point, both
+      // in SSR and client-side hydration.
+      // Therefore, our i18init function will set an option to immediately
+      // initialize the i18n instance instead of initializing i18n asynchronously.
       i18init(pageProps.language, pageProps.dictionary);
     }
     return (

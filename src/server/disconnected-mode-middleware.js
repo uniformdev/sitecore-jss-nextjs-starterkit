@@ -42,6 +42,8 @@ module.exports = {
     disconnectedServerOptions.server = server;
     return createDefaultDisconnectedServer(disconnectedServerOptions);
   },
+  customizeContext,
+  customizeRendering,
 };
 
 function createDefaultDisconnectedServer(options) {
@@ -106,12 +108,6 @@ function createDefaultDisconnectedServer(options) {
       server.use('/data/media', express.static(path.join(options.appRoot, 'data/media')));
       server.use('/sitecore/api/layout/render', layoutService.middleware);
       server.use('/sitecore/api/jss/dictionary/:appName/:language', dictionaryService.middleware);
-      server.use('/disconnected-path-map', (req, res) => {
-        disconnectedPathMapMiddleware(req, res, manifestManager);
-      });
-      server.use('/disconnected-server-ping', (req, res) => {
-        res.send('42');
-      });
 
       if (options.afterMiddlewareRegistered) {
         options.afterMiddlewareRegistered(server);
@@ -125,33 +121,6 @@ function createDefaultDisconnectedServer(options) {
         process.exit(1);
       }
     });
-}
-
-function disconnectedPathMapMiddleware(req, res, manifestManager) {
-  let pathMap = {};
-  function generatePathMap(route, parentPath = '') {
-    // first/initial route should resolve to `/` instead of a named route
-    const routeName = parentPath === '' ? '' : route.name;
-    const routePath = `${parentPath === '/' ? '' : parentPath}/${routeName}`.toLowerCase();
-
-    pathMap[routePath] = {
-      page: '/index',
-    };
-
-    // traverse the route tree
-    if (route.children) {
-      route.children.forEach((child) => {
-        generatePathMap(child, routePath);
-      });
-    }
-  }
-
-  return manifestManager.getManifest().then((manifest) => {
-    generatePathMap(manifest.items.routes[0]);
-
-    res.send(pathMap);
-    return pathMap;
-  });
 }
 
 function customizeContext(context, routeData, currentManifest, request, response) {
