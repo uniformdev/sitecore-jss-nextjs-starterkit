@@ -7,8 +7,8 @@ export function enhanceRouter(nextRouter, routeDefinitions) {
     return (url, as, options) => {
       const { route, params } = nextRouter.matchRoute(url);
 
-      const resolvedHref = route ? route.getHref(params) : href;
-      const resolvedAs = as || href;
+      const resolvedHref = route ? route.getHref(params) : url;
+      const resolvedAs = as || url;
 
       return nextRouter[method](resolvedHref, resolvedAs, options);
     };
