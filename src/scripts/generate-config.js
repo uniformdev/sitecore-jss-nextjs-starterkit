@@ -74,6 +74,7 @@ function transformScJssConfig() {
   return {
     sitecoreApiKey: config.sitecore.apiKey,
     sitecoreApiHost: config.sitecore.layoutServiceHost,
+    sitecoreSiteName: config.sitecore.sitecoreSiteName,
   };
 }
 
@@ -87,6 +88,7 @@ function transformPackageConfig() {
     sitecoreSiteName: packageConfig.config.sitecoreSiteName || packageConfig.config.appName,
     defaultLanguage: packageConfig.config.language || 'en',
     graphQLEndpointPath: packageConfig.config.graphQLEndpointPath || null,
+    appLanguages: packageConfig.config.appLanguages || ['en'],
   };
 }
 

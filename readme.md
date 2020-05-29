@@ -62,9 +62,13 @@ In this mode, you can do front-end development without the Sitecore back-end usi
 
 1. `npm install` from `/src` folder.
 
-1. To run the app, use `npm run start:disconnected`.
+1. To run the app, use `npm run start:disconnected` - without connection to Sitecore.
 
-> As of now, static export in disconnected mode is not supported.
+   > In disconnected mode, the page content the app depends on is served by disconnected Layout Service from the YAML files in `src/data` folder.
+
+1. To export the site, run `npm run export:disconnected` - without connection to Sitecore.
+
+   > Same as for the `npm run start:disconnected` command above, the page content the app depends on is served by disconnected Layout Service from the YAML files in `src/data` folder during export process.
 
 ## Integrating with the server-side
 
