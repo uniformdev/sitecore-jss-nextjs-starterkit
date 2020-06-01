@@ -28,13 +28,13 @@ const nextConfig = {
   serverRuntimeConfig: {
     sitecoreApiHost: process.env.UNIFORM_API_URL,
     sitecoreApiKey: process.env.UNIFORM_API_KEY,
+    JSS_MODE: process.env.JSS_MODE,
   },
   publicRuntimeConfig: {
     siteName: process.env.UNIFORM_API_SITENAME,
   },
   env: {
     APP_MODE: process.env.APP_MODE || 'static',
-    JSS_MODE: process.env.JSS_MODE,
   },
   exportTrailingSlash: true,
 };
