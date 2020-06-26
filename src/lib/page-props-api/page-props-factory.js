@@ -49,8 +49,13 @@ export function pagePropsFactory({ req, query }) {
   if (typeof window === 'undefined' && isExportProcess()) {
     // Export mode. The app is being rendered for static export.
 
+    // The export process may run in multiple threads/workers, and each worker will have
+    // a distinct `process` which does not have the same env vars as the original process.
+    // Therefore, we need to use next config to retrieve env vars that have been defined in next.config.js.
+    const nextConfig = require('next/config').default;
+
     // If in disconnected mode, we need to handle data retrieval for static export differently than in connected mode.
-    if (process.env.JSS_MODE === 'disconnected') {
+    if (nextConfig().serverRuntimeConfig.JSS_MODE === 'disconnected') {
       const { getProps } = require('./disconnected-export-props-resolver');
       getPropsPromise = getProps;
     } else {
@@ -65,7 +70,7 @@ export function pagePropsFactory({ req, query }) {
 
     // If not running as a static site, i.e. deployed to a CDN / static site host, then assume
     // we need to fetch from a "standard" Layout Service endpoint (either disconnected or connected).
-    if (process.env.SITE_RUNTIME_ENV !== 'static') {
+    if (process.env.APP_MODE !== 'static') {
       getPropsPromise = getPropsFromApi;
     } else {
       // Otherwise, try to fetch from static data.
