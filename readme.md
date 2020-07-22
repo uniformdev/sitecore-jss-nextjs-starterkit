@@ -74,7 +74,7 @@ In this mode, you can do front-end development without the Sitecore back-end usi
 
 Once the Sitecore back-end is ready and available, you would need to configure Uniform and then you will be able to switch to being connected to the server-side.
 
-### Step 1: server package installation and configuration
+### Step 1: Server package installation and configuration
 
 1. Deploy config files for this sample JSS app by copying the files from this repo's `/src/sitecore/config` folder to your Sitecore installation's `App_Config\Include\zzz` folder.
    > If you are not planning on using Unicorn for content item push to Sitecore, you would only need to deploy the "uniform-jss.config" file.
@@ -190,7 +190,7 @@ After the server-side is installed and configured, you will need to update your 
 Now you are ready to develop connected to Sitecore back-end.
 Start development server with `npm start` and open `http://localhost:3000/` to access the app.
 
-### Step 3 - sample content deployment
+### Step 3: Sample content deployment
 
 **This step is optional**. If you don't have a JSS app deployed, but want to experience Uniform, not a problem! Follow the steps below to deploy required configs and content items for this sample app.
 
@@ -217,7 +217,15 @@ Start development server with `npm start` and open `http://localhost:3000/` to a
 
  > While this sample app is configured to serve content from master database (aka "Live mode"), when using "web" database for content, you may need to push some of these content items via workflow using Workbox to ensure those items are published to the "web" database.
 
-### Step 4: test static site export
+### Step 4: Publish content items (NEW)
+
+   > added on July 21, 2020
+
+   The site is configured to use the `web` database therefore the items need to be published there. 
+
+   **Note**, if using **JSS Code-first workflow**, the items are created in a **non-final workflow state**. It means they need to be either moved to the final workflow state (for example, all in one batch using the Workbox app) or the current workflow step can be made final.
+
+### Step 5: Test static site export
 
 Once the content for your app is available in your Sitecore instance, you can run `npm run export` to perform build and export of your JSS app into the `/out` folder.
 
