@@ -100,7 +100,7 @@ function attachUniformServices(server) {
 
   const options = {
     uniformServerConfig,
-    publishProvider: createPublishProvider(),
+    createPublishProvider: (config) => createPublishProvider(config),
   };
 
   attachUniformServicesToServer(server, buildAndExportEngine, serverLogger, options);
