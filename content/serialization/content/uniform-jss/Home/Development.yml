@@ -1,0 +1,115 @@
+﻿---
+ID: "40f46aa9-e983-48a3-b685-9c93386cde44"
+Parent: "5505b7b1-b454-459e-9d36-06a4d89755ad"
+Template: "bc93942a-b0e5-4bd3-a872-a9b8b5c7d4f9"
+Path: "/sitecore/content/uniform-jss/Home/Development"
+DB: master
+BranchID: "97ae4e42-cd04-40b9-97d0-5d6950d20e7b"
+SharedFields:
+- ID: "1172f251-dad4-4efb-a329-0c63500e4f1e"
+  Hint: __Masters
+  Type: TreelistEx
+  Value: "{97AE4E42-CD04-40B9-97D0-5D6950D20E7B}"
+- ID: "b0a67b2a-8b07-4e0b-8809-69f751709806"
+  Hint: __Tracking
+  Type: Tracking
+  Value: |
+    <tracking>
+      <profile
+        id="f30254f9-4475-4ec1-86c5-70ec82418698"
+        name="Interest">
+        <key
+          name="Architecture"
+          value="0" />
+        <key
+          name="Development"
+          value="10" />
+        <key
+          name="Marketing"
+          value="0" />
+        <key
+          name="Security"
+          value="0" />
+      </profile>
+    </tracking>
+- ID: "f1a1fe9e-a60c-4ddb-a3a0-bb5b29fe732e"
+  Hint: __Renderings
+  Type: layout
+  Value: |
+    <r xmlns:p="p" xmlns:s="s"
+      p:p="1">
+      <d
+        id="{FE5D7FDF-89C0-4D99-9AA3-B5FBD009C9F3}">
+        <r
+          uid="{43949FB1-7BEA-4C98-8E79-00ABD9B61BBA}"
+          s:ds="{1D9CFCB4-2BEF-4BC8-83A4-97C70F997B38}"
+          s:id="{FB53DB9E-75B0-4DBD-A14B-3BD053ECEF59}"
+          s:par=""
+          s:ph="uniform-jss-content">
+          <rls>
+            <ruleset>
+              <rule
+                uid="{DBDBFE29-6A31-415E-B580-E02209832B26}"
+                s:name="Development pattern match rule">
+                <conditions>
+                  <condition
+                    uid="6C741287B3734F1196985BC69D2A0A12"
+                    s:id="{E00DB4F0-B206-4544-AD90-25D201CFB62C}"
+                    s:ProfileName="Uniform Interest"
+                    s:PatternName="Diane the Developer" />
+                </conditions>
+                <actions>
+                  <action
+                    uid="389E2AF2BBC241EEA8C72BCB5A4E0487"
+                    s:id="{0F3C6BEC-E56B-4875-93D7-2846A75881D2}"
+                    s:DataSource="{AB99A575-6B86-4440-8C26-885A6C266F6F}" />
+                </actions>
+              </rule>
+              <rule
+                uid="{E9C2BC83-8F35-4300-B931-89E58719DD99}"
+                s:name="Development profile score rule">
+                <conditions>
+                  <condition
+                    uid="F0C1009B172C4C49BBC8C46F97CCBE3E"
+                    s:id="{F3BC1CC2-0724-4F7C-82A1-832F138431B3}"
+                    s:profilekeyid="{A633A054-C6F1-4B7E-ABA0-A978DD5B2776}"
+                    s:operatorid="{814EF7D0-1639-44FD-AEEF-735B5AC14425}"
+                    s:value="2" />
+                </conditions>
+                <actions>
+                  <action
+                    uid="02418BA06E7D4FA3B580EB5D61A1E38C"
+                    s:id="{0F3C6BEC-E56B-4875-93D7-2846A75881D2}"
+                    s:DataSource="{DEF09AEE-C9F5-4B47-9842-5C16A1A981B9}" />
+                </actions>
+              </rule>
+              <rule
+                uid="{00000000-0000-0000-0000-000000000000}"
+                s:name="Default">
+                <conditions>
+                  <condition
+                    uid="03FB3FED2CCA4621BDF8653B2F18A4A3"
+                    s:id="{4888ABBB-F17D-4485-B14B-842413F88732}" />
+                </conditions>
+                <actions />
+              </rule>
+            </ruleset>
+          </rls>
+        </r>
+      </d>
+    </r>
+- ID: "f6d8a61c-2f84-4401-bd24-52d2068172bc"
+  Hint: __Originator
+  Value: "{65FBFCFE-F621-4777-9C6A-0FA1265A2F1D}"
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20200731T024120Z
+    - ID: "5dd74568-4d4b-44c1-b513-0af5f4cda34f"
+      Hint: __Created by
+      Value: |
+        sitecore\admin

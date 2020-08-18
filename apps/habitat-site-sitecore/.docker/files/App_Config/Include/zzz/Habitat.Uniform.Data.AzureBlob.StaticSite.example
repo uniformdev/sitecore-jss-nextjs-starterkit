@@ -1,0 +1,22 @@
+﻿<!--
+    Enable this config file to make Uniform use the $web Azure Blob Storage Container as a permanent cache for all JSON files publishing service uses during next export.
+    These files will also be used during SPA-navigation.
+    
+    (Recommended) set UNIFORM_DATA_URL=https://<STATIC-SITE-URL> to speed up export
+-->
+
+<configuration xmlns:patch="http://www.sitecore.net/xmlconfig/" xmlns:set="http://www.sitecore.net/xmlconfig/set/">
+  <sitecore>
+    <settings>
+      <setting name="Uniform.Deploy.PrefetchData.Enabled" set:value="true" />
+    </settings>
+    <sites>
+      <site name="habitat"
+            
+            set:dataRemoteFileProvider="azureblob"
+            set:dataRemoteFileProvider-AzureBlobConnectionString="<STORAGE-ACCOUNT-CONNECTION-STRING>"
+            set:dataRemoteFileProvider-AzureBlobUrl="https://<STATIC-SITE-URL>/"
+            />
+    </sites>
+  </sitecore>
+</configuration>

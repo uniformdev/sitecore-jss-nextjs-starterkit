@@ -1,0 +1,27 @@
+﻿---
+ID: "587e7bed-d75e-4ca7-b246-c1c783367c32"
+Parent: "4274c280-1a68-4d51-a4d3-131093b56c7d"
+Template: "dd6d4b50-2296-4146-9f48-7c61ff989e07"
+Path: "/sitecore/content/uniform-jss/Home/Architecture/local/heros/Architecture Profile Score"
+DB: master
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "0e14385e-493c-478e-8c3c-beb0839b5df3"
+      Hint: text
+      Value: You have expressed relatively strong interest in architecture.
+    - ID: "20753c20-34e3-4a03-8f34-1232250ae849"
+      Hint: subtitle
+      Value: Profile Score
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20200731T025637Z
+    - ID: "5dd74568-4d4b-44c1-b513-0af5f4cda34f"
+      Hint: __Created by
+      Value: |
+        sitecore\admin
+    - ID: "a4e63708-f7f5-4c53-9348-31e8b9a1b1e8"
+      Hint: title
+      Value: Architecture

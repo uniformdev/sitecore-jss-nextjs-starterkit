@@ -1,0 +1,115 @@
+﻿---
+ID: "d371c271-3f8a-4467-a91c-ec31eca846a3"
+Parent: "5505b7b1-b454-459e-9d36-06a4d89755ad"
+Template: "bc93942a-b0e5-4bd3-a872-a9b8b5c7d4f9"
+Path: "/sitecore/content/uniform-jss/Home/Architecture"
+DB: master
+BranchID: "97ae4e42-cd04-40b9-97d0-5d6950d20e7b"
+SharedFields:
+- ID: "1172f251-dad4-4efb-a329-0c63500e4f1e"
+  Hint: __Masters
+  Type: TreelistEx
+  Value: "{97AE4E42-CD04-40B9-97D0-5D6950D20E7B}"
+- ID: "b0a67b2a-8b07-4e0b-8809-69f751709806"
+  Hint: __Tracking
+  Type: Tracking
+  Value: |
+    <tracking>
+      <profile
+        id="f30254f9-4475-4ec1-86c5-70ec82418698"
+        name="Interest">
+        <key
+          name="Architecture"
+          value="10" />
+        <key
+          name="Development"
+          value="0" />
+        <key
+          name="Marketing"
+          value="0" />
+        <key
+          name="Security"
+          value="0" />
+      </profile>
+    </tracking>
+- ID: "f1a1fe9e-a60c-4ddb-a3a0-bb5b29fe732e"
+  Hint: __Renderings
+  Type: layout
+  Value: |
+    <r xmlns:p="p" xmlns:s="s"
+      p:p="1">
+      <d
+        id="{FE5D7FDF-89C0-4D99-9AA3-B5FBD009C9F3}">
+        <r
+          uid="{43949FB1-7BEA-4C98-8E79-00ABD9B61BBA}"
+          s:ds="{9659C4F9-536D-4142-B6F6-F82019B1B309}"
+          s:id="{FB53DB9E-75B0-4DBD-A14B-3BD053ECEF59}"
+          s:par=""
+          s:ph="uniform-jss-content">
+          <rls>
+            <ruleset>
+              <rule
+                uid="{EE41475A-96E4-4DF3-BAB2-122CEAAE07BC}"
+                s:name="Architecture pattern match rule">
+                <actions>
+                  <action
+                    uid="BD83430636AE4711BEDE6F846B27A60A"
+                    s:id="{0F3C6BEC-E56B-4875-93D7-2846A75881D2}"
+                    s:DataSource="{07761CD4-413B-4100-B8C0-146EE7B3ADB4}" />
+                </actions>
+                <conditions>
+                  <condition
+                    uid="B3663682A2594E5E8A14DCE56C43AD5C"
+                    s:id="{E00DB4F0-B206-4544-AD90-25D201CFB62C}"
+                    s:ProfileName="Uniform Interest"
+                    s:PatternName="Aaron the Architect" />
+                </conditions>
+              </rule>
+              <rule
+                uid="{A5FD0397-D10B-4F24-9561-668B8D9C8ADB}"
+                s:name="Architecture profile score rule">
+                <actions>
+                  <action
+                    uid="404E689E32B44133943C07CB170B91D8"
+                    s:id="{0F3C6BEC-E56B-4875-93D7-2846A75881D2}"
+                    s:DataSource="{587E7BED-D75E-4CA7-B246-C1C783367C32}" />
+                </actions>
+                <conditions>
+                  <condition
+                    uid="D209F1D794324A1498D3BBBC33FD2D16"
+                    s:id="{F3BC1CC2-0724-4F7C-82A1-832F138431B3}"
+                    s:profilekeyid="{10DAEEBA-7852-4226-8BDB-174DD9367156}"
+                    s:operatorid="{814EF7D0-1639-44FD-AEEF-735B5AC14425}"
+                    s:value="2" />
+                </conditions>
+              </rule>
+              <rule
+                uid="{00000000-0000-0000-0000-000000000000}"
+                s:name="Default">
+                <conditions>
+                  <condition
+                    uid="0C85C1C02BFB4700817183598AFAB486"
+                    s:id="{4888ABBB-F17D-4485-B14B-842413F88732}" />
+                </conditions>
+                <actions />
+              </rule>
+            </ruleset>
+          </rls>
+        </r>
+      </d>
+    </r>
+- ID: "f6d8a61c-2f84-4401-bd24-52d2068172bc"
+  Hint: __Originator
+  Value: "{65FBFCFE-F621-4777-9C6A-0FA1265A2F1D}"
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20200731T024108Z
+    - ID: "5dd74568-4d4b-44c1-b513-0af5f4cda34f"
+      Hint: __Created by
+      Value: |
+        sitecore\admin

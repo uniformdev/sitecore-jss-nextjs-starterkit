@@ -1,0 +1,115 @@
+﻿---
+ID: "a279c3d1-3bf4-48e7-b735-e0fdf6f93cbd"
+Parent: "5505b7b1-b454-459e-9d36-06a4d89755ad"
+Template: "bc93942a-b0e5-4bd3-a872-a9b8b5c7d4f9"
+Path: "/sitecore/content/uniform-jss/Home/Security"
+DB: master
+BranchID: "97ae4e42-cd04-40b9-97d0-5d6950d20e7b"
+SharedFields:
+- ID: "1172f251-dad4-4efb-a329-0c63500e4f1e"
+  Hint: __Masters
+  Type: TreelistEx
+  Value: "{97AE4E42-CD04-40B9-97D0-5D6950D20E7B}"
+- ID: "b0a67b2a-8b07-4e0b-8809-69f751709806"
+  Hint: __Tracking
+  Type: Tracking
+  Value: |
+    <tracking>
+      <profile
+        id="f30254f9-4475-4ec1-86c5-70ec82418698"
+        name="Interest">
+        <key
+          name="Architecture"
+          value="0" />
+        <key
+          name="Development"
+          value="0" />
+        <key
+          name="Marketing"
+          value="0" />
+        <key
+          name="Security"
+          value="10" />
+      </profile>
+    </tracking>
+- ID: "f1a1fe9e-a60c-4ddb-a3a0-bb5b29fe732e"
+  Hint: __Renderings
+  Type: layout
+  Value: |
+    <r xmlns:p="p" xmlns:s="s"
+      p:p="1">
+      <d
+        id="{FE5D7FDF-89C0-4D99-9AA3-B5FBD009C9F3}">
+        <r
+          uid="{43949FB1-7BEA-4C98-8E79-00ABD9B61BBA}"
+          s:ds="{52BB0D15-527C-4E4E-ABCC-28DE34C5DF6E}"
+          s:id="{FB53DB9E-75B0-4DBD-A14B-3BD053ECEF59}"
+          s:par=""
+          s:ph="uniform-jss-content">
+          <rls>
+            <ruleset>
+              <rule
+                uid="{C214951A-C1D3-4BAA-A5FA-9602F37A4D39}"
+                s:name="Security pattern match rule">
+                <actions>
+                  <action
+                    uid="DCE750B6C8EF4E9A87682BE5EAADEF3A"
+                    s:id="{0F3C6BEC-E56B-4875-93D7-2846A75881D2}"
+                    s:DataSource="{7E0484B0-4FF0-468E-8796-819B1D6C93D6}" />
+                </actions>
+                <conditions>
+                  <condition
+                    uid="80DE099ABC97463E85DB011D34E864EC"
+                    s:id="{E00DB4F0-B206-4544-AD90-25D201CFB62C}"
+                    s:ProfileName="Uniform Interest"
+                    s:PatternName="Shawn the Security Manager" />
+                </conditions>
+              </rule>
+              <rule
+                uid="{C9040432-A403-4765-AF00-703367DAE9F6}"
+                s:name="Security profile score rule">
+                <actions>
+                  <action
+                    uid="E6F6ECCE9C0641AB97AA4203727AFEE6"
+                    s:id="{0F3C6BEC-E56B-4875-93D7-2846A75881D2}"
+                    s:DataSource="{F5AF813D-488B-4EB0-A04E-642EA466B554}" />
+                </actions>
+                <conditions>
+                  <condition
+                    uid="EEEA628ABA9943B28FD824EC3D893D52"
+                    s:id="{F3BC1CC2-0724-4F7C-82A1-832F138431B3}"
+                    s:profilekeyid="{3DDC753F-7F47-4787-96BB-88D077845CD6}"
+                    s:operatorid="{814EF7D0-1639-44FD-AEEF-735B5AC14425}"
+                    s:value="2" />
+                </conditions>
+              </rule>
+              <rule
+                uid="{00000000-0000-0000-0000-000000000000}"
+                s:name="Default">
+                <conditions>
+                  <condition
+                    uid="9C7F08C2F2034830999A2469C57642DF"
+                    s:id="{4888ABBB-F17D-4485-B14B-842413F88732}" />
+                </conditions>
+                <actions />
+              </rule>
+            </ruleset>
+          </rls>
+        </r>
+      </d>
+    </r>
+- ID: "f6d8a61c-2f84-4401-bd24-52d2068172bc"
+  Hint: __Originator
+  Value: "{65FBFCFE-F621-4777-9C6A-0FA1265A2F1D}"
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20200731T025814Z
+    - ID: "5dd74568-4d4b-44c1-b513-0af5f4cda34f"
+      Hint: __Created by
+      Value: |
+        sitecore\admin

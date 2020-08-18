@@ -1,0 +1,39 @@
+﻿---
+ID: "65fbfcfe-f621-4777-9c6a-0fa1265a2f1d"
+Parent: "97ae4e42-cd04-40b9-97d0-5d6950d20e7b"
+Template: "bc93942a-b0e5-4bd3-a872-a9b8b5c7d4f9"
+Path: "/sitecore/templates/Branches/Project/uniform-jss/CommonPage/$name"
+DB: master
+SharedFields:
+- ID: "1172f251-dad4-4efb-a329-0c63500e4f1e"
+  Hint: __Masters
+  Type: TreelistEx
+  Value: "{97AE4E42-CD04-40B9-97D0-5D6950D20E7B}"
+- ID: "f1a1fe9e-a60c-4ddb-a3a0-bb5b29fe732e"
+  Hint: __Renderings
+  Type: layout
+  Value: |
+    <r xmlns:p="p" xmlns:s="s"
+      p:p="1">
+      <d
+        id="{FE5D7FDF-89C0-4D99-9AA3-B5FBD009C9F3}">
+        <r
+          uid="{43949FB1-7BEA-4C98-8E79-00ABD9B61BBA}"
+          s:ds=""
+          s:id="{FB53DB9E-75B0-4DBD-A14B-3BD053ECEF59}"
+          s:par=""
+          s:ph="uniform-jss-content" />
+      </d>
+    </r>
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20200730T152148Z
+    - ID: "5dd74568-4d4b-44c1-b513-0af5f4cda34f"
+      Hint: __Created by
+      Value: |
+        sitecore\admin

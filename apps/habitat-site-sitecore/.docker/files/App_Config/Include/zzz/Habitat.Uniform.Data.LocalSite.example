@@ -1,0 +1,29 @@
+﻿<!--
+    Enable this config file to make Uniform use Local Site Storage as a permanent cache for all JSON files publishing service uses during next export.
+    Originally it was designed to be able to serve content from separate folder via IIS/npx serve or deploying it to separate netlify site.
+    
+    But as it was discovered, this functionality works the best in the following scenario:
+    - configure it to output the data to uniform\apps\habitat-site-next\public folder
+    - configure .env file to use the same origin for ajax calls (SPA navigation) UNIFORM_DATA_URL=/
+    
+    This is possible because in the common-client package there is special code block that only executes during SSR and 
+    tries to load data directly from file system so there's no need to make a network call. On machines with very fast IO
+    it gives unprecedented performance boost.
+    
+    This unlocks use of Netlify with SPA without Azure Blob Storage or AWS S3 when Uniform Service is running on the same machine where Sitecore runs.
+-->
+
+<configuration xmlns:patch="http://www.sitecore.net/xmlconfig/" xmlns:set="http://www.sitecore.net/xmlconfig/set/">
+  <sitecore>
+    <settings>
+      <setting name="Uniform.Deploy.PrefetchData.Enabled" set:value="true" />
+    </settings>
+    <sites>
+      <site name="habitat"
+            
+            set:dataRemoteFileProvider="localsite"
+            set:dataRemoteFileProvider-RootDirectory="D:\uniform\apps\habitat-site-next\public"
+            />
+    </sites>
+  </sitecore>
+</configuration>

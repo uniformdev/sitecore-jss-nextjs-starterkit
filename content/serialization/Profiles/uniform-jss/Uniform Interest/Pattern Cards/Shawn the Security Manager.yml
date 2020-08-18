@@ -1,0 +1,34 @@
+﻿---
+ID: "fae67909-97b5-4699-aa71-8e78ccdec472"
+Parent: "216f6402-5374-4748-b51a-43bec8ac669d"
+Template: "4a6a7e36-2481-438f-a9ba-0453ecc638fa"
+Path: "/sitecore/system/Marketing Control Panel/Profiles/uniform-jss/Uniform Interest/Pattern Cards/Shawn the Security Manager"
+DB: master
+SharedFields:
+- ID: "6da71ad3-5849-4482-9317-d21390e5a348"
+  Hint: Pattern
+  Value: |
+    <tracking>
+      <profile id="f30254f9-4475-4ec1-86c5-70ec82418698" name="Interest">
+        <key name="Architecture" value="0" />
+        <key name="Development" value="0" />
+        <key name="Marketing" value="0" />
+        <key name="Security" value="0" />
+      </profile>
+    </tracking>
+Languages:
+- Language: en
+  Fields:
+  - ID: "fe732790-2ddb-4657-a882-c2fce1fbf0c9"
+    Hint: Name
+    Value: Shawn the Security Manager
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20200731T022043Z
+    - ID: "5dd74568-4d4b-44c1-b513-0af5f4cda34f"
+      Hint: __Created by
+      Value: |
+        sitecore\admin

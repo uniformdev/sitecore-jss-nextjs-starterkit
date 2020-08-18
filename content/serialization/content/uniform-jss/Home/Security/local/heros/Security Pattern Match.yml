@@ -1,0 +1,27 @@
+﻿---
+ID: "7e0484b0-4ff0-468e-8796-819b1d6c93d6"
+Parent: "c7113fed-9896-41cf-910b-eebcd9be41fd"
+Template: "dd6d4b50-2296-4146-9f48-7c61ff989e07"
+Path: "/sitecore/content/uniform-jss/Home/Security/local/heros/Security Pattern Match"
+DB: master
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "0e14385e-493c-478e-8c3c-beb0839b5df3"
+      Hint: text
+      Value: You have expressed a primary interest in security.
+    - ID: "20753c20-34e3-4a03-8f34-1232250ae849"
+      Hint: subtitle
+      Value: Pattern Match
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20200731T025832Z
+    - ID: "5dd74568-4d4b-44c1-b513-0af5f4cda34f"
+      Hint: __Created by
+      Value: |
+        sitecore\admin
+    - ID: "a4e63708-f7f5-4c53-9348-31e8b9a1b1e8"
+      Hint: title
+      Value: Security

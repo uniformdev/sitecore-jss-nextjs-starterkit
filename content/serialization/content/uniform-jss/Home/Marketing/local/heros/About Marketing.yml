@@ -1,0 +1,32 @@
+﻿---
+ID: "8c707a78-98ce-42a6-b9e3-fd3c0718e5d9"
+Parent: "61a40922-e3c6-4c8c-ade1-bae22b4ff87e"
+Template: "dd6d4b50-2296-4146-9f48-7c61ff989e07"
+Path: "/sitecore/content/uniform-jss/Home/Marketing/local/heros/About Marketing"
+DB: master
+BranchID: "97ae4e42-cd04-40b9-97d0-5d6950d20e7b"
+SharedFields:
+- ID: "f6d8a61c-2f84-4401-bd24-52d2068172bc"
+  Hint: __Originator
+  Value: "{A7B71EB0-2B34-44D5-A358-8892CB672448}"
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "0e14385e-493c-478e-8c3c-beb0839b5df3"
+      Hint: text
+      Value: You have expressed little interest in marketing.
+    - ID: "20753c20-34e3-4a03-8f34-1232250ae849"
+      Hint: subtitle
+      Value: Marketing
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20200731T025819Z
+    - ID: "5dd74568-4d4b-44c1-b513-0af5f4cda34f"
+      Hint: __Created by
+      Value: |
+        sitecore\admin
+    - ID: "a4e63708-f7f5-4c53-9348-31e8b9a1b1e8"
+      Hint: title
+      Value: About

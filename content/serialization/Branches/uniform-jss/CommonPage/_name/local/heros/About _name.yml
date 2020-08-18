@@ -1,0 +1,24 @@
+﻿---
+ID: "a7b71eb0-2b34-44d5-a358-8892cb672448"
+Parent: "eac461e2-dbf1-4231-bae2-8d76241fd0be"
+Template: "dd6d4b50-2296-4146-9f48-7c61ff989e07"
+Path: "/sitecore/templates/Branches/Project/uniform-jss/CommonPage/$name/local/heros/About $name"
+DB: master
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "20753c20-34e3-4a03-8f34-1232250ae849"
+      Hint: subtitle
+      Value: $name
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20200730T152717Z
+    - ID: "5dd74568-4d4b-44c1-b513-0af5f4cda34f"
+      Hint: __Created by
+      Value: |
+        sitecore\admin
+    - ID: "a4e63708-f7f5-4c53-9348-31e8b9a1b1e8"
+      Hint: title
+      Value: About

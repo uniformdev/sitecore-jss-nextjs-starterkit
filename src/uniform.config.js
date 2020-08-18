@@ -7,8 +7,8 @@ const dotenv = require('dotenv');
 const defaults = {
   PORT: 3000,
   UNIFORM_API_SITENAME: 'uniform-jss',
-  UNIFORM_API_URL: 'http://localhost:3000',
-  UNIFORM_DATA_URL: 'http://localhost:3000',
+  UNIFORM_API_URL: 'http://localhost:44006',
+  UNIFORM_DATA_URL: 'http://localhost:44006',
   UNIFORM_API_DEFAULT_LANGUAGE: 'en',
   UNIFORM_OPTIONS_MVC_SUPPORT: false,
   UNIFORM_OPTIONS_MVC_SPA_ENABLED: false,

@@ -1,0 +1,18 @@
+﻿---
+ID: "9b0c3e8b-c122-4284-a9b8-de419917f5bf"
+Parent: "a1f6469d-16e1-4a5f-9e49-1aad869a5d11"
+Template: "85adbf5b-e836-4932-a333-fe0f9fa1ed1e"
+Path: "/sitecore/templates/Branches/Project/uniform-jss"
+DB: master
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20200731T173044Z
+    - ID: "5dd74568-4d4b-44c1-b513-0af5f4cda34f"
+      Hint: __Created by
+      Value: |
+        sitecore\admin

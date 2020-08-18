@@ -1,0 +1,25 @@
+﻿<!--
+    Enable this config file (updating variables) to make Uniform deploy media files 
+    directly to the $web Azure Blob Storage Container that acts as static site. It
+    will naturally support Sitecore media links (with real file extensions) that 
+    will be resolved to the physical files. 
+    
+    There's a limitation that dynamic media transformation parameters will be ignored
+    such as mw, mh, bg etc.
+-->
+
+<configuration xmlns:patch="http://www.sitecore.net/xmlconfig/" xmlns:set="http://www.sitecore.net/xmlconfig/set/">
+  <sitecore>
+    <settings>
+        <setting name="Media.AlwaysIncludeServerUrl" value="false" />
+    </settings>
+    <sites>
+      <site name="habitat"
+            
+            set:mediaRemoteFileProvider="azureblob"
+            set:mediaRemoteFileProvider-AzureBlobConnectionString="<STORAGE-ACCOUNT-CONNECTION-STRING>"
+            set:mediaRemoteFileProvider-AzureBlobUrl="https://<STORAGE-ACCOUNT-NAME>.blob.core.windows.net/$web"
+            />
+    </sites>
+  </sitecore>
+</configuration>

@@ -1,7 +1,10 @@
+import Tracking from '../Tracking';
+
 function Footer() {
   return (
     <div className="bg-gray-800">
       <div className="max-w-screen-xl mx-auto py-12 px-4 sm:px-6 lg:py-16 lg:px-8">
+      <Tracking />
         <div className="mt-8 pt-8 md:flex md:items-center md:justify-between">
           <div className="flex md:order-2">
             <a
