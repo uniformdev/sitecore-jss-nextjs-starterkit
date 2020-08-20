@@ -34,7 +34,8 @@ const nextConfig = {
     siteName: process.env.UNIFORM_API_SITENAME,
   },
   env: {
-    APP_MODE: process.env.APP_MODE || 'static',
+    RUNTIME_MODE: process.env.RUNTIME_MODE || 'ssr',
+    BUILD_MODE: process.env.BUILD_MODE || 'server',
   },
   exportTrailingSlash: true,
 };

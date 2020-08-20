@@ -12,7 +12,7 @@ const staticExportAssetFolderPath = nodePath.resolve('./public');
 
 export const config = (pipelines) => {
   // We only want to execute our custom pipeline processor when the app is being statically exported.
-  if (process.env.APP_MODE !== 'export') {
+  if (process.env.BUILD_MODE !== 'export') {
     return;
   }
 

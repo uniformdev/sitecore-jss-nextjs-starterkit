@@ -70,7 +70,7 @@ export function pagePropsFactory({ req, query }) {
 
     // If not running as a static site, i.e. deployed to a CDN / static site host, then assume
     // we need to fetch from a "standard" Layout Service endpoint (either disconnected or connected).
-    if (process.env.APP_MODE !== 'static') {
+    if (process.env.RUNTIME_MODE !== 'static') {
       getPropsPromise = getPropsFromApi;
     } else {
       // Otherwise, try to fetch from static data.
