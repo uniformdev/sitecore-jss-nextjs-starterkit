@@ -94,7 +94,7 @@ function fetchLayoutServiceData(route, language, options = {}) {
       return error.response.data;
     }
 
-    console.error(`Route data fetch error for route: ${route}`, error.message);
+    console.error(`Route data fetch error for route: ${route}`, error.toJSON());
 
     return null;
   });

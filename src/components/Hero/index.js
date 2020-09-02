@@ -52,7 +52,7 @@ const Hero = ({ fields }) => {
         <div className="hidden md:absolute md:flex md:items-center md:justify-end md:inset-y-0 md:right-0">
           <span className="inline-flex rounded-md shadow">
             <a
-              href="mailto:hi@unfrm.io"
+              href="mailto:hi@uniform.dev"
               className="inline-flex items-center px-4 py-2 border border-transparent text-base leading-6 font-medium rounded-md text-red-500 bg-white hover:text-red-500 focus:outline-none focus:shadow-outline-blue active:bg-gray-50 active:text-red-700 transition duration-150 ease-in-out"
             >
               Contact Us
@@ -95,7 +95,7 @@ const Hero = ({ fields }) => {
           </div>
           <div>
             <a
-              href="mailto:hi@unfrm.io"
+              href="mailto:hi@uniform.dev"
               className="block w-full px-5 py-3 text-center font-medium text-red-500 bg-gray-50 hover:bg-gray-100 hover:text-red-700 focus:outline-none focus:bg-gray-100 focus:text-red-700 transition duration-150 ease-in-out"
             >
               Contact Us

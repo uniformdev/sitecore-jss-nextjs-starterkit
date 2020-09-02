@@ -86,7 +86,7 @@ const HeroImage = ({ children, fields }) => {
           </div>
           <div>
             <a
-              href="mailto:hi@unfrm.io"
+              href="mailto:hi@uniform.dev"
               className="block w-full px-5 py-3 text-center font-medium text-red-600 bg-gray-50 hover:bg-gray-100 hover:text-red-700 focus:outline-none focus:bg-gray-100 focus:text-red-700 transition duration-150 ease-in-out"
             >
               Contact Us
