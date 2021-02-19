@@ -1,0 +1,54 @@
+{
+  "name": "@uniformdev/uniform-sitecore-jss-nextjs-starterkit",
+  "version": "0.0.1",
+  "private": true,
+  "config": {
+    "appName": "JssKit",
+    "rootPlaceholders": [
+      "jss-kit-content"
+    ],
+    "sitecoreConfigPath": "/App_Config/Include/zzz",
+    "graphQLEndpointPath": "/api/JssKit",
+    "language": "en",
+    "appLanguages": [
+      "en"
+    ]
+  },
+  "scripts": {
+    "dev": "cross-env npm run start-server",
+    "start": "cross-env-shell \"npm run build && npm run start-server\"",
+    "export": "cross-env-shell NODE_ENV=production UNIFORM_BUILD_MODE=export \"npm run build && next export\"",
+    "build": "next build",
+    "start-server": "node uniform.server.js"
+  },
+  "dependencies": {
+    "@sitecore-jss/sitecore-jss-react": "^13.0.0",
+    "@sitecore-jss/sitecore-jss-tracking": "^13.0.0",
+    "@uniformdev/common": "4.0.210219-3",
+    "@uniformdev/common-server": "4.0.210219-3",
+    "@uniformdev/next": "4.0.210219-3",
+    "@uniformdev/next-jss": "4.0.210219-3",
+    "@uniformdev/next-jss-server": "4.0.210219-3",
+    "@uniformdev/next-server": "4.0.210219-3",
+    "@uniformdev/publishing-all": "4.0.210219-3",
+    "@uniformdev/publishing-azureblobstorage": "4.0.210219-3",
+    "@zeit/next-css": "^1.0.1",
+    "axios": "^0.21.1",
+    "dotenv": "^8.2.0",
+    "i18next": "^19.0.1",
+    "next": "10.0.5",
+    "next-compose-plugins": "^2.2.0",
+    "next-progressbar": "^1.0.0",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "react-i18next": "^10.12.2",
+    "winston": "^3.2.1"
+  },
+  "devDependencies": {
+    "@babel/register": "^7.5.5",
+    "@sitecore-jss/sitecore-jss-cli": "^13.0.0",
+    "@sitecore-jss/sitecore-jss-dev-tools": "^13.0.0",
+    "@sitecore-jss/sitecore-jss-manifest": "^13.0.0",
+    "cross-env": "^5.2.0"
+  }
+}

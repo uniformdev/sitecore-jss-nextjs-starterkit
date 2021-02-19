@@ -1,7 +1,0 @@
-[build]
-  base = "src/"
-  publish = "out/"
-  command = "npm run export:disconnected"
-  
-[[plugins]]
-package = "netlify-plugin-cache-nextjs"

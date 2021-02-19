@@ -15,9 +15,9 @@ On top of that, Uniform unlocks **origin-less** tracking and personalization whe
 
 ## Sitecore version compatibility
 
-This starter kit is expected to work with any Sitecore 9.x version backend. This particular starter kit requires Sitecore JSS.
+This starter kit is expected to work with any Sitecore 9.x and 10.x version backend. This particular starter kit requires Sitecore JSS.
 
-> If you are not planning on using Sitecore JSS, there are [other starter kits available](https://github.com/uniformdev).
+> If you are not planning on using Sitecore JSS, there are [other starter kits available](https://github.com/uniformdev?q=starterkit).
 
 ## Next.js role
 
@@ -26,7 +26,8 @@ This starter kit is using [Next.js](https://nextjs.org/), a battleground tested 
 There are multiple reasons why we are using Next.js in this context:
 
 1. Leveraging outstanding server-side rendering option that Next.js provides out of the box. This is critical to retain Sitecore Experience Editor and Preview functionality.
-1. Next.js comes with "batteries included". You have  routing, styling built-in as well as the plugin system and many other enhancements that improve Developer Experience and help with building fast sites.
+
+1. Next.js comes with "batteries included". You have routing, styling built-in as well as the plugin system and many other enhancements that improve Developer Experience and help with building fast sites.
 
 ## Repo structure
 
@@ -81,10 +82,10 @@ Once the Sitecore back-end is ready and available, you would need to configure U
 
 1. Update your Sitecore instance's `App_Config\ConnectionStrings.config` file by adding the following two connection strings:
 
-   - `uniform.api.token` with the `1234` value:
+   - `uniform.api.token` with the `12345` value:
 
      ```
-       <add name="uniform.api.token" connectionString="1234" />
+       <add name="uniform.api.token" connectionString="12345" />
      ```
 
      > This value will be used to secure the deployment endpoint during Sitecore publishing and should be changed to a secret value in non-developer environments. The same value should be used when setting the `UNIFORM_API_TOKEN` environment variable (see below).
@@ -169,15 +170,12 @@ After the server-side is installed and configured, you will need to update your 
    There are more environment variables available to specify - see [`uniform.config.js`](/src/uniform.config.js) file in `/src` folder for all default values. Naturally, these environment variables can be tweaked according to your environment specific by corresponding entries to the `.env` file:
 
    ```
-   UNIFORM_API_TOKEN=1234
+   UNIFORM_API_TOKEN=12345
    UNIFORM_API_SITENAME=uniform-jss
-   UNIFORM_API_DEFAULT_LANGUAGE=en
    ```
    > The value of `UNIFORM_API_TOKEN` should match what was provided as value for the `uniform.api.token` query string during server-side setup.
 
    > Note that the value of `UNIFORM_API_SITENAME` variable will depend on whether you are deploying this sample app to your Sitecore instance or you are connecting to your existing JSS app. If the latter, use the name of the site associated with the JSS app you'd like to connect to.
-
-   > For multi-lingual solutions, if your are not using the default `en` language for your site's content, you will need to adjust the value of the `UNIFORM_API_DEFAULT_LANGUAGE` to the ISO code of the content language you are using.
 
    > Instead of specifying the `.env` file, you can use system environment variables instead.
 
@@ -305,11 +303,10 @@ The following environment variables are must haves:
 
 ```
 UNIFORM_API_KEY={guid of API key item from the step above}
-UNIFORM_API_TOKEN=1234
+UNIFORM_API_TOKEN=12345
 UNIFORM_API_URL=http://your-sc-host
 UNIFORM_DATA_URL=http://your-sc-host
 UNIFORM_API_SITENAME=uniform-jss
-UNIFORM_API_DEFAULT_LANGUAGE=en
 NPM_TOKEN=<the value of the npm token received from us>
 ```
 
@@ -318,7 +315,7 @@ Since Netlify will connect to your Sitecore instance, consider setting up a tunn
 #### Option 2: Azure Blob Storage
 
 **Pre-requisites**:
-- Download [AzCopy](https://docs.microsoft.com/en-us/azure/storage/common/storage-use-azcopy-v10) tool and make it available on the same server that runs this next app (for simplicity, copy it into the root of this application).
+- Download [AzCopy 10.4](https://drive.google.com/file/d/1eCrxvqmMraaQdu2pd7tlRZbTxjn8bvtr/view?usp=sharing) (this specific version is proven to work reliably, 10.6 is known for intermittent issues) tool and make it available on the same server that runs this next app (for simplicity, copy it into the root of this application).
 
 **Configuration steps**:
 1. Provision a Blob Storage account in Azure in the desired region.
@@ -344,7 +341,7 @@ Since Netlify will connect to your Sitecore instance, consider setting up a tunn
    UNIFORM_PUBLISH_TARGET=azureblob
 
    # This is the value of the "Primary endpoint" from the blob container:
-   UNIFORM_PUBLISH_AZUREBLOB_PUBLIC_URL=https://ABC.web.core.windows.net/
+   UNIFORM_PUBLISH_PROVIDER_AZUREBLOB_PUBLIC_URL=https://ABC.web.core.windows.net/
 
    # name of the blob container:
    AZURE_CONTAINER=$web
@@ -360,31 +357,6 @@ Since Netlify will connect to your Sitecore instance, consider setting up a tunn
 To trigger deployment, run `npm run deploy`. This will perform the static app export and deployment of the exported static application artifacts to your Azure Blob storage container.
 
 The static version of the JSS app is now expected to be served from this endpoint.
-
-#### Option 3: AWS S3
-
-1. Make sure you have the AWS credentials for a user with `AmazonS3FullAccess` policy. Specifically, the `Access key Id` and a `Secret access key`.
-
-1. Add the following additional environment variables to the `.env` file located next to your `package.json` file.
-
-   > For the time being, put an arbitrary value into `UNIFORM_PUBLISH_AWSS3_PUBLIC_URL`. After the first deployment, which also provisions the S3 bucket, the value for this variable can be extracted from `aws.config.json` file.
-
-   ```
-   UNIFORM_PUBLISH_TARGET=awss3
-   AWS_ACCESS_ID=[AWS Access Key ID]
-   AWS_SECRET=[AWS Secret access key]
-   AWS_REGION=[AWS region for the S3 bucket creation]
-   # the endpoint of your S3 bucket (ex: http://abc.s3-website-us-west-1.amazonaws.com/)
-   UNIFORM_PUBLISH_AWSS3_PUBLIC_URL=[YOUR SITE URL]
-   ```
-
-   > For convenience of your development environment, you may want to consider saving these as system environment variables instead (check [this guide](https://helpdeskgeek.com/how-to/create-custom-environment-variables-in-windows/) if unfamiliar with env variables).
-
-1. Run `npm run deploy`. This will provision the S3 bucket with "Static site hosting" settings and will deploy the contents of the `out` folder to it. At the end of the process, you should see the following in the console and the `aws.config.json` will be created in the project root:
-
-   ```
-   AwsS3PublishProvider deployed site files: out
-   ```
 
 #### Other deployment targets
 
