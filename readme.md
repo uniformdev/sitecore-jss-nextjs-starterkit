@@ -16,6 +16,9 @@ You can also use this kit to start a vanilla project, simply remove everything f
 1. Install the Sitecore package with items from `/sitecore/App_Data/packages` folder.
 1. Deploy the configs from `/sitecore/App_Config` folder to your Sitecore instance's `App_Config` folder (the subfolder structure should match).
 
+## Known issues
+1. @sitecore-jss v15.0 npm packages are not supported yet, make sure to use `14.0.1` versions.
+
 ## Getting started with the app
 
 > Check out official docs for more scenarios and tutorial.
