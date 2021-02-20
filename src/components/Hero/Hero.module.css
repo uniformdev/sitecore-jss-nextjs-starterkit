@@ -32,7 +32,6 @@
 }
 
 /*neon Button*/
-.cta2,
 .cta1 {
   margin-left: 20px;
   text-decoration: none;
@@ -108,9 +107,23 @@
   transition: 0.5s;
   transition-delay: 0.1s;
 }
+
+.cta2 {
+  margin-left: 20px;
+  text-decoration: none;
+  position: relative;
+  padding: 15px 30px;
+  overflow: hidden;
+  transition: 0.2s all;
+  background: #1d3557;
+  color: #fff;
+  text-transform: uppercase;
+  letter-spacing: 4px;
+}
+
 .cta2:hover {
   background: #1d3557;
-  color: #000;
+  color: #fff;
   box-shadow: 0px 0px 10px #1d3557, 0px 0px 40px#1d3557, 0px 0px 80px #1d3557;
   transition-delay: 0.1s;
 }
