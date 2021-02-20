@@ -1,0 +1,19 @@
+﻿<configuration xmlns:patch="http://www.sitecore.net/xmlconfig/" xmlns:set="http://www.sitecore.net/xmlconfig/set/">
+  <sitecore>
+    <uniform>
+      <siteConfigurations>
+        <siteConfiguration name="uniform-jss-kit">
+          <deployment>
+            <mediaDeploymentScopeService ref="uniform/services/mediaDeploymentScopeService">
+              <mediaRoots hint="list:AddMediaRoot">
+                <fullMediaLibrary>/sitecore/media library</fullMediaLibrary>
+              </mediaRoots>
+            </mediaDeploymentScopeService>
+            <relatedMediaDeploymentScopeService ref="uniform/services/relatedMediaDeploymentScopeService" />
+          </deployment>
+        </siteConfiguration>
+      </siteConfigurations>
+    </uniform>
+
+  </sitecore>
+</configuration>

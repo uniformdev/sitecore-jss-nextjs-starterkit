@@ -5,12 +5,12 @@ const dotenv = require('dotenv');
 // you can override the values in the .env file if required
 
 const defaults = {
-    UNIFORM_API_SITENAME: 'JssKit',
-  UNIFORM_API_URL: `https://jss-sc${process.env.DNS_SUFFIX || ''}.unfrm.space${
-    process.env.TLD_HTTPS_SUFFIX || ''
-  }`,
+  UNIFORM_API_SITENAME: 'uniform-jss-kit',
   UNIFORM_PUBLISH_TARGET: 'none',
   UNIFORM_MODE: 'mixed',
+  UNIFORM_API_TOKEN: '12345',
+  UNIFORM_PUBLISH_FAKE_PUBLIC_URL: 'http://localhost',
+  UNIFORM_API_KEY: 'eefe326b-aff1-4154-9ae8-2beb85d4b8cb',
 };
 
 function processDefault(key, fallback) {

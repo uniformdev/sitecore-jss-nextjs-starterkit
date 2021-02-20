@@ -1,5 +1,7 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
+!uniform/lib/
+
 # dependencies
 /node_modules
 /.pnp
@@ -26,7 +28,9 @@ yarn-debug.log*
 yarn-error.log*
 
 .vs/
+.vscode
+.netlify
+netlify.config.json
 .npmrc
 .temp
 .debug.log
-scjssconfig.json

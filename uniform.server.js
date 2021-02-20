@@ -6,7 +6,9 @@ const { createUniformServer } = require('@uniformdev/next-jss-server');
 const { createPublishProvider } = require('@uniformdev/publishing-all');
 
 const port = process.env.PORT || 3000;
-const serverUrl = `http://0.0.0.0:${port}`
+const hostname = process.env.SERVER_HOST_NAME || 'localhost';
+const protocol = process.env.SERVER_PROTOCOL || 'http';
+const serverUrl = `${protocol}://${hostname}:${port}`;
 
 createUniformServer({
     port,

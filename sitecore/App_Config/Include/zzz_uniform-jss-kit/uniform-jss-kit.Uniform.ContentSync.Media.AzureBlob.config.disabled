@@ -1,0 +1,26 @@
+﻿<!--
+    When enabled, Uniform deploys media files to a Azure Blob Storage Container and optionally served via CDN in front of it.
+    
+    There's a limitation that dynamic media transformation parameters will be ignored such as mw, mh, bg etc.
+-->
+
+<configuration xmlns:set="http://www.sitecore.net/xmlconfig/set/">
+  <sitecore>
+    <uniform>
+      <siteConfigurations>
+        <siteConfiguration name="uniform-jss-kit">
+          <contentSync>
+            <mediaContentSyncService set:ref="uniform/services/azureBlobMediaContentSyncService">
+              <ContainerName>$(env:UNIFORM_SITES_JSSKIT_MEDIA_AZUREBLOB_CONTAINER_NAME)</ContainerName>
+              <ConnectionString>$(env:UNIFORM_SITES_JSSKIT_MEDIA_AZUREBLOB_CONNECTIONSTRING)</ConnectionString>
+            </mediaContentSyncService>
+          </contentSync>
+        </siteConfiguration>
+      </siteConfigurations>
+    </uniform>
+    <settings>
+      <!-- this is required because file URLs of Azure Blob Containers are case-sensitive -->
+      <setting name="Media.LowercaseUrls" set:value="true" />
+    </settings>
+  </sitecore>
+</configuration>
