@@ -34,3 +34,4 @@ netlify.config.json
 .npmrc
 .temp
 .debug.log
+scjssconfig.json
