@@ -22,9 +22,9 @@
   },
   "dependencies": {
     "@sitecore-jss/sitecore-jss-react": "14.0.1",
-    "@uniformdev/next-jss": "4.0.210219-6",
-    "@uniformdev/next-jss-server": "4.0.210219-6",
-    "@uniformdev/publishing-all": "4.0.210219-6",
+    "@uniformdev/next-jss": "4.0.210222-3",
+    "@uniformdev/next-jss-server": "4.0.210222-3",
+    "@uniformdev/publishing-all": "4.0.210222-3",
     "dotenv": "^8.2.0",
     "netlify-cli": "^3.8.4",
     "next": "^10.0.5",
