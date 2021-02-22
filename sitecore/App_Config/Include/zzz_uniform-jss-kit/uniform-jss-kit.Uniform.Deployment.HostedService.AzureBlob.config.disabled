@@ -1,0 +1,29 @@
+﻿<configuration xmlns:patch="http://www.sitecore.net/xmlconfig/" xmlns:set="http://www.sitecore.net/xmlconfig/set/">
+  <sitecore>
+
+    <uniform>
+    
+      <siteConfigurations>
+        <siteConfiguration name="uniform-jss-kit">
+
+          <deployment>
+            <deploymentService>
+            
+              <!-- these variables are used when "next build" and "next export" are performed by Uniform Self-Hosted Service instead of those that defined in the .env file -->
+              <environmentVariables hint="raw:AddEnvironmentVariable">
+                <variable name="UNIFORM_PUBLISH_TARGET">azureblob</variable>
+                <variable name="AZURE_CONTAINER">$web</variable>
+                <variable name="AZURE_STORAGE_CONNECTION_STRING"><!>connection string goes here<!></variable>
+                <variable name="AZCOPY_PATH">C:\azcopy\azcopy.exe</variable>
+              </environmentVariables>
+
+            </deploymentService>
+          </deployment>
+
+        </siteConfiguration>
+      </siteConfigurations>
+      
+    </uniform>
+
+  </sitecore>
+</configuration>

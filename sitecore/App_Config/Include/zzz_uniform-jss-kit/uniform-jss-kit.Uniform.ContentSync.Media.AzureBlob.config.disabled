@@ -11,8 +11,8 @@
         <siteConfiguration name="uniform-jss-kit">
           <contentSync>
             <mediaContentSyncService set:ref="uniform/services/azureBlobMediaContentSyncService">
-              <ContainerName>$(env:UNIFORM_SITES_JSSKIT_MEDIA_AZUREBLOB_CONTAINER_NAME)</ContainerName>
-              <ConnectionString>$(env:UNIFORM_SITES_JSSKIT_MEDIA_AZUREBLOB_CONNECTIONSTRING)</ConnectionString>
+              <ContainerName>$web</ContainerName>
+              <ConnectionString><!>CONNECTION STRING OF AZURE BLOB STORAGE ACCOUNT USED IN PUBLISH PROVIDER EITHER IN uniform-jss-kit.Uniform.Deployment.HostedService.AzureBlob.config OR IN .env FILE<!></ConnectionString>
             </mediaContentSyncService>
           </contentSync>
         </siteConfiguration>
@@ -21,6 +21,9 @@
     <settings>
       <!-- this is required because file URLs of Azure Blob Containers are case-sensitive -->
       <setting name="Media.LowercaseUrls" set:value="true" />
+      
+      <!-- media links must be relative because media is synced to the same container where html files are published to -->
+      <setting name="Media.AlwaysIncludeServerUrl" set:value="false" />
     </settings>
   </sitecore>
 </configuration>
