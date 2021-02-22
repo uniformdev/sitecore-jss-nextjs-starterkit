@@ -52,8 +52,9 @@ export async function getStaticPaths() {
 
 // This getStaticProps can be used alongside a [...slug] or [[...slug]]
 // page within the pages folder.
-export async function getStaticProps({ params, locale, defaultLocale }) {
+export async function getStaticProps({ params, locale, defaultLocale, previewData }) {
   const options = {
+    previewData,
     routeParams: {
       sitecoreRoute: "/" + (params?.slug?.join("/") || ""),
       lang: locale ?? defaultLocale ?? "en",
