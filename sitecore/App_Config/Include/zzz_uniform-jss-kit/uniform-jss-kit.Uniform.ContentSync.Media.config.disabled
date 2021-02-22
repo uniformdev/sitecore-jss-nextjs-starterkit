@@ -9,7 +9,6 @@
                 <fullMediaLibrary>/sitecore/media library</fullMediaLibrary>
               </mediaRoots>
             </mediaDeploymentScopeService>
-            <relatedMediaDeploymentScopeService ref="uniform/services/relatedMediaDeploymentScopeService" />
           </deployment>
         </siteConfiguration>
       </siteConfigurations>
