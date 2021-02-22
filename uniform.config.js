@@ -8,7 +8,6 @@ const defaults = {
   UNIFORM_API_SITENAME: 'uniform-jss-kit',
   UNIFORM_PUBLISH_TARGET: 'none',
   UNIFORM_MODE: 'mixed',
-  UNIFORM_API_TOKEN: '12345',
   UNIFORM_PUBLISH_FAKE_PUBLIC_URL: 'http://localhost',
   UNIFORM_API_KEY: 'eefe326b-aff1-4154-9ae8-2beb85d4b8cb',
 };
