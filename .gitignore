@@ -31,7 +31,6 @@ yarn-error.log*
 .vscode
 .netlify
 netlify.config.json
-.npmrc
 .temp
 .debug.log
 scjssconfig.json
