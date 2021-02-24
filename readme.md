@@ -4,11 +4,12 @@ This repo contains both the starter kit with content items and required configur
 
 You can also use this kit to start a vanilla project, simply remove everything from `/src/components` and adjust the Sitecore site name from `uniform-jss-kit` to whatever you want and get cracking.
 
-## Links (TODO)
+## Docs
 
-1. Demo instance (TODO)
-1. Official docs
-1. Tutorial for this starter kit.
+1. [Tutorial for this starter kit](https://docs.uniform.dev/sitecore/deploy/getting-started/sitecore-jss-nextjs-tutorial)
+
+1. [Uniform for Sitecore docs](https://docs.uniform.dev/sitecore/deploy/introduction/)
+
 
 ## Pre-requisites
 1. Sitecore 9.x-10.x instance available with Sitecore JSS installed and configured
@@ -21,11 +22,11 @@ You can also use this kit to start a vanilla project, simply remove everything f
 
 ## Getting started with the app
 
-> Check out official docs for more scenarios and tutorial.
+> Check out official docs for more scenarios and [tutorial](https://docs.uniform.dev/sitecore/deploy/getting-started/sitecore-jss-nextjs-tutorial).
 
 ### TL;DR version
 
-1. Configure `.env` file according to your environment specifics (see docs for more info and `.env-example` file).
+1. Configure `.env` file according to your environment specifics (see `.env-example` file).
 1. Create `.npmrc` file with NPM_TOKEN, so you can download the `@uniformdev` packages.
 1. `npm install`
 1. `npm run dev` to start development server.
