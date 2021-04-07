@@ -12,10 +12,11 @@ You can also use this kit to start a vanilla project, simply remove everything f
 
 
 ## Pre-requisites
-1. Sitecore 9.x-10.x instance available with Sitecore JSS installed and configured
-1. "Uniform for Sitecore" installed and configured on your Sitecore instance. Check out the docs.
-1. Install the Sitecore package with items from `/sitecore/App_Data/packages` folder.
-1. Deploy the configs from `/sitecore/App_Config` folder to your Sitecore instance's `App_Config` folder (the subfolder structure should match).
+1. Sitecore 9.1.1+ instance available with Sitecore JSS installed and configured.
+   > Due to the JSS Rendering Host being used, 9.1.1+ version is required.
+3. "Uniform for Sitecore" installed and configured on your Sitecore instance. Check out the docs.
+4. Install the Sitecore package with items from `/sitecore/App_Data/packages` folder.
+5. Deploy the configs from `/sitecore/App_Config` folder to your Sitecore instance's `App_Config` folder (the subfolder structure should match).
 
 ## Known issues
 1. @sitecore-jss v15.0 npm packages are not supported yet, make sure to use `14.0.1` versions.
