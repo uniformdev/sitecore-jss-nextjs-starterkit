@@ -1,0 +1,17 @@
+<!--
+    This is a must-to-have config file that registers uniform-jss-kit site in configuration
+-->
+<configuration xmlns:patch="http://www.sitecore.net/xmlconfig/" xmlns:set="http://www.sitecore.net/xmlconfig/set/" xmlns:role="http://www.sitecore.net/xmlconfig/role/">
+  <sitecore>
+    <sites>
+      <site patch:before="site[@name='website']" virtualFolder="/" physicalFolder="/" name="uniform-jss-kit-preview" language="en" rootPath="/sitecore/content/uniform-jss-kit" startItem="/home" database="master" filterItems="false" enableWorkflow="false" domain="extranet" allowDebug="true" cacheHtml="true" htmlCacheSize="50MB" registryCacheSize="0" viewStateCacheSize="0" xslCacheSize="25MB" filteredItemsCacheSize="10MB" enablePreview="true" enableWebEdit="true" enableDebugger="true" disableClientData="false" cacheRenderingParameters="true" renderingParametersCacheSize="10MB" enableItemLanguageFallback="false" enableFieldLanguageFallback="false" role:require="Standalone or ContentManagement" />
+    </sites>
+    <uniform>
+      <siteConfigurations>
+        <siteConfiguration name="uniform-jss-kit-preview">
+          <site set:inherits="uniform-jss-kit-preview" />
+        </siteConfiguration>
+      </siteConfigurations>
+    </uniform>
+  </sitecore>
+</configuration>

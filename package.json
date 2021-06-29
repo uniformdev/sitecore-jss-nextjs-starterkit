@@ -1,6 +1,6 @@
 {
   "name": "@uniformdev/uniform-sitecore-jss-nextjs-starterkit",
-  "version": "4.0.210420-3",
+  "version": "5.0.210625-1",
   "private": true,
   "configx": {
     "appName": "uniform-sitecore-jss-kit",
@@ -21,22 +21,25 @@
     "start-server": "node uniform.server.js"
   },
   "dependencies": {
-    "@sitecore-jss/sitecore-jss-react": "15.0.1",
-    "@uniformdev/next-jss": "4.0.210420-3",
-    "@uniformdev/next-jss-server": "4.0.210420-3",
-    "@uniformdev/publishing-all": "4.0.210420-3",
+    "@sitecore-jss/sitecore-jss-react": "16.0.0",
+    "@uniformdev/common": "5.0.210625-1",
+    "@uniformdev/esi-jss-ssr": "5.0.210625-1",
+    "@uniformdev/esi-jss-react": "5.0.210625-1",
+    "@uniformdev/next-jss": "5.0.210625-1",
+    "@uniformdev/next-jss-server": "5.0.210625-1",
+    "@uniformdev/publishing-all": "5.0.210625-1",
     "dotenv": "^8.2.0",
     "netlify-cli": "^3.8.4",
     "next": "10.0.5",
-    "react": "^16.13.1",
-    "react-dom": "^16.13.1"
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1"
   },
   "devDependencies": {
     "@babel/register": "^7.5.5",
     "@babel/runtime": "^7.13.10",
-    "@sitecore-jss/sitecore-jss-cli": "14.0.1",
-    "@sitecore-jss/sitecore-jss-dev-tools": "14.0.1",
-    "@sitecore-jss/sitecore-jss-manifest": "14.0.1",
+    "@sitecore-jss/sitecore-jss-cli": "16.0.0",
+    "@sitecore-jss/sitecore-jss-dev-tools": "16.0.0",
+    "@sitecore-jss/sitecore-jss-manifest": "16.0.0",
     "cross-env": "^5.2.1"
   }
 }

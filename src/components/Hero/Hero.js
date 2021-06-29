@@ -43,13 +43,10 @@ const Hero = ({ fields }) => {
 };
 
 const Cta = ({ titleField, linkField, cssClassName }) =>
-  titleField &&
-  linkField &&
-  linkField.value &&
-  linkField.value.href && (
-    <Link field={linkField} className={cssClassName}>
-      <Text field={titleField} />
-    </Link>
-  );
+    titleField && linkField?.value?.href ? (
+        <Link field={linkField} className={cssClassName}>
+            <Text field={titleField} />
+        </Link>
+    ) : null;
 
 export default Hero;
