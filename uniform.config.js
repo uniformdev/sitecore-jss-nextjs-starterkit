@@ -7,9 +7,7 @@ const dotenv = require('dotenv');
 const defaults = {
   UNIFORM_API_SITENAME: 'uniform-jss-kit',
   UNIFORM_PUBLISH_TARGET: 'fake',
-  UNIFORM_MODE: 'mixed',
-  UNIFORM_SSR_ENGINE: "nextjs",
-  UNIFORM_API_KEY: 'eefe326b-aff1-4154-9ae8-2beb85d4b8cb',
+  UNIFORM_MODE: 'mixed'
 };
 
 function processDefault(key, fallback) {
