@@ -2,7 +2,7 @@
   "name": "@uniformdev/uniform-sitecore-jss-nextjs-starterkit",
   "version": "5.0.210625-1",
   "private": true,
-  "configx": {
+  "config": {
     "appName": "uniform-sitecore-jss-kit",
     "rootPlaceholders": [
       "uniform-jss-kit-content"
