@@ -15,6 +15,7 @@
                 <variable name="AZURE_CONTAINER">$web</variable>
                 <variable name="AZURE_STORAGE_CONNECTION_STRING"><!>connection string goes here<!></variable>
                 <variable name="AZCOPY_PATH">C:\azcopy\azcopy.exe</variable>
+                <variable name="PUBLIC_URL"><!>public URL of azure static site goes here<!></variable>
               </environmentVariables>
 
             </deploymentService>
