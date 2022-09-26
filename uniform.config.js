@@ -5,6 +5,7 @@ const dotenv = require('dotenv');
 // you can override the values in the .env file if required
 
 const defaults = {
+  UNIFORM_JSS_APP_NAME: 'uniform-jss-kit',
   UNIFORM_API_SITENAME: 'uniform-jss-kit',
   UNIFORM_PUBLISH_TARGET: 'fake',
   UNIFORM_MODE: 'mixed'
