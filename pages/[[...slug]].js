@@ -1,7 +1,6 @@
 import Head from "next/head";
 import {
   getPageProps,
-  isExportProcess,
   SitecoreContext,
   StaticAssetContextProvider,
 } from "@uniformdev/next-jss";
@@ -33,7 +32,7 @@ export async function getStaticPaths() {
   const { getSitecoreStaticPaths } = await import(
     "@uniformdev/next-jss-server"
   );
-  if (isExportProcess()) {
+  if (process.env.UNIFORM_BUILD_MODE !== 'ssr') {
     // If we are exporting the site directly or via a publish
     // specify all static paths and let nextjs handle 404
     return {
