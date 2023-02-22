@@ -1,6 +1,6 @@
 {
   "name": "@uniformdev/uniform-sitecore-jss-nextjs-starterkit",
-  "version": "7.1.220915-1",
+  "version": "7.2.230222-1",
   "private": true,
   "config": {
     "appName": "uniform-sitecore-jss-kit",
@@ -21,22 +21,21 @@
     "start-server": "node uniform.server.js"
   },
   "dependencies": {
-    "@sitecore-jss/sitecore-jss-react": "^19.0.0",
-    "@uniformdev/common": "7.1.220915-1",
-    "@uniformdev/next-jss": "7.1.220915-1",
-    "@uniformdev/next-jss-server": "7.1.220915-1",
-    "@uniformdev/publishing-all": "7.1.220915-1",
+    "@sitecore-jss/sitecore-jss-react": "^21.0.1",
+    "@uniformdev/common": "7.2.230222-1",
+    "@uniformdev/next-jss": "7.2.230222-1",
+    "@uniformdev/next-jss-server": "7.2.230222-1",
+    "@uniformdev/publishing-all": "7.2.230222-1",
     "dotenv": "^8.2.0",
-    "next": "12.2.5",
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2"
+    "next": "13.0.5",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
   },
   "devDependencies": {
     "@babel/register": "^7.5.5",
     "@babel/runtime": "^7.13.10",
-    "@sitecore-jss/sitecore-jss-cli": "^19.0.0",
-    "@sitecore-jss/sitecore-jss-dev-tools": "^19.0.0",
-    "@sitecore-jss/sitecore-jss-manifest": "^19.0.0",
+    "@sitecore-jss/sitecore-jss-cli": "^21.0.1",
+    "@sitecore-jss/sitecore-jss-dev-tools": "^21.0.1",
     "cross-env": "^5.2.1",
     "typescript": "^4.5.5"
   }
