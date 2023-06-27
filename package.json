@@ -1,6 +1,6 @@
 {
   "name": "@uniformdev/uniform-sitecore-jss-nextjs-starterkit",
-  "version": "7.2.230222-1",
+  "version": "7.3.230626-1",
   "private": true,
   "config": {
     "appName": "uniform-sitecore-jss-kit",
@@ -15,21 +15,27 @@
   },
   "scripts": {
     "dev": "cross-env NODE_ENV=development npm run start-server",
-    "start": "cross-env-shell \"npm run build && npm run start-server\"",
+    "start": "cross-env-shell NODE_ENV=production \"npm run build && npm run start-server\"",
     "export": "cross-env-shell NODE_ENV=production UNIFORM_BUILD_MODE=export \"npm run build && next export\"",
     "build": "next build",
     "start-server": "node uniform.server.js"
   },
   "dependencies": {
     "@sitecore-jss/sitecore-jss-react": "^21.0.1",
-    "@uniformdev/common": "7.2.230222-1",
-    "@uniformdev/next-jss": "7.2.230222-1",
-    "@uniformdev/next-jss-server": "7.2.230222-1",
-    "@uniformdev/publishing-all": "7.2.230222-1",
+    "@uniformdev/common": "7.3.230626-1",
+    "@uniformdev/next-jss": "7.3.230626-1",
+    "@uniformdev/next-jss-server": "7.3.230626-1",
+    "@uniformdev/publishing-all": "7.3.230626-1",
     "dotenv": "^8.2.0",
     "next": "13.0.5",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
+  },
+  "overrides": {
+      "xml2js": "^0.5.0"
+  },
+  "resolutions": {
+      "xml2js": "^0.5.0"
   },
   "devDependencies": {
     "@babel/register": "^7.5.5",
