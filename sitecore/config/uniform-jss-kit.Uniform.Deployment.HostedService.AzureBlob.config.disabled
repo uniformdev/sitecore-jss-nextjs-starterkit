@@ -9,7 +9,7 @@
           <deployment>
             <deploymentService>
             
-              <!-- these variables are used when "next build" and "next export" are performed by Uniform Self-Hosted Service instead of those that defined in the .env file -->
+              <!-- these variables are used when "next build" is performed by Uniform Self-Hosted Service instead of those that defined in the .env file -->
               <environmentVariables hint="raw:AddEnvironmentVariable">
                 <variable name="UNIFORM_PUBLISH_TARGET">azureblob</variable>
                 <variable name="AZURE_CONTAINER">$web</variable>
