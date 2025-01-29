@@ -1,4 +1,6 @@
+import { useEffect } from 'react';
 import Head from "next/head";
+import { handleEditorFastRefresh } from '@sitecore-jss/sitecore-jss-nextjs/utils';
 import {
   getPageProps,
   SitecoreContext,
@@ -8,6 +10,11 @@ import componentFactory from "../src/componentFactory";
 import MainLayout from "../src/components/MainLayout/MainLayout";
 
 const SitecoreRoute = ({ layoutData, assetPrefix = "" }) => {
+  useEffect(() => {
+      // Refresh Experience Editor markup and JS after Next.js Fast Refresh
+      handleEditorFastRefresh();
+  }, []);
+
   const route = layoutData?.sitecore?.route;
 
   return (
