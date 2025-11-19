@@ -1,6 +1,6 @@
 {
   "name": "@uniformdev/uniform-sitecore-jss-nextjs-starterkit",
-  "version": "7.3.250818-1",
+  "version": "7.3.251119-1",
   "private": true,
   "config": {
     "appName": "uniform-sitecore-jss-kit",
@@ -23,12 +23,12 @@
   "dependencies": {
     "@sitecore-jss/sitecore-jss-nextjs": "^21.10.0",
     "@sitecore-jss/sitecore-jss-react": "^21.10.0",
-    "@uniformdev/common": "7.3.250818-1",
-    "@uniformdev/next-jss": "7.3.250818-1",
-    "@uniformdev/next-jss-server": "7.3.250818-1",
-    "@uniformdev/publishing-all": "7.3.250818-1",
+    "@uniformdev/common": "7.3.251119-1",
+    "@uniformdev/next-jss": "7.3.251119-1",
+    "@uniformdev/next-jss-server": "7.3.251119-1",
+    "@uniformdev/publishing-all": "7.3.251119-1",
     "dotenv": "^8.2.0",
-    "next": "15.3.5",
+    "next": "15.5.6",
     "react": "^19.1.0",
     "react-dom": "^19.1.0"
   },
